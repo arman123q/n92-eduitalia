@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forest: #103f35;
+  --color-forest-deep: #0b2e27;
+  --color-forest-soft: #1a5747;
+  --color-gold: #c7a05a;
+  --color-gold-soft: #e7d3a1;
+  --color-ivory: #faf9f5;
+  --color-ivory-warm: #f3efe4;
+  --color-charcoal: #202824;
+  --color-tri-red: #b3392e;
+  --color-tri-green: #1e7a4f;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-charcoal);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* ---------- focus visibility (accessibility) ---------- */
+:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------- buttons ---------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--color-forest);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-forest);
+  transition: background 0.2s ease, transform 0.15s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background: var(--color-forest-soft);
+}
+.btn-primary:active {
+  transform: translateY(1px);
+}
+.btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--color-gold);
+  color: var(--color-forest-deep);
+  font-weight: 700;
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-gold);
+  transition: filter 0.2s ease, transform 0.15s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-gold:hover {
+  filter: brightness(1.07);
+}
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--color-forest);
+  font-weight: 600;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 63, 53, 0.35);
+  transition: border-color 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-ghost:hover {
+  border-color: var(--color-forest);
+  background: rgba(16, 63, 53, 0.05);
+}
+
+/* ---------- form controls ---------- */
+.field-label {
+  display: block;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--color-forest-deep);
+  margin-bottom: 0.35rem;
+}
+.field-input {
+  width: 100%;
+  background: #fff;
+  border: 1.5px solid rgba(16, 63, 53, 0.22);
+  border-radius: 0.75rem;
+  padding: 0.68rem 0.85rem;
+  font-size: 0.95rem;
+  color: var(--color-charcoal);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.field-input:hover {
+  border-color: rgba(16, 63, 53, 0.45);
+}
+.field-input:focus {
+  border-color: var(--color-forest);
+  box-shadow: 0 0 0 3px rgba(199, 160, 90, 0.35);
+  outline: none;
+}
+.field-input[aria-invalid="true"] {
+  border-color: var(--color-tri-red);
+}
+.field-error {
+  color: var(--color-tri-red);
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  font-weight: 500;
+}
+
+/* ---------- cards & panels ---------- */
+.panel {
+  background: #fff;
+  border: 1px solid rgba(16, 63, 53, 0.12);
+  border-radius: 1.4rem;
+  box-shadow: 0 24px 60px -24px rgba(11, 46, 39, 0.35);
+}
+.card {
+  background: #fff;
+  border: 1px solid rgba(16, 63, 53, 0.1);
+  border-radius: 1.1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px -18px rgba(11, 46, 39, 0.3);
+}
+
+.kicker {
+  letter-spacing: 0.32em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-forest-soft);
+}
+
+.tricolour-bar {
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    var(--color-tri-green) 0 33.4%,
+    #ffffff 33.4% 66.7%,
+    var(--color-tri-red) 66.7% 100%
+  );
+}
+
+/* hero sky (Stage 3 CSS scene; Stage 5 adds the WebGL layer) */
+.hero-sky {
+  background:
+    radial-gradient(1100px 480px at 78% -10%, rgba(255, 214, 150, 0.55), transparent 60%),
+    radial-gradient(900px 500px at 8% 0%, rgba(199, 160, 90, 0.22), transparent 55%),
+    linear-gradient(180deg, #fdf6e9 0%, #faf9f5 55%, #f3efe4 100%);
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-24px);
+  }
+}
+.skyline-drift {
+  animation: drift 26s ease-in-out infinite alternate;
+}
