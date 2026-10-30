@@ -137,6 +137,10 @@ export default function RecordsManager({ table }: { table: string }) {
     if (!editing) return;
     const name = String(editing[schema.nameKey] || "").trim();
     if (!name) { setMsg({ ok: false, text: `Please fill the ${schema.nameKey === "question" ? "question" : "name"} field.` }); return; }
+    if (table === "admission_rounds" && editing.opensAt && editing.deadlineAt && new Date(String(editing.deadlineAt)) <= new Date(String(editing.opensAt))) {
+      setMsg({ ok: false, text: "The application deadline must be after the opening date/time. Please correct the dates and save again." });
+      return;
+    }
     if (!editing.slug && schema.fields.some((f) => f.key === "slug")) editing.slug = slugify(name);
     if (table === "faqs" && !editing.id) editing.id = `f-${slugify(name)}`;
     // Whitelist: send ONLY this table's declared fields (+ id). Any stray
@@ -149,6 +153,12 @@ export default function RecordsManager({ table }: { table: string }) {
     // never as "" (PostgreSQL rejects "" for those types).
     for (const f of schema.fields) {
       if ((f.type === "date" || f.type === "datetime" || f.type === "number") && clean[f.key] === "") clean[f.key] = null;
+      // A select whose schema declares an empty-string option (e.g.
+      // Admission Rounds → Manual status "Automatic") means "no value":
+      // persist NULL, never "". (admission_rounds.manual_status has a
+      // CHECK constraint allowing only NULL or specific values — ""
+      // violated it with error 23514.)
+      if (f.type === "select" && clean[f.key] === "" && (f.options || []).some(([v]) => v === "")) clean[f.key] = null;
     }
     const payload = toDb(clean);
     delete payload.createdAt; delete payload.updatedAt; delete payload.created_at; delete payload.updated_at;
