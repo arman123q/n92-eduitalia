@@ -19,7 +19,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-[#103f35]/10 bg-[#faf9f5]/92 backdrop-blur">
       <div className="tricolour-bar" aria-hidden="true" />
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-4 py-2 sm:gap-4 sm:px-6 sm:py-2.5">
+      <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-2 px-4 py-2 sm:gap-4 sm:px-6 sm:py-2.5">
         <a href="/" className="flex flex-none items-center gap-3" aria-label="N92 Edu-Italia — home">
           <span className="shrink-0">
             {/* New N92 Edu-Italia header logo (owner-supplied artwork, 31 Oct
@@ -41,8 +41,13 @@ export default function Header() {
           </span>
         </a>
 
-        <nav className="hidden xl:block flex-1" aria-label="Primary">
-          <ul className="flex items-center justify-center gap-6 text-[0.92rem] font-medium text-[#202824]">
+        {/* Full navigation only from 1600px up: brand (342px) + eight
+            nowrap links (~743px) + both CTA buttons (~380px) need ~1500px,
+            which cannot fit a 1280px container — below 1600px the hamburger
+            menu is used instead of letting the row overflow and clip the
+            Book Consultation button (owner report, 31 Oct 2026). */}
+        <nav className="hidden min-[1600px]:block flex-1 min-w-0" aria-label="Primary">
+          <ul className="flex items-center justify-center gap-4 text-[0.92rem] font-medium text-[#202824]">
             {LINKS.map(([label, href]) => (
               <li key={href}>
                 <a className="whitespace-nowrap hover:text-[#103f35] hover:underline underline-offset-4 decoration-[#c7a05a] decoration-2" href={href}>
@@ -53,16 +58,16 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-3">
-          <a href="/eligibility/" className="btn-ghost hidden xl:inline-flex !py-2.5 !px-5 text-sm">
+        <div className="flex flex-none items-center gap-3">
+          <a href="/eligibility/" className="btn-ghost hidden min-[1600px]:inline-flex whitespace-nowrap !py-2.5 !px-5 text-sm">
             Check My Eligibility
           </a>
-          <a href="/contact/" className="btn-primary hidden sm:inline-flex !py-2.5 !px-5 text-sm">
+          <a href="/contact/" className="btn-primary hidden sm:inline-flex whitespace-nowrap !py-2.5 !px-5 text-sm">
             Book Consultation
           </a>
           <button
             type="button"
-            className="xl:hidden rounded-lg border border-[#103f35]/25 px-3 py-2 text-sm font-semibold text-[#103f35]"
+            className="min-[1600px]:hidden rounded-lg border border-[#103f35]/25 px-3 py-2 text-sm font-semibold text-[#103f35]"
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen(!open)}
@@ -73,7 +78,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav id="mobile-menu" className="xl:hidden border-t border-[#103f35]/10 bg-[#faf9f5]" aria-label="Mobile">
+        <nav id="mobile-menu" className="min-[1600px]:hidden border-t border-[#103f35]/10 bg-[#faf9f5]" aria-label="Mobile">
           <ul className="space-y-1 px-4 py-3 text-[0.95rem] font-medium">
             {LINKS.map(([label, href]) => (
               <li key={href}>
