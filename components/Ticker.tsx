@@ -27,12 +27,44 @@ function fmtDate(iso?: string | null): string {
   }
 }
 
-function roundItem(r: AdmissionRound & { computedStatus?: string }): Item {
+/**
+ * Returns a trimmed display string, or "" for anything that must never
+ * reach the public ticker: null, undefined, non-strings, blanks, and the
+ * literal strings "undefined"/"null" stored as data.
+ */
+function clean(v: unknown): string {
+  if (typeof v !== "string") return "";
+  const t = v.trim();
+  if (!t || t.toLowerCase() === "undefined" || t.toLowerCase() === "null") return "";
+  return t;
+}
+
+/** A date string is usable only if it parses; otherwise treated as absent. */
+function validDate(iso?: string | null): boolean {
+  if (!iso) return false;
+  return !Number.isNaN(new Date(iso).getTime());
+}
+
+function roundItem(r: AdmissionRound & { computedStatus?: string }): Item | null {
   const st = r.computedStatus || computeRoundStatus(r);
   const meta = ROUND_STATUS_META[st as keyof typeof ROUND_STATUS_META] || { label: st.toUpperCase(), urgent: false };
-  const roundLabel = r.roundName === "Custom Round" && r.customRoundLabel ? r.customRoundLabel : r.roundName;
-  const intake = [r.intakeSemester, r.intakeYear].filter(Boolean).join(" ");
-  const deadline = r.deadlineVerified && r.deadlineAt ? ` · Deadline ${fmtDate(r.deadlineAt)}` : " · Deadline not officially verified";
+  const university = clean(r.universityName);
+  const roundLabel = clean(r.roundName === "Custom Round" && r.customRoundLabel ? r.customRoundLabel : r.roundName);
+  // A round with neither a university nor a round name has nothing valid
+  // to announce — hide it rather than showing placeholders.
+  if (!university && !roundLabel) return null;
+  const head = [university, roundLabel].filter(Boolean).join(" — ");
+  const intake = [clean(r.intakeSemester), r.intakeYear ? String(r.intakeYear) : ""].filter(Boolean).join(" ");
+  const programme = clean(r.programmeName);
+  // Deadline segment: verified + a real date shows the date; unverified
+  // keeps the honest "not officially verified" wording (status logic
+  // unchanged); verified but dateless omits the segment instead of
+  // contradicting itself.
+  const deadline = r.deadlineVerified && validDate(r.deadlineAt)
+    ? ` · Deadline ${fmtDate(r.deadlineAt)}`
+    : !r.deadlineVerified
+      ? " · Deadline not officially verified"
+      : "";
   return {
     key: `round-${r.id}`,
     urgent: Boolean(meta.urgent),
@@ -42,19 +74,23 @@ function roundItem(r: AdmissionRound & { computedStatus?: string }): Item {
       : st === "open"
         ? "bg-[#c7a05a] text-[#103f35]"
         : "bg-white/20 text-white",
-    text: `${r.universityName} — ${roundLabel}${intake ? ` · ${intake}` : ""}${r.programmeName ? ` · ${r.programmeName}` : ""}${deadline}`,
+    text: `${head}${intake ? ` · ${intake}` : ""}${programme ? ` · ${programme}` : ""}${deadline}`,
     href: `/admissions#${r.id}`,
   };
 }
 
-function noticeItem(n: Notice): Item {
+function noticeItem(n: Notice): Item | null {
+  const title = clean(n.title);
+  const message = clean(n.message);
+  if (!title && !message) return null; // nothing valid to announce
   const urgent = n.priority === "urgent" || n.priority === "high";
+  const category = clean(n.category);
   return {
     key: `notice-${n.id}`,
     urgent,
-    badge: n.priority === "urgent" ? "URGENT" : n.category.toUpperCase().slice(0, 28),
+    badge: n.priority === "urgent" ? "URGENT" : (category ? category.toUpperCase().slice(0, 28) : "NOTICE"),
     badgeClass: urgent ? "bg-white text-red-700" : "bg-[#c7a05a] text-[#103f35]",
-    text: `${n.title} — ${n.message}`,
+    text: [title, message].filter(Boolean).join(" — "),
     href: "/notices",
   };
 }
@@ -73,8 +109,8 @@ export default function Ticker() {
       const [rounds, notices] = await Promise.all([getAdmissionRounds(), getNotices()]);
       if (!live) return;
       const now = new Date();
-      const roundItems = sortRounds(rounds, now).map(roundItem);
-      const noticeItems = sortNotices(notices.filter((n) => isActiveNotice(n, now))).map(noticeItem);
+      const roundItems = sortRounds(rounds, now).map(roundItem).filter((i: Item | null): i is Item => i !== null);
+      const noticeItems = sortNotices(notices.filter((n: Notice) => isActiveNotice(n, now))).map(noticeItem).filter((i: Item | null): i is Item => i !== null);
       // Urgent first, then pinned order preserved within each source list.
       const all = [...noticeItems, ...roundItems].sort((a, b) => Number(b.urgent) - Number(a.urgent));
       setItems(all);

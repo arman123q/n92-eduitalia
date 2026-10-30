@@ -20,7 +20,7 @@ export default function Header() {
     <header className="sticky top-0 z-40 border-b border-[#103f35]/10 bg-[#faf9f5]/92 backdrop-blur">
       <div className="tricolour-bar" aria-hidden="true" />
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-4 py-2 sm:gap-4 sm:px-6 sm:py-2.5">
-        <a href="/" className="flex min-w-0 items-center gap-3" aria-label="N92 Edu-Italia — home">
+        <a href="/" className="flex flex-none items-center gap-3" aria-label="N92 Edu-Italia — home">
           <span className="shrink-0">
             {/* New N92 Edu-Italia header logo (owner-supplied artwork, 31 Oct
                 2026): the black matte of the supplied JPG was keyed out to
@@ -28,21 +28,24 @@ export default function Header() {
                 owner's reference screenshot; the artwork itself is untouched
                 (no redraw, no crop of the mark, aspect preserved). The footer
                 keeps the previous /logo.jpg — this asset is header-only. */}
-            <img src="/logo-header.png" alt="N92 Edu-Italia logo" className="h-16 w-auto sm:h-24" width="720" height="598" />
+            <img src="/logo-header.png" alt="N92 Edu-Italia logo" className="h-14 w-auto sm:h-16 xl:h-20" width="720" height="598" />
           </span>
+          {/* The logo artwork already contains "Edu-Italia", so the text
+              beside it is just "N92" (owner instruction, 31 Oct 2026) —
+              no duplicated wordmark. */}
           <span className="hidden md:block shrink-0 leading-tight">
-            <span className="font-display block whitespace-nowrap text-lg font-bold text-[#103f35]">N92 Edu-Italia</span>
+            <span className="font-display block whitespace-nowrap text-[1.45rem] font-bold text-[#103f35]">N92</span>
             <span className="block whitespace-nowrap text-[0.68rem] font-semibold tracking-[0.22em] uppercase text-[#202824]/60">
               Study · Plan · Grow in Italy
             </span>
           </span>
         </a>
 
-        <nav className="hidden lg:block" aria-label="Primary">
-          <ul className="flex items-center gap-7 text-[0.92rem] font-medium text-[#202824]">
+        <nav className="hidden xl:block flex-1" aria-label="Primary">
+          <ul className="flex items-center justify-center gap-6 text-[0.92rem] font-medium text-[#202824]">
             {LINKS.map(([label, href]) => (
               <li key={href}>
-                <a className="hover:text-[#103f35] hover:underline underline-offset-4 decoration-[#c7a05a] decoration-2" href={href}>
+                <a className="whitespace-nowrap hover:text-[#103f35] hover:underline underline-offset-4 decoration-[#c7a05a] decoration-2" href={href}>
                   {label}
                 </a>
               </li>
@@ -59,7 +62,7 @@ export default function Header() {
           </a>
           <button
             type="button"
-            className="lg:hidden rounded-lg border border-[#103f35]/25 px-3 py-2 text-sm font-semibold text-[#103f35]"
+            className="xl:hidden rounded-lg border border-[#103f35]/25 px-3 py-2 text-sm font-semibold text-[#103f35]"
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen(!open)}
@@ -70,7 +73,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav id="mobile-menu" className="lg:hidden border-t border-[#103f35]/10 bg-[#faf9f5]" aria-label="Mobile">
+        <nav id="mobile-menu" className="xl:hidden border-t border-[#103f35]/10 bg-[#faf9f5]" aria-label="Mobile">
           <ul className="space-y-1 px-4 py-3 text-[0.95rem] font-medium">
             {LINKS.map(([label, href]) => (
               <li key={href}>
