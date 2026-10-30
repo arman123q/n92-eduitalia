@@ -58,5 +58,6 @@ export const SUBJECT_LABELS: Record<string, string> = {
 export const LEVEL_LABELS: Record<string, string> = {
   bachelor: "Bachelor's",
   master: "Master's",
+  single_cycle: "Single-cycle Master's",
   phd: "PhD",
 };

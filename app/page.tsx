@@ -5,6 +5,7 @@ import HeroText from "@/components/HeroText";
 import SectionToggles from "@/components/SectionToggles";
 import HeroScene from "@/components/HeroScene";
 import Hero3DLoader from "@/components/Hero3DLoader";
+import { ServicesOverview, IeltsHomeBand, RefundHomeBand } from "@/components/ServiceSections";
 
 const TRUST = [
   ["🏛️", "Top Italian Universities", "Research directions from official sources"],
@@ -98,6 +99,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ---------- SERVICES OVERVIEW ---------- */}
+      <ServicesOverview />
+
       {/* ---------- WHY ITALY ---------- */}
       <section id="why-italy" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-20">
         <p className="kicker">Study in Italy</p>
@@ -137,6 +141,9 @@ export default function HomePage() {
       </section>
 
       <Featured />
+
+      {/* ---------- IELTS ONLINE COACHING ---------- */}
+      <IeltsHomeBand />
 
       {/* ---------- SCHOLARSHIPS PREVIEW ---------- */}
       <section id="scholarships" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-20">
@@ -189,6 +196,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ---------- REFUND GUARANTEE ---------- */}
+      <RefundHomeBand />
 
       {/* ---------- FAQ ---------- */}
       <section id="faq" className="border-t border-[#103f35]/10 bg-white">

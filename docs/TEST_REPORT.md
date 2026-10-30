@@ -170,3 +170,113 @@ exact schema.sql DDL: original 10 seed rows loaded → migration applied
 → 61 rows; original-10 checksum identical before/after
 (4619f6f1e07445b3842f7787a2a74194); no duplicate ids/slugs; all 61
 published; second run changed nothing (idempotent).
+
+---
+
+## Security verification battery (30 Oct 2026, owner-requested, no changes made)
+
+- Core RLS probes: **7/7 PASSED** (incl. published universities now **61
+  rows** — corrected migration 005 confirmed applied).
+- Rounds/notices probes: **6/6 PASSED** (migration 004 tables live;
+  public reads published-only, inserts blocked 401).
+- Anonymous PATCH/DELETE attempts against universities, courses,
+  scholarships, faqs, site_content, calculator_settings: **all
+  rejected** (401/400; zero writes succeeded).
+- Auth settings: disable_signup = true (re-verified). Password-reset
+  request for the owner's account accepted (HTTP 200) — a reset email
+  was dispatched by this test; it changes nothing unless used.
+- Secret scan: no service-role key, secret key or JWT anywhere in
+  source or built JS. Only comments stating the key must never be used.
+  The publishable key in the frontend is public-by-design and safe
+  only because RLS holds (verified above).
+- Policy review: content tables + leads grant full CRUD to ANY
+  authenticated session by policy (single-admin design, accepted by
+  owner); audit_log is append-only at grant level (migration 003);
+  profiles is read-own/select-only; leads are insert-only for the
+  public. Residual risk recorded: if a second auth user is ever
+  created or sign-ups re-enabled, that user would gain full content
+  control — role hardening required before staff accounts.
+- NOT TESTED: successful authenticated-session CRUD (awaits the
+  owner's guided login session, Option B).
+
+## Selected upgrades — course catalogue, IELTS, refund guarantee, visa & arrival services (30 Oct 2026)
+
+Owner-selected upgrades only; no unrelated services added. Branding, palette
+(#103F35 / #C7A05A / #FAF9F5), logo and all working features preserved.
+
+### Course catalogue expansion (13 → 30)
+- 17 new programmes, each verified on the university's official programme
+  page on 2026-10-30 (Bachelor's ×6 incl. Bologna CLABE, Sapienza ACSAI,
+  Turin Business & Management, Ca' Foscari Digital Management, Milan IPLE,
+  Padova Psychological Science; Master's ×8 incl. Bicocca/Genoa/Pisa/Siena/
+  Verona/Trieste data & engineering programmes; single-cycle Medicine ×2 —
+  Pavia Harvey, Bologna; PhD ×3 — Trento IECS, Sapienza CS, Bologna DSC).
+- 4 existing records upgraded to verified with real official programme
+  URLs (Polimi CS&E, PoliTo Computer Engineering — language now
+  English & Italian, Bologna AI, Trento Data Science). The other 9
+  originals remain needs-review, unchanged. No fees, deadlines or
+  requirements invented; unverified fields say so.
+- New Academic-year filter added; all five filters (University, Subject,
+  Degree level incl. new "Single-cycle Master's", Teaching language,
+  Academic year) verified in a real browser (see below).
+- Delivery to the live database is `supabase/migration_006_courses.sql`
+  (INSERT-only for new rows + targeted UPDATEs for the 4 verified
+  upgrades; no permission changes). PG-tested locally against the real
+  schema.sql DDL with the exact pre-expansion data: 13 → 30 rows, the 9
+  untouched originals byte-identical (md5), FK integrity OK, idempotent
+  on re-run — ALL PASSED.
+
+### New service pages + homepage sections
+- /ielts-coaching/ — "IELTS Online Coaching — Prepare with Confidence.",
+  all 7 owner-listed inclusions, explicit no-affiliation / no-guaranteed-
+  band disclaimer, "Book Your Free Demo Class" enquiry form → leads.
+- /refund-policy/ — "Your Visa. Our Commitment." + the owner's exact main
+  statement and supporting text; covers/excludes exactly per the owner's
+  rules (consultancy fees actually received only; tuition, visa fees, VFS,
+  insurance, accommodation and other third-party costs excluded; one, two
+  or all three instalments → 100% of fees actually received; unpaid
+  instalments stop); refusal-evidence list and 3-step request procedure;
+  the processing timeline is referred to the written refund agreement
+  (no days invented). Three-instalment plan shown with the owner's stage
+  titles/descriptions; no amounts, percentages or dates anywhere.
+- /visa-support/ — "Your Italy Journey, Made Easier.", all 7 inclusions,
+  guidance-only / no-guaranteed-approval statement, "Get Visa Assistance".
+- /accommodation-support/ — "From Arrival to Settling In — We've Got You
+  Covered.", all 7 inclusions incl. Codice Fiscale and Permesso di
+  Soggiorno guidance, no availability promises, guidance vs government
+  services distinguished, "Get Arrival Support".
+- Homepage: Services Overview (all five offerings + eligibility card),
+  IELTS band, refund-guarantee band with "Read Full Refund Policy" link.
+  Footer gained the four service links.
+- All service copy is admin-editable (Admin → Website Content: four new
+  sections, prefilled with the approved wording; existing draft → publish
+  flow is the authorised approval step). All enquiry forms use the
+  existing leads system, tagged via subject_interest (no schema change).
+
+### Admin course CSV import/export
+- Courses manager: Export CSV (all catalogue fields) and Import CSV
+  (quoted-CSV parser; validates university, level, language, verification
+  and status values; duplicates by id/slug skipped, never overwritten;
+  status defaults to draft; per-row error report; audit-logged).
+
+### Test results
+- Production build (compile + typecheck): PASSED.
+- Unit tests: 25/25 PASSED.
+- Functional browser checks (scripts/functional-check.mjs; real Chromium,
+  production export, Supabase REST intercepted and answered from the new
+  seed so the real page code ran against the 30-course catalogue):
+  45/45 PASSED — catalogue count, each filter (Bachelor's 6, single-cycle
+  2, PhD 3, Medicine 2, English & Italian 2, Bologna 4, year 2026/27 30),
+  search + reset, homepage overview/bands, all four service pages'
+  headlines/disclaimers/CTAs, IELTS enquiry end-to-end (success shown
+  only after server confirmation; lead payload checked: subject_interest
+  = "IELTS Online Coaching", consent recorded, no source column).
+- Link audit: PASSED (61 universities, 30 courses, 4 scholarships,
+  23 internal targets).
+- Responsive audit: PASSED — 16 pages × 8 widths (320–1280), zero
+  horizontal overflow, including the 4 new pages.
+- NOT TESTED yet: the new build on the live site (awaits GitHub upload →
+  Cloudflare auto-deploy); the live database still returns 13 courses
+  until migration 006 is run; authenticated admin editing/CSV import
+  against the live database (awaits the owner's guided admin session,
+  Option B — same outstanding item as before).

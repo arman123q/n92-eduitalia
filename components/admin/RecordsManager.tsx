@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { adminSelect, adminInsert, adminUpdate, adminDelete, audit, snapshot, toDb, fromDb } from "@/lib/admin";
 import { SCHEMAS, type Field } from "./schemas";
+import { LEVEL_LABELS } from "@/components/ui";
 // @ts-ignore - plain JS module
 import { romeLocalToUtcIso, utcToRomeLocal, computeRoundStatus, ROUND_STATUS_META } from "@/lib/rounds.js";
 
@@ -10,6 +11,58 @@ type Row = Record<string, unknown>;
 
 function slugify(s: string) {
   return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 60);
+}
+
+/* ---------- Course CSV import/export ---------- */
+const COURSE_CSV_COLUMNS = [
+  "id", "slug", "name", "universityId", "level", "subject", "language",
+  "durationYears", "credits", "requirements", "tuitionNote", "deadlineNote",
+  "officialUrl", "academicYear", "sourceUrl", "lastVerified",
+  "verificationStatus", "status", "adminNotes",
+] as const;
+
+function csvEscape(v: unknown): string {
+  const s = v === null || v === undefined ? "" : String(v);
+  return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+}
+
+function rowsToCsv(rows: Row[]): string {
+  const head = COURSE_CSV_COLUMNS.join(",");
+  const lines = rows.map((r) => COURSE_CSV_COLUMNS.map((c) => csvEscape(r[c])).join(","));
+  return [head, ...lines].join("\r\n") + "\r\n";
+}
+
+/** Minimal RFC-4180 CSV parser (quotes, commas, CRLF, embedded newlines). */
+function parseCsv(text: string): Record<string, string>[] {
+  const out: string[][] = [];
+  let row: string[] = [];
+  let cell = "";
+  let inQuotes = false;
+  const src = text.replace(/^\uFEFF/, "");
+  for (let i = 0; i < src.length; i++) {
+    const ch = src[i];
+    if (inQuotes) {
+      if (ch === '"') {
+        if (src[i + 1] === '"') { cell += '"'; i++; } else inQuotes = false;
+      } else cell += ch;
+    } else if (ch === '"') inQuotes = true;
+    else if (ch === ",") { row.push(cell); cell = ""; }
+    else if (ch === "\n" || ch === "\r") {
+      if (ch === "\r" && src[i + 1] === "\n") i++;
+      row.push(cell); cell = "";
+      if (row.length > 1 || row[0] !== "") out.push(row);
+      row = [];
+    } else cell += ch;
+  }
+  row.push(cell);
+  if (row.length > 1 || row[0] !== "") out.push(row);
+  if (out.length === 0) return [];
+  const headers = out[0].map((h) => h.trim().replace(/_([a-z])/g, (_, c) => c.toUpperCase()));
+  return out.slice(1).map((cells) => {
+    const obj: Record<string, string> = {};
+    headers.forEach((h, idx) => { obj[h] = (cells[idx] ?? "").trim(); });
+    return obj;
+  });
 }
 
 export default function RecordsManager({ table }: { table: string }) {
@@ -102,12 +155,109 @@ export default function RecordsManager({ table }: { table: string }) {
 
   const setF = (key: string, v: unknown) => setEditing((e) => (e ? { ...e, [key]: v } : e));
 
+  /* ----- Courses CSV ----- */
+  const [csvMsg, setCsvMsg] = useState<{ ok: boolean; text: string } | null>(null);
+  const [csvBusy, setCsvBusy] = useState(false);
+  const fileRef = useRef<HTMLInputElement | null>(null);
+
+  function exportCsv() {
+    const blob = new Blob([rowsToCsv(rows)], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "n92-courses.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+    setCsvMsg({ ok: true, text: `Exported ${rows.length} courses to n92-courses.csv.` });
+  }
+
+  async function importCsv(file: File) {
+    setCsvBusy(true);
+    setCsvMsg(null);
+    try {
+      const parsed = parseCsv(await file.text());
+      const uniIds = new Set(uniOptions.map(([id]) => id));
+      const seenIds = new Set(rows.map((r) => String(r.id)));
+      const seenSlugs = new Set(rows.map((r) => String(r.slug)));
+      let imported = 0;
+      let skipped = 0;
+      const errors: string[] = [];
+      for (let i = 0; i < parsed.length; i++) {
+        const raw = parsed[i];
+        const rowNo = i + 2; // +1 header, +1 for 1-based
+        const name = (raw.name || "").trim();
+        if (!name) { errors.push(`Row ${rowNo}: missing course name`); continue; }
+        const universityId = (raw.universityId || "").trim();
+        if (!uniIds.has(universityId)) { errors.push(`Row ${rowNo} (“${name}”): unknown universityId “${universityId}”`); continue; }
+        const level = (raw.level || "master").trim();
+        if (!(level in LEVEL_LABELS)) { errors.push(`Row ${rowNo} (“${name}”): invalid level “${level}”`); continue; }
+        const language = (raw.language || "english").trim();
+        if (!["english", "italian", "both"].includes(language)) { errors.push(`Row ${rowNo} (“${name}”): invalid language “${language}”`); continue; }
+        const verificationStatus = (raw.verificationStatus || "needs-review").trim();
+        if (!["verified", "needs-review", "expired"].includes(verificationStatus)) { errors.push(`Row ${rowNo} (“${name}”): invalid verificationStatus “${verificationStatus}”`); continue; }
+        const status = (raw.status || "draft").trim();
+        if (!["draft", "published"].includes(status)) { errors.push(`Row ${rowNo} (“${name}”): invalid status “${status}”`); continue; }
+        const slug = (raw.slug || "").trim() || slugify(name);
+        const id = (raw.id || "").trim() || `c-${slugify(slug)}`;
+        if (seenIds.has(id) || seenSlugs.has(slug)) { skipped++; continue; }
+        const numOrNull = (v: string) => (v === "" || v === undefined ? null : Number.isNaN(Number(v)) ? null : Number(v));
+        const record: Row = {
+          id, slug, name, universityId, level, language, verificationStatus, status,
+          subject: (raw.subject || "other").trim(),
+          durationYears: numOrNull(raw.durationYears || ""),
+          credits: numOrNull(raw.credits || ""),
+          requirements: raw.requirements || "",
+          tuitionNote: raw.tuitionNote || "Not verified",
+          deadlineNote: raw.deadlineNote || "Check the official programme page.",
+          officialUrl: raw.officialUrl || "",
+          academicYear: raw.academicYear || "2026/27",
+          sourceUrl: raw.sourceUrl || "",
+          lastVerified: raw.lastVerified || new Date().toISOString().slice(0, 10),
+          adminNotes: raw.adminNotes || "",
+        };
+        const ok = await adminInsert("courses", toDb(record));
+        if (ok) {
+          imported++;
+          seenIds.add(id);
+          seenSlugs.add(slug);
+          await audit("create", "courses", id);
+        } else {
+          errors.push(`Row ${rowNo} (“${name}”): database rejected the insert`);
+        }
+      }
+      setCsvMsg({
+        ok: errors.length === 0,
+        text: `CSV import finished: ${imported} imported, ${skipped} duplicates skipped, ${errors.length} rejected.${errors.length ? " " + errors.slice(0, 3).join(" · ") + (errors.length > 3 ? ` · and ${errors.length - 3} more` : "") : ""}`,
+      });
+      if (imported > 0) load();
+    } catch {
+      setCsvMsg({ ok: false, text: "Could not read that CSV file. Please use the exported format and try again." });
+    }
+    setCsvBusy(false);
+  }
+
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h2 className="font-display text-2xl font-bold text-[#103f35]">{schema.title}</h2>
-        <button type="button" className="btn-primary !py-2.5" onClick={startNew}>+ Add {schema.singular}</button>
+        <div className="flex flex-wrap gap-2">
+          {table === "courses" && (
+            <>
+              <button type="button" className="btn-ghost !py-2.5" onClick={exportCsv}>Export CSV</button>
+              <button type="button" className="btn-ghost !py-2.5" onClick={() => fileRef.current?.click()} disabled={csvBusy}>{csvBusy ? "Importing…" : "Import CSV"}</button>
+              <input ref={fileRef} type="file" accept=".csv,text/csv" className="hidden" aria-label="Import courses from CSV"
+                onChange={(e) => { const f = e.target.files?.[0]; if (f) importCsv(f); e.target.value = ""; }} />
+            </>
+          )}
+          <button type="button" className="btn-primary !py-2.5" onClick={startNew}>+ Add {schema.singular}</button>
+        </div>
       </div>
+      {table === "courses" && (
+        <p className="mt-2 text-[0.82rem] text-[#202824]/55">
+          CSV columns: {COURSE_CSV_COLUMNS.join(", ")}. Import adds new courses only — rows whose id or slug already exists are skipped, never overwritten. New imports keep the status in the file (draft if blank).
+        </p>
+      )}
+      {csvMsg && <p className={`mt-3 rounded-lg px-4 py-2.5 text-sm ${csvMsg.ok ? "bg-green-50 border border-green-300 text-green-900" : "bg-red-50 border border-red-300 text-red-900"}`} role="status">{csvMsg.text}</p>}
       <input className="field-input mt-4 max-w-md" type="search" placeholder={`Search ${schema.title.toLowerCase()}…`} value={search} onChange={(e) => setSearch(e.target.value)} aria-label="Search records" />
       {msg && <p className={`mt-3 rounded-lg px-4 py-2.5 text-sm ${msg.ok ? "bg-green-50 border border-green-300 text-green-900" : "bg-red-50 border border-red-300 text-red-900"}`} role="status">{msg.text}</p>}
 

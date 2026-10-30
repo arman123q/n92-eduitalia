@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { adminSelect, adminInsert, adminUpdate, audit, snapshot } from "@/lib/admin";
+import { SERVICE_CONTENT_DEFAULTS } from "@/lib/serviceContent";
 
 interface ContentRow { key: string; title: string; draft: Record<string, unknown>; published: Record<string, unknown> | null }
 
@@ -25,6 +26,55 @@ const SECTIONS: { key: string; title: string; fields: { key: string; label: stri
       { key: "showFaq", label: "Show FAQ section", type: "toggle" },
     ],
   },
+  {
+    key: "page_ielts", title: "Service page — IELTS Online Coaching",
+    fields: [
+      { key: "headline", label: "Headline", type: "text" },
+      { key: "intro", label: "Intro text", type: "textarea" },
+      { key: "includes", label: "What's included (one item per line)", type: "textarea" },
+      { key: "cardText", label: "Homepage service-card text", type: "textarea" },
+      { key: "ctaText", label: "Enquiry button text", type: "text" },
+      { key: "note", label: "Disclaimer note", type: "textarea" },
+    ],
+  },
+  {
+    key: "page_visa", title: "Service page — Visa & Documentation Support",
+    fields: [
+      { key: "headline", label: "Headline", type: "text" },
+      { key: "intro", label: "Intro text", type: "textarea" },
+      { key: "includes", label: "What's included (one item per line)", type: "textarea" },
+      { key: "cardText", label: "Homepage service-card text", type: "textarea" },
+      { key: "ctaText", label: "Enquiry button text", type: "text" },
+      { key: "note", label: "Disclaimer note", type: "textarea" },
+    ],
+  },
+  {
+    key: "page_accommodation", title: "Service page — Accommodation & Arrival Support",
+    fields: [
+      { key: "headline", label: "Headline", type: "text" },
+      { key: "intro", label: "Intro text", type: "textarea" },
+      { key: "includes", label: "What's included (one item per line)", type: "textarea" },
+      { key: "cardText", label: "Homepage service-card text", type: "textarea" },
+      { key: "ctaText", label: "Enquiry button text", type: "text" },
+      { key: "note", label: "Disclaimer note", type: "textarea" },
+    ],
+  },
+  {
+    key: "page_refund", title: "Refund Policy page & payment plan (publish = authorised approval)",
+    fields: [
+      { key: "headline", label: "Headline", type: "text" },
+      { key: "mainStatement", label: "Main statement", type: "textarea" },
+      { key: "supportingText", label: "Supporting text", type: "textarea" },
+      { key: "cardText", label: "Homepage service-card text", type: "textarea" },
+      { key: "instalment1Title", label: "Instalment 1 — title", type: "text" },
+      { key: "instalment1Text", label: "Instalment 1 — description", type: "text" },
+      { key: "instalment2Title", label: "Instalment 2 — title", type: "text" },
+      { key: "instalment2Text", label: "Instalment 2 — description", type: "text" },
+      { key: "instalment3Title", label: "Instalment 3 — title", type: "text" },
+      { key: "instalment3Text", label: "Instalment 3 — description", type: "text" },
+      { key: "closingNote", label: "Payment-plan closing note", type: "textarea" },
+    ],
+  },
 ];
 
 export default function ContentEditor() {
@@ -42,6 +92,11 @@ export default function ContentEditor() {
       map[r.key] = { key: r.key, title: r.title, draft: (r.draft as Record<string, unknown>) || {}, published: (r.published as Record<string, unknown>) || null };
       d[r.key] = { ...((r.draft as Record<string, unknown>) || {}) };
     });
+    // Service pages: prefill the editor with the built-in approved wording
+    // until a draft has been saved, so editing starts from the live text.
+    for (const [key, defaults] of Object.entries(SERVICE_CONTENT_DEFAULTS)) {
+      if (!d[key] || Object.keys(d[key]).length === 0) d[key] = { ...defaults };
+    }
     setRows(map);
     setDrafts(d);
     const v = await adminSelect<{ id: string; entity_key: string; created_at: string; snapshot: unknown }>(

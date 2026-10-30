@@ -19,6 +19,7 @@ export default function CoursesPage() {
   const [subject, setSubject] = useState("");
   const [language, setLanguage] = useState("");
   const [uniId, setUniId] = useState("");
+  const [year, setYear] = useState("");
   const [shortlist, setShortlist] = useState<string[]>([]);
   const [compare, setCompare] = useState<string[]>([]);
 
@@ -47,6 +48,8 @@ export default function CoursesPage() {
       save(COMPARE_KEY, n); return n;
     });
 
+  const years = useMemo(() => [...new Set(courses.map((c) => c.academicYear).filter(Boolean))].sort(), [courses]);
+
   const filtered = useMemo(
     () =>
       courses.filter(
@@ -55,13 +58,14 @@ export default function CoursesPage() {
           (!level || c.level === level) &&
           (!subject || c.subject === subject) &&
           (!language || c.language === language) &&
-          (!uniId || c.universityId === uniId)
+          (!uniId || c.universityId === uniId) &&
+          (!year || c.academicYear === year)
       ),
-    [courses, unis, q, level, subject, language, uniId]
+    [courses, unis, q, level, subject, language, uniId, year]
   );
 
   const compared = compare.map((id) => courses.find((c) => c.id === id)).filter(Boolean) as Course[];
-  const reset = () => { setQ(""); setLevel(""); setSubject(""); setLanguage(""); setUniId(""); };
+  const reset = () => { setQ(""); setLevel(""); setSubject(""); setLanguage(""); setUniId(""); setYear(""); };
 
   return (
     <div className="pb-20">
@@ -72,7 +76,7 @@ export default function CoursesPage() {
       />
       <DataNotice source={source} />
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="mt-8 grid gap-3 rounded-2xl border border-[#103f35]/12 bg-white p-4 sm:grid-cols-2 lg:grid-cols-6">
+        <div className="mt-8 grid gap-3 rounded-2xl border border-[#103f35]/12 bg-white p-4 sm:grid-cols-2 lg:grid-cols-4">
           <input className="field-input lg:col-span-2" type="search" placeholder="Search course or university…" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search courses" />
           <select className="field-input" value={level} onChange={(e) => setLevel(e.target.value)} aria-label="Degree level">
             <option value="">All levels</option>
@@ -91,6 +95,10 @@ export default function CoursesPage() {
           <select className="field-input" value={uniId} onChange={(e) => setUniId(e.target.value)} aria-label="University">
             <option value="">All universities</option>
             {[...unis.values()].map((u) => <option key={u.id} value={u.id}>{u.name}</option>)}
+          </select>
+          <select className="field-input" value={year} onChange={(e) => setYear(e.target.value)} aria-label="Academic year">
+            <option value="">All academic years</option>
+            {years.map((y) => <option key={y} value={y}>{y}</option>)}
           </select>
           <button type="button" className="btn-ghost" onClick={reset}>Reset filters</button>
         </div>
@@ -117,7 +125,7 @@ export default function CoursesPage() {
                 </div>
                 <p className="mt-1.5 text-sm font-medium text-[#202824]/70">{unis.get(c.universityId)?.name} · {unis.get(c.universityId)?.city}</p>
                 <p className="mt-2 text-[0.85rem] text-[#202824]/65">
-                  {LEVEL_LABELS[c.level]} · {c.language === "english" ? "English-taught" : c.language} · {c.durationYears ? `${c.durationYears} years` : "Duration: check official page"} · {c.credits ? `${c.credits} ECTS` : ""}
+                  {LEVEL_LABELS[c.level]} · {c.language === "english" ? "English-taught" : c.language === "italian" ? "Italian-taught" : "English & Italian"} · {c.durationYears ? `${c.durationYears} years` : "Duration: check official page"} · {c.credits ? `${c.credits} ECTS` : ""}
                 </p>
                 <p className="mt-2 text-[0.85rem] text-[#202824]/65">Fees: {c.tuitionNote}</p>
                 <div className="mt-auto pt-5 flex flex-wrap gap-2">

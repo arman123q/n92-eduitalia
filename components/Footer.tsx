@@ -24,6 +24,10 @@ export default function Footer() {
             <li><a className="hover:underline" href="/calculator/">Cost Calculator</a></li>
             <li><a className="hover:underline" href="/process/">Application Process</a></li>
             <li><a className="hover:underline" href="/visa-guide/">Visa Guide</a></li>
+            <li><a className="hover:underline" href="/ielts-coaching/">IELTS Online Coaching</a></li>
+            <li><a className="hover:underline" href="/visa-support/">Visa &amp; Documentation Support</a></li>
+            <li><a className="hover:underline" href="/accommodation-support/">Accommodation &amp; Arrival Support</a></li>
+            <li><a className="hover:underline" href="/refund-policy/">Consultancy Fee Refund Policy</a></li>
             <li><a className="hover:underline" href="/faq/">FAQ</a></li>
             <li><a className="hover:underline" href="/privacy/">Privacy Notice</a></li>
             <li><a className="hover:underline" href="/terms/">Terms of Use</a></li>

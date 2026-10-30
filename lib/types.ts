@@ -33,7 +33,7 @@ export interface Course {
   slug: string;
   name: string;
   universityId: string;
-  level: "bachelor" | "master" | "phd";
+  level: "bachelor" | "master" | "single_cycle" | "phd";
   subject: string;
   language: "english" | "italian" | "both";
   durationYears: number | null;

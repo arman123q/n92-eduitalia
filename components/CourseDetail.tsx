@@ -33,7 +33,7 @@ export default function CourseDetail({ slug }: { slug: string | null }) {
     ["University", uni ? `${uni.name} — ${uni.city}` : ""],
     ["Degree level", LEVEL_LABELS[course.level]],
     ["Subject", SUBJECT_LABELS[course.subject] || course.subject],
-    ["Teaching language", course.language],
+    ["Teaching language", course.language === "english" ? "English" : course.language === "italian" ? "Italian" : "English & Italian"],
     ["Duration", course.durationYears ? `${course.durationYears} years` : "Not verified — check official page"],
     ["Credits", course.credits ? `${course.credits} ECTS` : "Not verified"],
     ["Tuition", course.tuitionNote],
