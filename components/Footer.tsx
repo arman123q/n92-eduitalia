@@ -1,4 +1,5 @@
 import { FooterContact } from "@/components/CompanyInfo";
+import CookieSettingsLink from "@/components/CookieSettingsLink";
 
 export default function Footer() {
   return (
@@ -35,6 +36,7 @@ export default function Footer() {
             <li><a className="hover:underline" href="/faq/">FAQ</a></li>
             <li><a className="hover:underline" href="/privacy/">Privacy Notice</a></li>
             <li><a className="hover:underline" href="/terms/">Terms of Use</a></li>
+            <li><CookieSettingsLink /></li>
             <li><a className="hover:underline" href="/admin/">Admin Login</a></li>
           </ul>
         </nav>

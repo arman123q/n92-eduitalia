@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Counsellor from "@/components/Counsellor";
+import CookieConsent from "@/components/CookieConsent";
 
 const display = Playfair_Display({ subsets: ["latin"], variable: "--font-display", display: "swap" });
 const body = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" });
@@ -73,6 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="top">{children}</main>
         <Footer />
         <Counsellor />
+        <CookieConsent />
       </body>
     </html>
   );
