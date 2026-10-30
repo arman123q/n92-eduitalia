@@ -145,6 +145,30 @@ export const SCHEMAS: Record<string, { title: string; singular: string; idPrefix
       { key: "adminNotes", label: "Admin notes (private)", type: "textarea" },
     ],
   },
+  testimonials: {
+    title: "Student Reviews & Testimonials", singular: "Testimonial", idPrefix: "t-", nameKey: "displayName",
+    fields: [
+      { key: "displayName", label: "Student display name (exactly as the student approved)", type: "text", required: true },
+      { key: "photoUrl", label: "Student photo URL (optional)", type: "url", hint: "Upload the photo in the Media tab first, then paste its URL. Only use a photo the student has explicitly consented to publish." },
+      { key: "universityName", label: "University", type: "text", required: true },
+      { key: "programme", label: "Programme / course", type: "text" },
+      { key: "country", label: "Country", type: "text", hint: "e.g. India" },
+      { key: "serviceCategory", label: "Service received", type: "select", options: [
+        ["university-admission", "University Admission"],
+        ["visa-guidance", "Visa Guidance"],
+        ["scholarship-assistance", "Scholarship Assistance"],
+        ["ielts-coaching", "IELTS Coaching"],
+        ["accommodation-arrival", "Accommodation & Arrival Support"],
+      ] },
+      { key: "reviewText", label: "Review text (the student's own words — never edit the meaning)", type: "textarea", required: true },
+      { key: "reviewDate", label: "Review date", type: "date" },
+      { key: "source", label: "Review source", type: "select", options: [["manual", "Submitted directly to N92"], ["google", "Google review"]], hint: "Direct submissions and Google reviews are labelled differently on the website." },
+      { key: "permissionConfirmed", label: "Student gave permission to publish", type: "checkbox", hint: "MUST be ON: the database blocks public visibility of any testimonial without recorded permission, even if set to Published." },
+      { key: "featured", label: "Feature on the homepage", type: "checkbox" },
+      { key: "status", label: "Publishing status (approval step)", type: "select", options: STATUS, hint: "Keep as Draft until you have checked the review and the student's permission, then set Published to approve it." },
+      { key: "adminNotes", label: "Admin notes (private — e.g. where the permission is recorded)", type: "textarea" },
+    ],
+  },
 };
 
-export const TABLES = ["universities", "courses", "scholarships", "faqs", "admission_rounds", "notices"] as const;
+export const TABLES = ["universities", "courses", "scholarships", "faqs", "admission_rounds", "notices", "testimonials"] as const;

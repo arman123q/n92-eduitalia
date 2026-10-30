@@ -9,6 +9,7 @@ import CalcSettings from "@/components/admin/CalcSettings";
 import LeadsCRM from "@/components/admin/LeadsCRM";
 import MediaManager from "@/components/admin/MediaManager";
 import { TABLES } from "@/components/admin/schemas";
+import { ArrowUpRight } from "lucide-react";
 
 type View = "dashboard" | "leads" | "content" | "calculator" | "media" | (typeof TABLES)[number];
 
@@ -21,6 +22,7 @@ const NAV: { id: View; label: string }[] = [
   { id: "faqs", label: "FAQs & Knowledge" },
   { id: "admission_rounds", label: "Admission Rounds & Deadlines" },
   { id: "notices", label: "Important Notices" },
+  { id: "testimonials", label: "Student Reviews" },
   { id: "content", label: "Website Content" },
   { id: "calculator", label: "Calculator Settings" },
   { id: "media", label: "Media Library" },
@@ -109,7 +111,7 @@ export default function AdminPage() {
           </p>
         </div>
         <div className="flex gap-2">
-          <a className="btn-ghost !py-2" href="/" target="_blank" rel="noopener noreferrer">View website ↗</a>
+          <a className="btn-ghost !py-2" href="/" target="_blank" rel="noopener noreferrer">View website <ArrowUpRight size={14} className="inline -mt-0.5" aria-hidden="true" /></a>
           <button type="button" className="btn-ghost !py-2" onClick={() => { logout(); setAuthed(false); }}>Log out</button>
         </div>
       </div>

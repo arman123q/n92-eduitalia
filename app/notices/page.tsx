@@ -6,6 +6,7 @@ import { getNotices } from "@/lib/data";
 import type { Notice } from "@/lib/types";
 // @ts-ignore - plain JS module
 import { sortNotices, isActiveNotice } from "@/lib/rounds.js";
+import { Pin, ArrowUpRight } from "lucide-react";
 
 function fmt(iso?: string | null): string {
   if (!iso) return "";
@@ -63,13 +64,13 @@ export default function NoticesPage() {
                   {n.priority.toUpperCase()}
                 </span>
                 <span className="text-[0.8rem] font-semibold text-[#103f35]">{n.category}</span>
-                {n.pinned && <span className="text-[0.8rem] text-[#202824]/55">📌 Pinned</span>}
+                {n.pinned && <span className="inline-flex items-center gap-1 text-[0.8rem] text-[#202824]/55"><Pin size={12} aria-hidden="true" /> Pinned</span>}
               </div>
               <h2 className="mt-2.5 font-display text-xl font-bold text-[#103f35]">{n.title}</h2>
               <p className="mt-1.5 whitespace-pre-line text-[0.95rem] text-[#202824]/85">{n.message}</p>
               <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[0.85rem]">
-                {n.linkUrl && <a className="font-semibold text-[#103f35] underline" href={n.linkUrl} target="_blank" rel="noopener noreferrer">{n.linkText || "Open link"} ↗</a>}
-                {n.sourceUrl && <a className="text-[#202824]/70 underline" href={n.sourceUrl} target="_blank" rel="noopener noreferrer">Official source ↗</a>}
+                {n.linkUrl && <a className="font-semibold text-[#103f35] underline" href={n.linkUrl} target="_blank" rel="noopener noreferrer">{n.linkText || "Open link"} <ArrowUpRight size={14} className="inline -mt-0.5" aria-hidden="true" /></a>}
+                {n.sourceUrl && <a className="text-[#202824]/70 underline" href={n.sourceUrl} target="_blank" rel="noopener noreferrer">Official source <ArrowUpRight size={14} className="inline -mt-0.5" aria-hidden="true" /></a>}
                 {n.endsAt && <span className="text-[#202824]/60">Shown until {fmt(n.endsAt)}</span>}
                 {n.lastVerified && <span className="text-[#202824]/60">Verified {fmt(n.lastVerified)}</span>}
               </div>

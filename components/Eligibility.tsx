@@ -12,6 +12,8 @@ import {
   BUDGET_BANDS,
 } from "@/lib/eligibility";
 import { submitLead } from "@/lib/leads";
+import type { LucideIcon } from "lucide-react";
+import { Zap, GraduationCap, TriangleAlert, Compass, Award, FolderCheck, CircleCheck, ArrowLeft } from "lucide-react";
 
 const FIELDS = [
   ["engineering-technology", "Engineering & Technology"],
@@ -72,12 +74,12 @@ function Select({ id, value, onChange, error, children }: { id: string; value: s
   );
 }
 
-function ResultList({ title, items, icon }: { title: string; items: string[]; icon: string }) {
+function ResultList({ title, items, icon: Icon }: { title: string; items: string[]; icon: LucideIcon }) {
   if (!items || items.length === 0) return null;
   return (
     <div className="mt-5">
       <h4 className="font-display text-lg font-bold text-[#103f35] flex items-center gap-2">
-        <span aria-hidden="true">{icon}</span> {title}
+        <Icon size={20} strokeWidth={1.8} className="text-[#103f35]" aria-hidden="true" /> {title}
       </h4>
       <ul className="mt-2 space-y-2 text-[0.93rem] leading-relaxed text-[#202824]">
         {items.map((it, i) => (
@@ -308,7 +310,7 @@ export default function Eligibility() {
             </div>
           </fieldset>
           <div className="mt-6 flex gap-3">
-            <button type="button" className="btn-ghost flex-1" onClick={goBack}>← Back</button>
+            <button type="button" className="btn-ghost flex-1 inline-flex items-center justify-center gap-1.5" onClick={goBack}><ArrowLeft size={16} aria-hidden="true" /> Back</button>
             <button type="submit" className="btn-primary flex-[2]">Continue →</button>
           </div>
         </form>
@@ -345,11 +347,11 @@ export default function Eligibility() {
             </div>
           </fieldset>
           <div className="mt-6 flex gap-3">
-            <button type="button" className="btn-ghost flex-1" onClick={goBack}>← Back</button>
+            <button type="button" className="btn-ghost flex-1 inline-flex items-center justify-center gap-1.5" onClick={goBack}><ArrowLeft size={16} aria-hidden="true" /> Back</button>
             <button type="submit" className="btn-gold flex-[2]">Show My Results →</button>
           </div>
           <p className="mt-4 text-center text-[0.8rem] text-[#202824]/60">
-            ⚡ Instant preliminary guidance · 100% free · No obligation · Your answers stay in your browser
+            <Zap size={13} className="inline -mt-0.5 text-[#c7a05a]" aria-hidden="true" /> Instant preliminary guidance · 100% free · No obligation · Your answers stay in your browser
           </p>
         </form>
       )}
@@ -366,12 +368,12 @@ export default function Eligibility() {
             and official university pages.
           </div>
 
-          <ResultList title="What we see in your profile" items={results.factors} icon="🎓" />
-          {results.checks.length > 0 && <ResultList title="Requirements to check" items={results.checks} icon="⚠️" />}
-          <ResultList title="Course-search directions" items={results.courseDirections} icon="🧭" />
-          <ResultList title="Scholarship research priorities" items={results.scholarshipPriorities} icon="🏅" />
-          <ResultList title="Documents to prepare" items={results.documents} icon="🗂️" />
-          <ResultList title="Your next steps" items={results.nextSteps} icon="✅" />
+          <ResultList title="What we see in your profile" items={results.factors} icon={GraduationCap} />
+          {results.checks.length > 0 && <ResultList title="Requirements to check" items={results.checks} icon={TriangleAlert} />}
+          <ResultList title="Course-search directions" items={results.courseDirections} icon={Compass} />
+          <ResultList title="Scholarship research priorities" items={results.scholarshipPriorities} icon={Award} />
+          <ResultList title="Documents to prepare" items={results.documents} icon={FolderCheck} />
+          <ResultList title="Your next steps" items={results.nextSteps} icon={CircleCheck} />
 
           <div className="mt-7 border-t border-[#103f35]/10 pt-6">
             <h3 className="font-display text-xl font-bold text-[#103f35]">Request a Personalised Review (optional)</h3>

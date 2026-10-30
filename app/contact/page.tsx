@@ -4,6 +4,7 @@ import { useState } from "react";
 import { validateLead } from "@/lib/eligibility";
 import { submitLead, isBackendConfigured } from "@/lib/leads";
 import { PageHeader } from "@/components/ui";
+import { CompanyLocation } from "@/components/CompanyInfo";
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -124,15 +125,25 @@ export default function ContactPage() {
                 <span>Optional: also send me study-in-Italy updates and scholarship alerts.</span>
               </label>
             </div>
-            <button type="submit" className="btn-primary sm:col-span-2" disabled={sending}>
-              {sending ? "Sending…" : "Send my enquiry"}
-            </button>
+            <div className="sm:col-span-2">
+              <button type="submit" className="btn-primary w-full" disabled={sending}>
+                {sending ? "Sending…" : "Send my enquiry"}
+              </button>
+              <p className="mt-3 text-[0.82rem] leading-relaxed text-[#202824]/55">
+                Privacy note: we use your details only to respond to this enquiry. See our{" "}
+                <a className="underline font-semibold" href="/privacy/">Privacy Notice</a>,{" "}
+                <a className="underline font-semibold" href="/refund-policy/">Refund Policy</a> and{" "}
+                <a className="underline font-semibold" href="/terms/">Terms</a>.
+              </p>
+            </div>
           </form>
         )}
         <div className="mt-8 flex flex-wrap gap-3">
-          <a className="btn-gold" href="https://wa.me/919452532786" target="_blank" rel="noopener noreferrer">WhatsApp +91 94525 32786</a>
+          <a className="btn-gold" href="/book-consultation/">Book a Free Consultation</a>
+          <a className="btn-ghost" href="https://wa.me/919452532786" target="_blank" rel="noopener noreferrer">WhatsApp +91 94525 32786</a>
           <a className="btn-ghost" href="https://www.instagram.com/n92eduitalia/" target="_blank" rel="noopener noreferrer">Instagram @n92eduitalia</a>
         </div>
+        <CompanyLocation />
       </div>
     </div>
   );

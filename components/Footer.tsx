@@ -1,3 +1,5 @@
+import { FooterContact } from "@/components/CompanyInfo";
+
 export default function Footer() {
   return (
     <footer className="bg-[#0b2e27] text-[#faf9f5]">
@@ -28,6 +30,8 @@ export default function Footer() {
             <li><a className="hover:underline" href="/visa-support/">Visa &amp; Documentation Support</a></li>
             <li><a className="hover:underline" href="/accommodation-support/">Accommodation &amp; Arrival Support</a></li>
             <li><a className="hover:underline" href="/refund-policy/">Consultancy Fee Refund Policy</a></li>
+            <li><a className="hover:underline" href="/reviews/">Student Reviews</a></li>
+            <li><a className="hover:underline" href="/book-consultation/">Book a Free Consultation</a></li>
             <li><a className="hover:underline" href="/faq/">FAQ</a></li>
             <li><a className="hover:underline" href="/privacy/">Privacy Notice</a></li>
             <li><a className="hover:underline" href="/terms/">Terms of Use</a></li>
@@ -58,6 +62,7 @@ export default function Footer() {
                 @n92eduitalia
               </a>
             </li>
+            <FooterContact />
             <li>Intake focus: 2027–28</li>
           </ul>
         </div>

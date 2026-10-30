@@ -113,7 +113,7 @@ export default function RefundPolicyPage() {
 
         <div className="mt-8 flex flex-wrap gap-3">
           <a className="btn-gold" href="https://wa.me/919452532786" target="_blank" rel="noopener noreferrer">WhatsApp +91 94525 32786</a>
-          <a className="btn-ghost" href="/contact/">Book a consultation</a>
+          <a className="btn-ghost" href="/book-consultation/">Book a free consultation</a>
         </div>
       </div>
     </div>

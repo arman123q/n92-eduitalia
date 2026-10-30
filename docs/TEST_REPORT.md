@@ -280,3 +280,110 @@ Owner-selected upgrades only; no unrelated services added. Branding, palette
   until migration 006 is run; authenticated admin editing/CSV import
   against the live database (awaits the owner's guided admin session,
   Option B — same outstanding item as before).
+
+## Visual polish, reviews & company contact upgrade (30 Oct 2026)
+
+Owner-commissioned polish release. All existing functionality, data,
+branding and RLS preserved. Builds on the selected-upgrades release
+(courses 30, service pages) — that content is unchanged.
+
+### Lucide icons (emoji removed)
+- lucide-react added as a dependency. Every colourful emoji across the
+  site replaced with consistent Lucide icons (forest green, stroke 1.8,
+  champagne-gold chip accents): service cards (MessagesSquare,
+  FolderCheck, House, GraduationCap, ShieldCheck), homepage trust strip
+  (Landmark, GraduationCap, FolderCheck, Handshake), eligibility results
+  (GraduationCap, TriangleAlert, Compass, Award, FolderCheck,
+  CircleCheck, Zap), counsellor launcher (MessageCircle), location pins,
+  shortlist hearts, menu toggle, pinned notices, external-link arrows
+  (ArrowUpRight), back arrows (ArrowLeft), admin warning markers.
+- Verified by code audit (zero emoji codepoints left outside
+  typographic ✓/✕/→) and a browser check on the rendered homepage.
+
+### Hero contrast
+- Dark forest-green overlay added over the 3D Venice hero (uniform veil
+  on mobile, directional gradient on desktop); headline now ivory
+  (#FAF9F5) with the second line in light champagne gold (#E7D3A1),
+  subtext ivory/90, secondary CTA restyled for dark backgrounds, subtle
+  text shadow. The 3D scene remains visible; screenshots at 360px and
+  1440px inspected — text fully readable, no overlap with the
+  eligibility panel.
+- scripts/hero-check.mjs: PASSED at all 8 required widths (320, 360,
+  375, 390, 414, 768, 1024, 1440) — no overflow, headline inside the
+  hero, no overlap with the form, computed headline colour ivory.
+
+### Student reviews & testimonials (no invented data)
+- New `testimonials` table arrives via supabase/migration_007_testimonials.sql
+  (shown to the owner in full before use; he runs it). PG-tested locally:
+  applies cleanly, CHECK constraints enforced, idempotent, and a
+  behavioural RLS test proved anon can read ONLY published +
+  permission-confirmed rows and cannot insert. The public-read policy
+  itself requires permission_confirmed, and the frontend re-checks it —
+  a testimonial cannot become public without recorded permission.
+- The table starts EMPTY. No reviews, names, photos, counts or star
+  ratings were invented anywhere. Homepage "Student Reviews" section
+  shows featured published testimonials, or an honest empty state;
+  /reviews/ lists all published testimonials with the 5 service-category
+  filters and clearly labels the source (submitted to N92 with
+  permission vs Google review). "Read Google Reviews" buttons link to
+  the owner's Google listing (his share link). Direct Google review
+  *import* is not possible without a paid Google Places API key, so the
+  site links out instead — stated plainly to the owner.
+- Admin: new "Student Reviews" section (add/edit/remove, photo URL via
+  Media uploads, permission checkbox, featured flag, draft→publish
+  approval) via the existing RecordsManager.
+- Browser-tested with fixture rows inside the test harness only:
+  permitted+featured testimonial renders on homepage and /reviews/;
+  a published-but-not-permitted fixture is NEVER rendered.
+
+### Company location & contact — IMPORTANT limitation
+- The owner's Google share link (https://share.google/SMZxVZdUWDem9ucYB)
+  could NOT be fully resolved from this environment: Google served its
+  bot-check "sorry" page to both the browser agent and direct fetches.
+  The redirect trace indicates the listing's knowledge-graph name is
+  "Baksh Villa" — which does not match the consultancy name — so NO
+  address, phone number or hours were taken from it, and nothing was
+  invented. The owner has been asked to confirm the exact listing
+  details.
+- Built instead: Contact-page "Company location & contact" section and
+  footer contact lines driven by Admin → Website Content → Company
+  (business name, address, phone, email, hours, Maps/Directions/embed
+  URLs — all editable). Maps, Directions and "Read Google Reviews"
+  buttons work today via the owner's share link; address/phone/email/
+  hours appear automatically once entered (empty fields are hidden,
+  and an interactive map embed appears if an embed URL is added).
+
+### Student Journey + consultation booking
+- Homepage "Your Journey to Italy — Step by Step": the owner's 6 steps,
+  horizontal timeline on desktop / vertical on mobile, decision-making
+  disclaimer included; fully admin-editable (Website Content → Journey).
+- New /book-consultation/: service select (admin-editable list), name,
+  email, phone, preferred date/time, consent — submits to the existing
+  leads system (subject_interest "Free Consultation — <service>",
+  preferred time inside the message). Confirmation states clearly the
+  chosen time is a request, not a confirmed appointment. CTAs added on
+  the homepage (consultation band), contact page, footer and service
+  pages. Privacy notes with Privacy/Refund/Terms links added beside
+  the consultation, contact and service enquiry forms.
+
+### Test results
+- Production build (compile + typecheck): PASSED (126 static pages).
+- Unit tests: 25/25 PASSED.
+- Functional checks #1 (previous release): 45/45 PASSED (no regressions).
+- Functional checks #2 (scripts/functional-check-2.mjs): 30/30 PASSED —
+  hero colour, zero homepage emoji, journey steps + disclaimer,
+  testimonial permission behaviour, reviews category filter,
+  consultation lead payload + confirmation wording, contact location
+  section, no invented address, privacy notes.
+- Hero audit: 8/8 widths PASSED (above).
+- Link audit: PASSED (61 universities, 30 courses, 4 scholarships,
+  25 internal targets incl. /reviews/ and /book-consultation/).
+- Responsive audit: 144/144 PASSED (18 pages × 8 widths, zero overflow).
+- Migration 007 PostgreSQL test: ALL PASSED (see above).
+- NOT TESTED yet: the new build live (awaits GitHub upload → Cloudflare);
+  migration 007 against the live database (owner runs it — SQL supplied
+  in full with this delivery); authenticated admin review management
+  against the live database (awaits the owner's guided admin session,
+  Option B — same outstanding item); the Google listing's address /
+  phone / hours (blocked as described above, owner's confirmation
+  requested).

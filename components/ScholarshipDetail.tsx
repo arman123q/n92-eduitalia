@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getScholarships, scholarshipBySlug } from "@/lib/data";
 import type { Scholarship } from "@/lib/types";
 import { VerifyBadge, SourceLine, LEVEL_LABELS } from "@/components/ui";
+import { ArrowUpRight, ArrowLeft } from "lucide-react";
 
 function Row({ k, children }: { k: string; children: React.ReactNode }) {
   return (
@@ -36,7 +37,7 @@ export default function ScholarshipDetail({ slug }: { slug: string | null }) {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 pb-20">
-      <a href="/scholarships/" className="text-sm font-semibold text-[#103f35] underline decoration-[#c7a05a] decoration-2 underline-offset-4">← All scholarships</a>
+      <a href="/scholarships/" className="text-sm font-semibold text-[#103f35] underline decoration-[#c7a05a] decoration-2 underline-offset-4"><ArrowLeft size={14} className="inline -mt-0.5" aria-hidden="true" /> All scholarships</a>
       <div className="mt-4 flex flex-wrap items-start justify-between gap-3">
         <h1 className="font-display text-4xl font-bold text-[#103f35]">{s.name}</h1>
         <VerifyBadge status={s.verificationStatus} />
@@ -69,7 +70,7 @@ export default function ScholarshipDetail({ slug }: { slug: string | null }) {
       </div>
 
       <div className="mt-8 flex flex-wrap gap-3">
-        <a className="btn-gold" href={s.officialUrl} target="_blank" rel="noopener noreferrer">Official application/info ↗</a>
+        <a className="btn-gold" href={s.officialUrl} target="_blank" rel="noopener noreferrer">Official application/info <ArrowUpRight size={14} className="inline -mt-0.5" aria-hidden="true" /></a>
         <a className="btn-ghost" href="/eligibility/">Check my eligibility</a>
       </div>
       <div className="mt-8"><SourceLine sourceUrl={s.sourceUrl} lastVerified={s.lastVerified} /></div>

@@ -143,3 +143,28 @@ export interface Notice {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export type TestimonialCategory =
+  | "university-admission"
+  | "visa-guidance"
+  | "scholarship-assistance"
+  | "ielts-coaching"
+  | "accommodation-arrival";
+
+export interface Testimonial {
+  id: string;
+  displayName: string;
+  photoUrl?: string | null;
+  universityName: string;
+  programme: string;
+  country: string;
+  serviceCategory: TestimonialCategory;
+  reviewText: string;
+  reviewDate?: string | null;
+  source: "manual" | "google";
+  permissionConfirmed: boolean;
+  featured: boolean;
+  status: PublishStatus;
+  createdAt?: string;
+  updatedAt?: string;
+}

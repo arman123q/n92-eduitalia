@@ -120,9 +120,17 @@ export default function ServiceEnquiryForm({
               <span>Optional: also send me study-in-Italy updates and scholarship alerts.</span>
             </label>
           </div>
-          <button type="submit" className="btn-primary sm:col-span-2" disabled={sending}>
-            {sending ? "Sending…" : submitLabel}
-          </button>
+          <div className="sm:col-span-2">
+            <button type="submit" className="btn-primary w-full" disabled={sending}>
+              {sending ? "Sending…" : submitLabel}
+            </button>
+            <p className="mt-3 text-[0.82rem] leading-relaxed text-[#202824]/55">
+              Privacy note: we use your details only to respond to this enquiry. See our{" "}
+              <a className="underline font-semibold" href="/privacy/">Privacy Notice</a>,{" "}
+              <a className="underline font-semibold" href="/refund-policy/">Refund Policy</a> and{" "}
+              <a className="underline font-semibold" href="/terms/">Terms</a>.
+            </p>
+          </div>
         </form>
       )}
     </section>

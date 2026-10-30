@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { adminSelect, fromDb } from "@/lib/admin";
+import { TriangleAlert } from "lucide-react";
 
 type Row = Record<string, unknown>;
 
@@ -45,7 +46,7 @@ export default function Dashboard() {
           <div key={s.label} className="card p-5">
             <p className="font-display text-3xl font-black text-[#103f35]">{s.value}</p>
             <p className="mt-1 text-[0.85rem] font-medium text-[#202824]/65">
-              {s.label} {s.warn && <span className="text-amber-600" title="Needs attention">⚠</span>}
+              {s.label} {s.warn && <TriangleAlert size={14} className="inline text-amber-600" aria-label="Needs attention" />}
             </p>
           </div>
         ))}

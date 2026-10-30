@@ -6,6 +6,7 @@ import { getAdmissionRounds } from "@/lib/data";
 import type { AdmissionRound } from "@/lib/types";
 // @ts-ignore - plain JS module
 import { sortRounds, ROUND_STATUS_META } from "@/lib/rounds.js";
+import { ArrowUpRight } from "lucide-react";
 
 function fmt(iso?: string | null, withTime = false): string {
   if (!iso) return "—";
@@ -86,8 +87,8 @@ export default function AdmissionsPage() {
                 </dl>
                 {r.message && <p className="mt-3 text-[0.95rem] text-[#202824]/80">{r.message}</p>}
                 <div className="mt-4 flex flex-wrap gap-2.5">
-                  {r.officialUrl && <a className="btn-primary !py-2 text-[0.88rem]" href={r.officialUrl} target="_blank" rel="noopener noreferrer">Apply on the official portal ↗</a>}
-                  {r.sourceUrl && <a className="btn-ghost !py-2 text-[0.88rem]" href={r.sourceUrl} target="_blank" rel="noopener noreferrer">Official announcement ↗</a>}
+                  {r.officialUrl && <a className="btn-primary !py-2 text-[0.88rem]" href={r.officialUrl} target="_blank" rel="noopener noreferrer">Apply on the official portal <ArrowUpRight size={14} className="inline -mt-0.5" aria-hidden="true" /></a>}
+                  {r.sourceUrl && <a className="btn-ghost !py-2 text-[0.88rem]" href={r.sourceUrl} target="_blank" rel="noopener noreferrer">Official announcement <ArrowUpRight size={14} className="inline -mt-0.5" aria-hidden="true" /></a>}
                 </div>
                 {r.lastVerified && <p className="mt-3 text-[0.78rem] text-[#202824]/55">Last verified against the official source: {fmt(r.lastVerified)}</p>}
               </article>

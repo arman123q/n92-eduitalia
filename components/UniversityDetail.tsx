@@ -5,6 +5,7 @@ import { getUniversities, getCourses, universityBySlug } from "@/lib/data";
 import type { University, Course } from "@/lib/types";
 import { VerifyBadge, SourceLine, SUBJECT_LABELS, LEVEL_LABELS } from "@/components/ui";
 import { detailHref } from "@/lib/links";
+import { MapPin, ArrowUpRight, ArrowLeft } from "lucide-react";
 
 export default function UniversityDetail({ slug }: { slug: string | null }) {
   const [uni, setUni] = useState<University | undefined | null>(null);
@@ -30,12 +31,12 @@ export default function UniversityDetail({ slug }: { slug: string | null }) {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 pb-20">
-      <a href="/universities/" className="text-sm font-semibold text-[#103f35] underline decoration-[#c7a05a] decoration-2 underline-offset-4">← All universities</a>
+      <a href="/universities/" className="text-sm font-semibold text-[#103f35] underline decoration-[#c7a05a] decoration-2 underline-offset-4"><ArrowLeft size={14} className="inline -mt-0.5" aria-hidden="true" /> All universities</a>
       <div className="mt-4 flex flex-wrap items-start justify-between gap-3">
         <h1 className="font-display text-4xl font-bold text-[#103f35]">{uni.name}</h1>
         <VerifyBadge status={uni.verificationStatus} />
       </div>
-      <p className="mt-2 text-lg text-[#202824]/70">📍 {uni.city}, {uni.region} · {uni.type} university · Academic year {uni.academicYear}</p>
+      <p className="mt-2 text-lg text-[#202824]/70"><MapPin size={17} className="inline -mt-1 text-[#103f35]" aria-hidden="true" /> {uni.city}, {uni.region} · {uni.type} university · Academic year {uni.academicYear}</p>
 
       <div className="mt-8 grid gap-5 sm:grid-cols-2">
         <section className="card p-6">
@@ -71,7 +72,7 @@ export default function UniversityDetail({ slug }: { slug: string | null }) {
       )}
 
       <div className="mt-10 flex flex-wrap gap-3">
-        <a className="btn-gold" href={uni.applicationUrl} target="_blank" rel="noopener noreferrer">Official admissions ↗</a>
+        <a className="btn-gold" href={uni.applicationUrl} target="_blank" rel="noopener noreferrer">Official admissions <ArrowUpRight size={14} className="inline -mt-0.5" aria-hidden="true" /></a>
         <a className="btn-ghost" href="/eligibility/">Check my eligibility</a>
       </div>
       <div className="mt-8"><SourceLine sourceUrl={uni.sourceUrl} lastVerified={uni.lastVerified} /></div>

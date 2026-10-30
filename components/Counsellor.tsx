@@ -9,6 +9,7 @@
 import { useEffect, useRef, useState } from "react";
 import { getFaqs } from "@/lib/data";
 import type { Faq } from "@/lib/types";
+import { MessageCircle, ArrowUpRight } from "lucide-react";
 
 interface Msg {
   from: "user" | "assistant";
@@ -72,7 +73,7 @@ export default function Counsellor() {
         aria-expanded={open}
         className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-50 flex items-center gap-2 rounded-full bg-[#103f35] px-4 py-3 sm:px-5 sm:py-3.5 font-semibold text-white shadow-2xl border border-[#c7a05a]/60 hover:bg-[#1a5747]"
       >
-        <span aria-hidden="true">💬</span> <span className="hidden sm:inline">{open ? "Close assistant" : "Guidance Assistant"}</span><span className="sr-only sm:hidden">{open ? "Close assistant" : "Open Guidance Assistant"}</span>
+        <MessageCircle size={20} strokeWidth={1.8} aria-hidden="true" /> <span className="hidden sm:inline">{open ? "Close assistant" : "Guidance Assistant"}</span><span className="sr-only sm:hidden">{open ? "Close assistant" : "Open Guidance Assistant"}</span>
       </button>
       {open && (
         <section
@@ -89,7 +90,7 @@ export default function Counsellor() {
                 <p>{m.text}</p>
                 {m.sourceUrl && (
                   <a className="mt-1.5 inline-block font-semibold underline" href={m.sourceUrl} target="_blank" rel="noopener noreferrer">
-                    Official source ↗
+                    Official source <ArrowUpRight size={14} className="inline -mt-0.5" aria-hidden="true" />
                   </a>
                 )}
               </div>

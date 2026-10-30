@@ -1,5 +1,7 @@
 "use client";
 
+import type { LucideIcon } from "lucide-react";
+import { MessagesSquare, FolderCheck, House, GraduationCap, ShieldCheck } from "lucide-react";
 import { useServiceContent } from "@/components/useServiceContent";
 import {
   IELTS_DEFAULTS,
@@ -17,12 +19,12 @@ export function ServicesOverview() {
   const arrival = useServiceContent("page_accommodation", ACCOMMODATION_DEFAULTS);
   const refund = useServiceContent("page_refund", REFUND_DEFAULTS);
 
-  const cards: { icon: string; title: string; text: string; href: string; cta: string }[] = [
-    { icon: "🗣️", title: "IELTS Online Coaching", text: ielts.cardText, href: "/ielts-coaching/", cta: ielts.ctaText },
-    { icon: "🗂️", title: "Visa & Documentation Support", text: visa.cardText, href: "/visa-support/", cta: visa.ctaText },
-    { icon: "🏠", title: "Accommodation & Arrival Support", text: arrival.cardText, href: "/accommodation-support/", cta: arrival.ctaText },
-    { icon: "🎓", title: "University Course & Admission Guidance", text: "Shortlisting, course comparison and application guidance built on official university programme pages — start from verified courses and real requirements.", href: "/courses/", cta: "Explore courses" },
-    { icon: "🛡️", title: "100% Consultancy Fee Refund Guarantee", text: refund.cardText, href: "/refund-policy/", cta: "Read Full Refund Policy" },
+  const cards: { Icon: LucideIcon; title: string; text: string; href: string; cta: string }[] = [
+    { Icon: MessagesSquare, title: "IELTS Online Coaching", text: ielts.cardText, href: "/ielts-coaching/", cta: ielts.ctaText },
+    { Icon: FolderCheck, title: "Visa & Documentation Support", text: visa.cardText, href: "/visa-support/", cta: visa.ctaText },
+    { Icon: House, title: "Accommodation & Arrival Support", text: arrival.cardText, href: "/accommodation-support/", cta: arrival.ctaText },
+    { Icon: GraduationCap, title: "University Course & Admission Guidance", text: "Shortlisting, course comparison and application guidance built on official university programme pages — start from verified courses and real requirements.", href: "/courses/", cta: "Explore courses" },
+    { Icon: ShieldCheck, title: "100% Consultancy Fee Refund Guarantee", text: refund.cardText, href: "/refund-policy/", cta: "Read Full Refund Policy" },
   ];
 
   return (
@@ -34,7 +36,9 @@ export function ServicesOverview() {
       <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((card) => (
           <article key={card.title} className="card flex flex-col p-6">
-            <span className="text-3xl" aria-hidden="true">{card.icon}</span>
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#c7a05a]/15 text-[#103f35]" aria-hidden="true">
+              <card.Icon size={22} strokeWidth={1.8} />
+            </span>
             <h3 className="font-display mt-3 text-lg font-bold leading-snug text-[#103f35]">{card.title}</h3>
             <p className="mt-2 flex-1 text-[0.9rem] leading-relaxed text-[#202824]/75">{card.text}</p>
             <a className="mt-4 inline-block font-semibold text-[#103f35] underline decoration-[#c7a05a] decoration-2 underline-offset-4" href={card.href}>
@@ -91,7 +95,7 @@ export function RefundHomeBand() {
         <p className="mt-3 max-w-3xl leading-relaxed text-[#faf9f5]/78">{c.supportingText}</p>
         <div className="mt-7 flex flex-wrap gap-3">
           <a href="/refund-policy/" className="btn-gold">Read Full Refund Policy →</a>
-          <a href="/contact/" className="btn-ghost !text-[#faf9f5] !border-white/40 hover:!bg-white/10">Book a consultation</a>
+          <a href="/book-consultation/" className="btn-ghost !text-[#faf9f5] !border-white/40 hover:!bg-white/10">Book a free consultation</a>
         </div>
       </div>
     </section>

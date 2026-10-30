@@ -5,6 +5,7 @@ import { getUniversities, getCourses, type DataSource } from "@/lib/data";
 import type { University, Course } from "@/lib/types";
 import { PageHeader, VerifyBadge, DataNotice, SUBJECT_LABELS, LEVEL_LABELS } from "@/components/ui";
 import { detailHref } from "@/lib/links";
+import { Heart } from "lucide-react";
 
 const SHORTLIST_KEY = "n92_shortlist";
 const COMPARE_KEY = "n92_compare";
@@ -104,7 +105,7 @@ export default function CoursesPage() {
         </div>
 
         {shortlist.length > 0 && (
-          <p className="mt-4 text-sm text-[#202824]/70">♥ Your shortlist: {shortlist.length} saved in this browser.</p>
+          <p className="mt-4 flex items-center gap-1.5 text-sm text-[#202824]/70"><Heart size={14} className="text-[#103f35]" fill="currentColor" aria-hidden="true" /> Your shortlist: {shortlist.length} saved in this browser.</p>
         )}
 
         {loading ? (
@@ -131,7 +132,7 @@ export default function CoursesPage() {
                 <div className="mt-auto pt-5 flex flex-wrap gap-2">
                   <a className="btn-primary flex-1 !py-2.5 text-sm" href={detailHref("courses", c.slug)}>Details</a>
                   <button type="button" className="btn-ghost !py-2.5 text-sm" onClick={() => toggleShort(c.id)} aria-pressed={shortlist.includes(c.id)}>
-                    {shortlist.includes(c.id) ? "♥ Saved" : "♡ Save"}
+                    {shortlist.includes(c.id) ? <span className="inline-flex items-center gap-1"><Heart size={13} fill="currentColor" aria-hidden="true" /> Saved</span> : <span className="inline-flex items-center gap-1"><Heart size={13} aria-hidden="true" /> Save</span>}
                   </button>
                   <button type="button" className="btn-ghost !py-2.5 text-sm" onClick={() => toggleCompare(c.id)} aria-pressed={compare.includes(c.id)}>
                     {compare.includes(c.id) ? "✓ Comparing" : "Compare"}

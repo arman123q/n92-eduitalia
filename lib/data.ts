@@ -7,7 +7,7 @@
  */
 import seed from "@/data/seed.json";
 import { restSelect, isDbConfigured } from "@/lib/supabase";
-import type { University, Course, Scholarship, Faq, CalculatorDefaults } from "@/lib/types";
+import type { University, Course, Scholarship, Faq, CalculatorDefaults, Testimonial } from "@/lib/types";
 
 export type DataSource = "database" | "seed";
 export interface DataResult<T> {
@@ -47,6 +47,29 @@ export function getScholarships(): Promise<DataResult<Scholarship>> {
 }
 export function getFaqs(): Promise<DataResult<Faq>> {
   return fetchTable<Faq>("faqs", seed.faqs as Faq[], "question");
+}
+/**
+ * Published testimonials. Deliberately NOT using the shared fetchTable
+ * fallback semantics: the seed holds none (never invent reviews), and if
+ * the live table is missing/empty the honest result is an empty list.
+ * The public query also re-checks permissionConfirmed client-side as a
+ * second line of defence (RLS already enforces it).
+ */
+export async function getTestimonials(): Promise<Testimonial[]> {
+  if (isDbConfigured()) {
+    const rows = await restSelect<Record<string, unknown>>(
+      "testimonials",
+      "select=*&status=eq.published&order=review_date.desc"
+    );
+    if (rows) {
+      return (rows.map((r) => snakeToCamel(r) as unknown as Testimonial) || []).filter(
+        (t) => t.permissionConfirmed
+      );
+    }
+  }
+  return ((seed as { testimonials?: Testimonial[] }).testimonials || []).filter(
+    (t) => t.status === "published" && t.permissionConfirmed
+  );
 }
 export async function getCalculatorDefaults(): Promise<{ value: CalculatorDefaults; source: DataSource }> {
   if (isDbConfigured()) {

@@ -5,6 +5,7 @@ import { getScholarships, type DataSource } from "@/lib/data";
 import type { Scholarship } from "@/lib/types";
 import { PageHeader, VerifyBadge, DataNotice, LEVEL_LABELS } from "@/components/ui";
 import { detailHref } from "@/lib/links";
+import { ArrowUpRight } from "lucide-react";
 
 const KIND_LABELS: Record<string, string> = {
   regional: "Regional (DSU)",
@@ -84,7 +85,7 @@ export default function ScholarshipsPage() {
                 <p className="mt-2 text-[0.83rem] text-[#202824]/60">Closing: {s.closesNote}</p>
                 <div className="mt-auto pt-5 flex gap-2">
                   <a className="btn-primary flex-1 !py-2.5 text-sm" href={detailHref("scholarships", s.slug)}>Details & how to apply</a>
-                  <a className="btn-ghost !py-2.5 text-sm" href={s.officialUrl} target="_blank" rel="noopener noreferrer">Official ↗</a>
+                  <a className="btn-ghost !py-2.5 text-sm" href={s.officialUrl} target="_blank" rel="noopener noreferrer">Official <ArrowUpRight size={14} className="inline -mt-0.5" aria-hidden="true" /></a>
                 </div>
               </article>
             ))}

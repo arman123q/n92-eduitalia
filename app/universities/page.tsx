@@ -5,6 +5,7 @@ import { getUniversities, getCourses, type DataSource } from "@/lib/data";
 import type { University, Course } from "@/lib/types";
 import { PageHeader, VerifyBadge, DataNotice, SUBJECT_LABELS, LEVEL_LABELS } from "@/components/ui";
 import { detailHref } from "@/lib/links";
+import { MapPin, ArrowUpRight } from "lucide-react";
 
 export default function UniversitiesPage() {
   const [unis, setUnis] = useState<University[]>([]);
@@ -149,7 +150,7 @@ export default function UniversitiesPage() {
                     <h2 className="font-display text-xl font-bold leading-snug text-[#103f35]">{u.name}</h2>
                     <VerifyBadge status={u.verificationStatus} />
                   </div>
-                  <p className="mt-1.5 text-sm font-medium text-[#202824]/70">📍 {u.city} · {u.region} · {u.type}</p>
+                  <p className="mt-1.5 text-sm font-medium text-[#202824]/70"><MapPin size={14} className="inline -mt-0.5 text-[#103f35]" aria-hidden="true" /> {u.city} · {u.region} · {u.type}</p>
                   <p className="mt-3 flex flex-wrap gap-1.5">
                     {u.subjects.slice(0, 3).map((s) => (
                       <span key={s} className="rounded-full bg-[#103f35]/6 px-2.5 py-1 text-[0.72rem] font-semibold text-[#103f35]">{SUBJECT_LABELS[s] || s}</span>
@@ -161,7 +162,7 @@ export default function UniversitiesPage() {
                   </p>
                   <div className="mt-auto pt-5 flex gap-2">
                     <a className="btn-primary flex-1 !py-2.5 text-sm" href={detailHref("universities", u.slug)}>View details</a>
-                    <a className="btn-ghost !py-2.5 text-sm" href={u.website} target="_blank" rel="noopener noreferrer">Official site ↗</a>
+                    <a className="btn-ghost !py-2.5 text-sm" href={u.website} target="_blank" rel="noopener noreferrer">Official site <ArrowUpRight size={14} className="inline -mt-0.5" aria-hidden="true" /></a>
                     <button type="button" aria-pressed={compareIds.includes(u.id)}
                       className={`rounded-xl border px-3 py-2.5 text-sm font-semibold ${compareIds.includes(u.id) ? "bg-[#103f35] text-white border-[#103f35]" : "border-[#103f35]/30 text-[#103f35]"}`}
                       onClick={() => toggleCompare(u.id)}>

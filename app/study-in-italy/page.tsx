@@ -1,4 +1,5 @@
 import { PageHeader } from "@/components/ui";
+import { ArrowUpRight } from "lucide-react";
 
 export const metadata = { title: "Study in Italy — Guide for Indian Students | N92 Edu-Italia" };
 
@@ -45,7 +46,7 @@ export default function StudyInItalyPage() {
         <div className="mt-12 flex flex-wrap gap-3">
           <a className="btn-gold" href="/eligibility/">Check my eligibility →</a>
           <a className="btn-ghost" href="/universities/">Explore universities</a>
-          <a className="btn-ghost" href="https://www.universitaly.it/" target="_blank" rel="noopener noreferrer">Universitaly (official) ↗</a>
+          <a className="btn-ghost" href="https://www.universitaly.it/" target="_blank" rel="noopener noreferrer">Universitaly (official) <ArrowUpRight size={14} className="inline -mt-0.5" aria-hidden="true" /></a>
         </div>
       </div>
     </div>

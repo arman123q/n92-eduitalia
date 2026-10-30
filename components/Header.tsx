@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 const LINKS = [
   ["Study in Italy", "/study-in-italy/"],
@@ -58,7 +59,7 @@ export default function Header() {
             aria-controls="mobile-menu"
             onClick={() => setOpen(!open)}
           >
-            {open ? "Close ✕" : "Menu ☰"}
+            {open ? <>Close <X size={16} aria-hidden="true" /></> : <>Menu <Menu size={16} aria-hidden="true" /></>}
           </button>
         </div>
       </div>

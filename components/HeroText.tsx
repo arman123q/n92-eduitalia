@@ -31,21 +31,21 @@ export default function HeroText() {
 
   return (
     <div className="min-w-0 pt-2 lg:pt-8">
-      <p className="kicker">Study · Plan · Grow in Italy</p>
-      <h1 className="font-display mt-4 text-[clamp(2.05rem,10vw,2.7rem)] leading-[1.06] font-black text-[#103f35] sm:text-6xl lg:text-[4.2rem]">
+      <p className="kicker !text-[#e7d3a1]">Study · Plan · Grow in Italy</p>
+      <h1 className="font-display mt-4 text-[clamp(2.05rem,10vw,2.7rem)] leading-[1.08] font-black text-[#faf9f5] [text-shadow:0_2px_18px_rgba(8,38,31,0.55)] sm:text-6xl lg:text-[4.2rem]">
         {c.headlineA}
-        <span className="block text-[#c7a05a]">{c.headlineB}</span>
+        <span className="block text-[#e7d3a1]">{c.headlineB}</span>
       </h1>
-      <p className="mt-5 max-w-xl text-lg leading-relaxed text-[#202824]/80">{c.subtext}</p>
+      <p className="mt-5 max-w-xl text-lg leading-relaxed text-[#faf9f5]/90">{c.subtext}</p>
       <div className="mt-7 flex flex-wrap gap-3">
         <a href="/eligibility/" className="btn-gold">
           {c.primaryCta} <span aria-hidden="true">→</span>
         </a>
-        <a href="/universities/" className="btn-ghost">
+        <a href="/universities/" className="btn-ghost !border-[#faf9f5]/60 !text-[#faf9f5] hover:!bg-white/10">
           {c.secondaryCta}
         </a>
       </div>
-      <p className="mt-5 text-sm text-[#202824]/60">
+      <p className="mt-5 text-sm leading-relaxed text-[#faf9f5]/70">
         For Indian students &amp; parents · Intake focus 2027–28 · No guaranteed-admission claims — honest
         guidance only.
       </p>

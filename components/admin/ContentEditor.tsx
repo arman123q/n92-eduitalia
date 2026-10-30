@@ -3,6 +3,14 @@
 import { useEffect, useState } from "react";
 import { adminSelect, adminInsert, adminUpdate, audit, snapshot } from "@/lib/admin";
 import { SERVICE_CONTENT_DEFAULTS } from "@/lib/serviceContent";
+import { EXTRA_CONTENT_DEFAULTS } from "@/lib/journeyContent";
+import { COMPANY_DEFAULTS } from "@/lib/company";
+
+const PREFILL_DEFAULTS: Record<string, Record<string, unknown>> = {
+  ...SERVICE_CONTENT_DEFAULTS,
+  ...EXTRA_CONTENT_DEFAULTS,
+  company: { ...COMPANY_DEFAULTS },
+};
 
 interface ContentRow { key: string; title: string; draft: Record<string, unknown>; published: Record<string, unknown> | null }
 
@@ -75,6 +83,49 @@ const SECTIONS: { key: string; title: string; fields: { key: string; label: stri
       { key: "closingNote", label: "Payment-plan closing note", type: "textarea" },
     ],
   },
+  {
+    key: "journey", title: "Homepage — Student Journey timeline",
+    fields: [
+      { key: "heading", label: "Section heading", type: "text" },
+      { key: "intro", label: "Intro text", type: "textarea" },
+      { key: "step1Title", label: "Step 1 — title", type: "text" },
+      { key: "step1Text", label: "Step 1 — text", type: "textarea" },
+      { key: "step2Title", label: "Step 2 — title", type: "text" },
+      { key: "step2Text", label: "Step 2 — text", type: "textarea" },
+      { key: "step3Title", label: "Step 3 — title", type: "text" },
+      { key: "step3Text", label: "Step 3 — text", type: "textarea" },
+      { key: "step4Title", label: "Step 4 — title", type: "text" },
+      { key: "step4Text", label: "Step 4 — text", type: "textarea" },
+      { key: "step5Title", label: "Step 5 — title", type: "text" },
+      { key: "step5Text", label: "Step 5 — text", type: "textarea" },
+      { key: "step6Title", label: "Step 6 — title", type: "text" },
+      { key: "step6Text", label: "Step 6 — text", type: "textarea" },
+      { key: "disclaimer", label: "Disclaimer (who decides admissions/visas)", type: "textarea" },
+    ],
+  },
+  {
+    key: "consultation", title: "Book a Free Consultation page",
+    fields: [
+      { key: "heading", label: "Page heading", type: "text" },
+      { key: "intro", label: "Intro text", type: "textarea" },
+      { key: "services", label: "Services in the dropdown (one per line)", type: "textarea" },
+      { key: "note", label: "Confirmation note (preferred time is a request)", type: "textarea" },
+    ],
+  },
+  {
+    key: "company", title: "Company location & contact (verified details only)",
+    fields: [
+      { key: "businessName", label: "Business name", type: "text" },
+      { key: "address", label: "Written address (exactly as on the Google listing)", type: "textarea" },
+      { key: "phoneDisplay", label: "Phone number (as displayed)", type: "text" },
+      { key: "phoneHref", label: "Phone number for the call link (e.g. +919452532786)", type: "text" },
+      { key: "email", label: "Public email address", type: "text" },
+      { key: "hours", label: "Business hours (one line per day/range)", type: "textarea" },
+      { key: "mapsUrl", label: "Google Maps / listing URL", type: "text" },
+      { key: "directionsUrl", label: "Google Maps directions URL", type: "text" },
+      { key: "embedUrl", label: "Map embed URL (optional — only if reliable)", type: "text" },
+    ],
+  },
 ];
 
 export default function ContentEditor() {
@@ -94,7 +145,7 @@ export default function ContentEditor() {
     });
     // Service pages: prefill the editor with the built-in approved wording
     // until a draft has been saved, so editing starts from the live text.
-    for (const [key, defaults] of Object.entries(SERVICE_CONTENT_DEFAULTS)) {
+    for (const [key, defaults] of Object.entries(PREFILL_DEFAULTS)) {
       if (!d[key] || Object.keys(d[key]).length === 0) d[key] = { ...defaults };
     }
     setRows(map);

@@ -5,6 +5,7 @@ import { getCourses, getUniversities, courseBySlug } from "@/lib/data";
 import type { Course, University } from "@/lib/types";
 import { VerifyBadge, SourceLine, SUBJECT_LABELS, LEVEL_LABELS } from "@/components/ui";
 import { detailHref } from "@/lib/links";
+import { ArrowUpRight, ArrowLeft } from "lucide-react";
 
 export default function CourseDetail({ slug }: { slug: string | null }) {
   const [course, setCourse] = useState<Course | undefined | null>(null);
@@ -43,7 +44,7 @@ export default function CourseDetail({ slug }: { slug: string | null }) {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 pb-20">
-      <a href="/courses/" className="text-sm font-semibold text-[#103f35] underline decoration-[#c7a05a] decoration-2 underline-offset-4">← All courses</a>
+      <a href="/courses/" className="text-sm font-semibold text-[#103f35] underline decoration-[#c7a05a] decoration-2 underline-offset-4"><ArrowLeft size={14} className="inline -mt-0.5" aria-hidden="true" /> All courses</a>
       <div className="mt-4 flex flex-wrap items-start justify-between gap-3">
         <h1 className="font-display text-4xl font-bold text-[#103f35]">{course.name}</h1>
         <VerifyBadge status={course.verificationStatus} />
@@ -65,7 +66,7 @@ export default function CourseDetail({ slug }: { slug: string | null }) {
         </table></div>
       </div>
       <div className="mt-8 flex flex-wrap gap-3">
-        <a className="btn-gold" href={course.officialUrl} target="_blank" rel="noopener noreferrer">Official programme page ↗</a>
+        <a className="btn-gold" href={course.officialUrl} target="_blank" rel="noopener noreferrer">Official programme page <ArrowUpRight size={14} className="inline -mt-0.5" aria-hidden="true" /></a>
         {uni && <a className="btn-ghost" href={detailHref("universities", uni.slug)}>About {uni.name}</a>}
         <a className="btn-ghost" href="/eligibility/">Check my eligibility</a>
       </div>

@@ -30,7 +30,7 @@ const server = http.createServer((req, res) => {
 await new Promise((r) => server.listen(0, r));
 const base = `http://127.0.0.1:${server.address().port}`;
 
-const PAGES = ["/", "/universities/", "/universities/ca-foscari-university-of-venice/", "/courses/", "/scholarships/", "/admissions/", "/notices/", "/eligibility/", "/calculator/", "/contact/", "/admin/", "/faq/", "/ielts-coaching/", "/visa-support/", "/accommodation-support/", "/refund-policy/"];
+const PAGES = ["/", "/universities/", "/universities/ca-foscari-university-of-venice/", "/courses/", "/scholarships/", "/admissions/", "/notices/", "/eligibility/", "/calculator/", "/contact/", "/admin/", "/faq/", "/ielts-coaching/", "/visa-support/", "/accommodation-support/", "/refund-policy/", "/reviews/", "/book-consultation/"];
 const WIDTHS = [320, 360, 375, 390, 414, 430, 768, 1280];
 const SHOT_PAGES = { "/": "home", "/eligibility/": "eligibility" };
 

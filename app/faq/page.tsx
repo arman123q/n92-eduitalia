@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { getFaqs, type DataSource } from "@/lib/data";
 import type { Faq } from "@/lib/types";
 import { PageHeader, DataNotice } from "@/components/ui";
+import { ArrowUpRight } from "lucide-react";
 
 export default function FaqPage() {
   const [faqs, setFaqs] = useState<Faq[]>([]);
@@ -50,7 +51,7 @@ export default function FaqPage() {
                     <p className="mt-2.5 leading-relaxed text-[#202824]/80">{f.answer}</p>
                     {f.sourceUrl && (
                       <p className="mt-2 text-sm">
-                        <a className="underline font-semibold" href={f.sourceUrl} target="_blank" rel="noopener noreferrer">Official source ↗</a>
+                        <a className="underline font-semibold" href={f.sourceUrl} target="_blank" rel="noopener noreferrer">Official source <ArrowUpRight size={14} className="inline -mt-0.5" aria-hidden="true" /></a>
                       </p>
                     )}
                   </details>

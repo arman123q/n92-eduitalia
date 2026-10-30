@@ -6,6 +6,7 @@ import { SCHEMAS, type Field } from "./schemas";
 import { LEVEL_LABELS } from "@/components/ui";
 // @ts-ignore - plain JS module
 import { romeLocalToUtcIso, utcToRomeLocal, computeRoundStatus, ROUND_STATUS_META } from "@/lib/rounds.js";
+import { TriangleAlert, OctagonX } from "lucide-react";
 
 type Row = Record<string, unknown>;
 
@@ -354,8 +355,8 @@ export default function RecordsManager({ table }: { table: string }) {
                       ) : (
                         <>
                           {String(r.verificationStatus || "")}
-                          {r.verificationStatus === "needs-review" && <span className="ml-1.5 text-amber-600" title="Needs an official check">⚠</span>}
-                          {r.verificationStatus === "expired" && <span className="ml-1.5 text-red-600" title="Expired">⛔</span>}
+                          {r.verificationStatus === "needs-review" && <TriangleAlert size={13} className="ml-1.5 inline text-amber-600" aria-label="Needs an official check" />}
+                          {r.verificationStatus === "expired" && <OctagonX size={13} className="ml-1.5 inline text-red-600" aria-label="Expired" />}
                         </>
                       )}
                     </td>

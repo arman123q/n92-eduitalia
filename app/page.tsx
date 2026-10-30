@@ -6,12 +6,16 @@ import SectionToggles from "@/components/SectionToggles";
 import HeroScene from "@/components/HeroScene";
 import Hero3DLoader from "@/components/Hero3DLoader";
 import { ServicesOverview, IeltsHomeBand, RefundHomeBand } from "@/components/ServiceSections";
+import { JourneySection, ConsultationBand } from "@/components/JourneySection";
+import { ReviewsSection } from "@/components/Testimonials";
+import type { LucideIcon } from "lucide-react";
+import { Landmark, GraduationCap, FolderCheck, Handshake } from "lucide-react";
 
-const TRUST = [
-  ["🏛️", "Top Italian Universities", "Research directions from official sources"],
-  ["🎓", "Scholarship Guidance", "Regional DSU & university funding"],
-  ["🗂️", "End-to-End Support", "Shortlisting, applications & visa steps"],
-  ["🤝", "Honest & Transparent", "No guaranteed-admission claims, ever"],
+const TRUST: [LucideIcon, string, string][] = [
+  [Landmark, "Top Italian Universities", "Research directions from official sources"],
+  [GraduationCap, "Scholarship Guidance", "Regional DSU & university funding"],
+  [FolderCheck, "End-to-End Support", "Shortlisting, applications & visa steps"],
+  [Handshake, "Honest & Transparent", "No guaranteed-admission claims, ever"],
 ];
 
 const WHY = [
@@ -75,6 +79,10 @@ export default function HomePage() {
       {/* ---------- HERO + ELIGIBILITY (first screen) ---------- */}
       <section className="hero-sky relative overflow-hidden">
         <Hero3DLoader />
+        {/* Contrast overlay: keeps the 3D Venice scene visible while making
+            the hero copy readable at every width (ivory text on deep green). */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[5] bg-[#08261f]/50" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[5] hidden lg:block bg-[linear-gradient(100deg,rgba(8,38,31,0.88)_0%,rgba(8,38,31,0.60)_46%,rgba(8,38,31,0.10)_76%,rgba(8,38,31,0)_100%)]" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 pt-10 pb-24 sm:px-6 lg:pt-14 lg:pb-32">
           <div className="grid items-start gap-10 lg:grid-cols-[1.05fr_1fr]">
             <HeroText />
@@ -87,9 +95,11 @@ export default function HomePage() {
       {/* ---------- TRUST STRIP ---------- */}
       <section className="border-y border-[#103f35]/10 bg-white" aria-label="What N92 Edu-Italia helps with">
         <div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 sm:grid-cols-2 lg:grid-cols-4">
-          {TRUST.map(([icon, title, sub]) => (
+          {TRUST.map(([Icon, title, sub]) => (
             <div key={title} className="flex items-start gap-3">
-              <span className="text-2xl" aria-hidden="true">{icon}</span>
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#c7a05a]/15 text-[#103f35]" aria-hidden="true">
+                <Icon size={20} strokeWidth={1.8} />
+              </span>
               <div>
                 <h2 className="font-display text-[1.05rem] font-bold text-[#103f35]">{title}</h2>
                 <p className="text-[0.85rem] text-[#202824]/65">{sub}</p>
@@ -139,6 +149,12 @@ export default function HomePage() {
           </a>
         </div>
       </section>
+
+      {/* ---------- STUDENT JOURNEY ---------- */}
+      <JourneySection />
+      <div className="pt-10">
+        <ConsultationBand />
+      </div>
 
       <Featured />
 
@@ -199,6 +215,9 @@ export default function HomePage() {
 
       {/* ---------- REFUND GUARANTEE ---------- */}
       <RefundHomeBand />
+
+      {/* ---------- STUDENT REVIEWS ---------- */}
+      <ReviewsSection />
 
       {/* ---------- FAQ ---------- */}
       <section id="faq" className="border-t border-[#103f35]/10 bg-white">

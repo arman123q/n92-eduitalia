@@ -1,4 +1,5 @@
 import { PageHeader } from "@/components/ui";
+import { ArrowUpRight } from "lucide-react";
 
 export const metadata = { title: "Resources — Official Links | N92 Edu-Italia" };
 
@@ -23,7 +24,7 @@ export default function ResourcesPage() {
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
           {LINKS.map(([name, url, desc]) => (
             <a key={url} href={url} target="_blank" rel="noopener noreferrer" className="card block p-6">
-              <h2 className="font-display text-lg font-bold text-[#103f35]">{name} ↗</h2>
+              <h2 className="font-display text-lg font-bold text-[#103f35]">{name} <ArrowUpRight size={14} className="inline -mt-0.5" aria-hidden="true" /></h2>
               <p className="mt-2 text-[0.92rem] leading-relaxed text-[#202824]/75">{desc}</p>
               <p className="mt-3 text-[0.8rem] text-[#202824]/50">{url.replace("https://", "")}</p>
             </a>
