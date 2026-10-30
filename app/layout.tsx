@@ -24,6 +24,16 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
+      <head>
+        {/* Google AdSense site verification — owner's publisher script,
+            added 31 Oct 2026. Loads in the head of every page via this
+            root layout; do not duplicate it elsewhere. */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1129138042140372"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body>
         <a
           href="#check"
