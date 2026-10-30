@@ -19,6 +19,8 @@ const NAV: { id: View; label: string }[] = [
   { id: "courses", label: "Courses" },
   { id: "scholarships", label: "Scholarships" },
   { id: "faqs", label: "FAQs & Knowledge" },
+  { id: "admission_rounds", label: "Admission Rounds & Deadlines" },
+  { id: "notices", label: "Important Notices" },
   { id: "content", label: "Website Content" },
   { id: "calculator", label: "Calculator Settings" },
   { id: "media", label: "Media Library" },

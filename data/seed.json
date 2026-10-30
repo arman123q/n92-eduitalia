@@ -1,1 +1,2468 @@
-{"calculator":{"fxDate":"2026-10-30","fxRateInr":95,"monthly":{"accommodation":450,"food":280,"insurance":15,"materials":35,"personal":120,"transport":40},"notes":"Planning assumptions only — not official figures. Public-university tuition in Italy is income-based (ISEE); enter the fee from your programme's official page. Living costs vary widely by city and lifestyle.","oneTime":{"permit":170,"setup":600,"travel":450},"tuitionAnnual":1600},"courses":[{"academicYear":"2026/27","credits":120,"deadlineNote":"Check the official programme page for the current call and deadlines.","durationYears":2,"id":"c-polimi-cs","language":"english","lastVerified":"2026-10-30","level":"master","name":"MSc Computer Science and Engineering","officialUrl":"https://www.polimi.it/en","requirements":"A Bachelor's degree in a related field is normally required. English proficiency around B2 level is typically asked for — verify the exact accepted proofs and any GPA expectations on the official programme page.","slug":"polimi-msc-computer-science-engineering","sourceUrl":"https://www.polimi.it/en","status":"published","subject":"computer-science-data","tuitionNote":"Not verified — see the university's official fees page.","universityId":"u-polimi","verificationStatus":"needs-review"},{"academicYear":"2026/27","credits":120,"deadlineNote":"Check the official programme page for the current call and deadlines.","durationYears":2,"id":"c-polimi-mgmt","language":"english","lastVerified":"2026-10-30","level":"master","name":"MSc Management Engineering","officialUrl":"https://www.polimi.it/en","requirements":"A Bachelor's degree in engineering, economics or a related field is normally required. Verify English requirements and selection rules on the official programme page.","slug":"polimi-msc-management-engineering","sourceUrl":"https://www.polimi.it/en","status":"published","subject":"business-management","tuitionNote":"Not verified — see the university's official fees page.","universityId":"u-polimi","verificationStatus":"needs-review"},{"academicYear":"2026/27","credits":120,"deadlineNote":"Check the official programme page for the current call and deadlines.","durationYears":2,"id":"c-polito-ce","language":"english","lastVerified":"2026-10-30","level":"master","name":"MSc Computer Engineering","officialUrl":"https://www.polito.it/en","requirements":"A Bachelor's degree in a related engineering/IT field is normally required. Verify English requirements on the official programme page.","slug":"polito-msc-computer-engineering","sourceUrl":"https://www.polito.it/en","status":"published","subject":"computer-science-data","tuitionNote":"Not verified — see the university's official fees page.","universityId":"u-polito","verificationStatus":"needs-review"},{"academicYear":"2026/27","credits":120,"deadlineNote":"Check the official programme page for the current call and deadlines.","durationYears":2,"id":"c-polito-ds","language":"english","lastVerified":"2026-10-30","level":"master","name":"MSc Data Science and Engineering","officialUrl":"https://www.polito.it/en","requirements":"A Bachelor's degree in a related field with a solid mathematics/statistics base is normally required. Verify details on the official programme page.","slug":"polito-msc-data-science-engineering","sourceUrl":"https://www.polito.it/en","status":"published","subject":"computer-science-data","tuitionNote":"Not verified — see the university's official fees page.","universityId":"u-polito","verificationStatus":"needs-review"},{"academicYear":"2026/27","credits":120,"deadlineNote":"Check the official programme page for the current call and deadlines.","durationYears":2,"id":"c-unibo-ai","language":"english","lastVerified":"2026-10-30","level":"master","name":"MSc Artificial Intelligence","officialUrl":"https://www.unibo.it/en","requirements":"A Bachelor's degree with adequate computing and mathematics preparation is normally required, plus English proficiency (commonly B2). Verify the official admission criteria — this programme publishes specific curricular requirements.","slug":"unibo-msc-artificial-intelligence","sourceUrl":"https://www.unibo.it/en","status":"published","subject":"computer-science-data","tuitionNote":"Not verified — see the university's official fees page.","universityId":"u-unibo","verificationStatus":"needs-review"},{"academicYear":"2026/27","credits":120,"deadlineNote":"Check the official programme page for the current call and deadlines.","durationYears":2,"id":"c-sapienza-cs","language":"english","lastVerified":"2026-10-30","level":"master","name":"MSc Computer Science","officialUrl":"https://www.uniroma1.it/en","requirements":"A Bachelor's degree in Computer Science or a related field is normally required, with English proficiency as specified on the official programme page.","slug":"sapienza-msc-computer-science","sourceUrl":"https://www.uniroma1.it/en","status":"published","subject":"computer-science-data","tuitionNote":"Not verified — see the university's official fees page.","universityId":"u-sapienza","verificationStatus":"needs-review"},{"academicYear":"2026/27","credits":120,"deadlineNote":"Check the official programme page for the current call and deadlines.","durationYears":2,"id":"c-sapienza-air","language":"english","lastVerified":"2026-10-30","level":"master","name":"MSc Artificial Intelligence and Robotics","officialUrl":"https://www.uniroma1.it/en","requirements":"A Bachelor's degree in a related engineering/computing field is normally required. Verify English requirements and background checks on the official programme page.","slug":"sapienza-msc-ai-robotics","sourceUrl":"https://www.uniroma1.it/en","status":"published","subject":"computer-science-data","tuitionNote":"Not verified — see the university's official fees page.","universityId":"u-sapienza","verificationStatus":"needs-review"},{"academicYear":"2026/27","credits":120,"deadlineNote":"Check the official programme page for the current call and deadlines.","durationYears":2,"id":"c-unipd-cs","language":"english","lastVerified":"2026-10-30","level":"master","name":"MSc Computer Science","officialUrl":"https://www.unipd.it/en","requirements":"A Bachelor's degree in a related field is normally required, with English proficiency (commonly B2) as specified on the official programme page.","slug":"unipd-msc-computer-science","sourceUrl":"https://www.unipd.it/en","status":"published","subject":"computer-science-data","tuitionNote":"Not verified — see the university's official fees page.","universityId":"u-unipd","verificationStatus":"needs-review"},{"academicYear":"2026/27","credits":120,"deadlineNote":"Check the official programme page for the current call and deadlines.","durationYears":2,"id":"c-unipd-ds","language":"english","lastVerified":"2026-10-30","level":"master","name":"MSc Data Science","officialUrl":"https://www.unipd.it/en","requirements":"A Bachelor's degree with adequate mathematics/statistics/computing preparation is normally required. Verify the official entry requirements.","slug":"unipd-msc-data-science","sourceUrl":"https://www.unipd.it/en","status":"published","subject":"computer-science-data","tuitionNote":"Not verified — see the university's official fees page.","universityId":"u-unipd","verificationStatus":"needs-review"},{"academicYear":"2026/27","credits":120,"deadlineNote":"Check the official programme page for the current call and deadlines.","durationYears":2,"id":"c-unitn-cs","language":"english","lastVerified":"2026-10-30","level":"master","name":"MSc Computer Science","officialUrl":"https://www.unitn.it/en","requirements":"A Bachelor's degree in a related field is normally required, with English proficiency as specified on the official programme page.","slug":"unitn-msc-computer-science","sourceUrl":"https://www.unitn.it/en","status":"published","subject":"computer-science-data","tuitionNote":"Not verified — see the university's official fees page.","universityId":"u-unitn","verificationStatus":"needs-review"},{"academicYear":"2026/27","credits":120,"deadlineNote":"Check the official programme page for the current call and deadlines.","durationYears":2,"id":"c-unitn-ds","language":"english","lastVerified":"2026-10-30","level":"master","name":"MSc Data Science","officialUrl":"https://www.unitn.it/en","requirements":"A Bachelor's degree with adequate quantitative preparation is normally required. Verify the official entry requirements.","slug":"unitn-msc-data-science","sourceUrl":"https://www.unitn.it/en","status":"published","subject":"computer-science-data","tuitionNote":"Not verified — see the university's official fees page.","universityId":"u-unitn","verificationStatus":"needs-review"},{"academicYear":"2026/27","credits":120,"deadlineNote":"Check the official programme page for the current call and deadlines.","durationYears":2,"id":"c-unive-cs","language":"english","lastVerified":"2026-10-30","level":"master","name":"MSc Computer Science and Software Technologies","officialUrl":"https://www.unive.it/en","requirements":"A Bachelor's degree in a related field is normally required, with English proficiency (commonly B2) as specified on the official programme page.","slug":"unive-msc-computer-science","sourceUrl":"https://www.unive.it/en","status":"published","subject":"computer-science-data","tuitionNote":"Not verified — see the university's official fees page.","universityId":"u-unive","verificationStatus":"needs-review"},{"academicYear":"2026/27","credits":120,"deadlineNote":"Check the official programme page for the current call and deadlines.","durationYears":2,"id":"c-unimi-cs","language":"english","lastVerified":"2026-10-30","level":"master","name":"MSc Computer Science","officialUrl":"https://www.unimi.it/en","requirements":"A Bachelor's degree in a related field is normally required, with English proficiency as specified on the official programme page.","slug":"unimi-msc-computer-science","sourceUrl":"https://www.unimi.it/en","status":"published","subject":"computer-science-data","tuitionNote":"Not verified — see the university's official fees page.","universityId":"u-unimi","verificationStatus":"needs-review"}],"faqs":[{"answer":"Yes. The assessment on this website is free, runs in your browser, and shows your preliminary results before you are ever asked for contact details. Requesting a personalised review is always optional.","category":"Getting started","id":"f-free","question":"Is the eligibility check really free?","status":"published"},{"answer":"No — and be cautious of anyone who does. Admissions are decided by universities, scholarships by regional agencies and universities, and visas by Italian authorities. We help you prepare a strong, correct application; outcomes are never guaranteed.","category":"Getting started","id":"f-guarantee","question":"Can you guarantee my admission or scholarship?","status":"published"},{"answer":"Many English-taught programmes ask for proof of English around B2 level. Some accept IELTS or TOEFL, and some accept a Medium of Instruction (MOI) letter from your previous institution. Accepted proofs differ by programme — always check the official programme page.","category":"Language","id":"f-ielts","question":"Do I need IELTS to study in Italy?","status":"published"},{"answer":"Diritto allo Studio Universitario (DSU) scholarships are run by Italy's regions for students enrolled at universities in that region. They are assessed mainly on family income and can include a tuition-fee waiver, a cash grant and services like housing and canteens. Deadlines and income rules are set by each region.","category":"Scholarships","id":"f-dsu","question":"What are DSU regional scholarships?","sourceUrl":"https://www.universitaly.it/","status":"published"},{"answer":"As early as you can. Programme application windows, scholarship calls and visa appointments run on separate calendars. Starting 9–12 months ahead leaves time for language tests, document legalisation and scholarship applications.","category":"Planning","id":"f-when","question":"When should I start for the 2027–28 intake?","status":"published"},{"answer":"Universitaly (the Italian Ministry's portal for international students) is the official starting point for programme search and pre-enrolment. Visa rules are published by the Italian Ministry of Foreign Affairs and the Embassy of Italy in New Delhi.","category":"Official sources","id":"f-official","question":"Where does official information live?","sourceUrl":"https://www.universitaly.it/","status":"published"},{"answer":"Use the cost calculator on this website to build your own estimate. As a rough guide, student living costs often fall around €7,000–€11,000 per year depending on the city and housing, plus tuition, which at public universities is income-based. Treat every figure as an estimate, never a quote.","category":"Costs","id":"f-cost","question":"How much does it cost to study in Italy for a year?","status":"published"},{"answer":"International students with a valid study residence permit are generally allowed part-time work up to 20 hours per week (with an annual cap). Rules can change — verify the current position on official Italian government sources before relying on work income.","category":"Living in Italy","id":"f-work","question":"Can I work part-time while studying in Italy?","status":"published"},{"answer":"Start with your passport, academic transcripts and certificates, CV, statement of purpose, recommendation letters where required, and your language proof. For regional scholarships you will also need family income documents, usually translated and legalised. The document checklist page on this site walks through each item.","category":"Documents","id":"f-docs","question":"Which documents should I prepare first?","status":"published"},{"answer":"After choosing a programme you complete pre-enrolment on the Universitaly portal, then apply for a study visa at the Italian Embassy or consulate responsible for your area, following their published checklist. N92 Edu-Italia helps you prepare and check the file, but the decision is made by the authorities.","category":"Visa","id":"f-visa","question":"How does the student visa process work?","sourceUrl":"https://ambnewdelhi.esteri.it/en/","status":"published"}],"scholarships":[{"academicYear":"2026/27","benefits":"Can combine a tuition-fee waiver with a cash grant and services such as student housing and canteens. Amounts and combinations vary by region and by the student's income band — no amount is stated here because regions publish their own figures each year.","closesNote":"Set by each region in its annual call — check the regional agency for your university's region.","documents":["Proof of enrolment or pre-enrolment at a university in the region","Family income and asset documentation (ISEE-equivalent for international students), typically translated and legalised","Identity documents and residence details as the regional call specifies"],"geographicEligibility":"Students enrolled at a university in the awarding region (each Italian region runs its own scheme).","id":"s-dsu","kind":"regional","lastVerified":"2026-10-30","name":"Regional Right-to-Study (DSU) Scholarships","officialUrl":"https://www.universitaly.it/","opensNote":"Calls are usually published in summer before the academic year — verify on the regional agency site.","procedure":"Apply through the regional agency's online portal for the region where your university is located, within that region's call deadline. Admission to the university and the DSU application are separate procedures.","provider":"Regional right-to-study agencies (e.g. ER.GO — Emilia-Romagna, DSU Toscana, ESU Padova, LazioDisco)","requirements":"Awarded mainly on family income (ISEE-equivalent assessment for international students); continued eligibility usually requires earning a minimum number of credits (merit condition in later years). Exact thresholds are set by each region's annual call.","slug":"regional-dsu-scholarships","sourceUrl":"https://www.universitaly.it/","status":"published","studentEligibility":"Students enrolled (or enrolling) at an Italian university in the region, including international students, subject to the region's income rules.","verificationStatus":"verified"},{"academicYear":"2026/27","benefits":"Scholarship grant plus possible tuition arrangements with participating universities, as defined in each year's official call. Amounts are published in the call — check the official site.","closesNote":"Published in the annual call on the official programme site.","documents":["Passport and academic certificates as the call specifies","Admission or pre-admission to an eligible programme","Language certificates where the call requires them"],"geographicEligibility":"Citizens of the countries listed in the current call — India has been included in recent editions; confirm for the current year.","id":"s-iyt","kind":"national","lastVerified":"2026-10-30","name":"Invest Your Talent in Italy","officialUrl":"https://investyourtalent.esteri.it/","opensNote":"The call is normally published once a year — check the official site for the current edition.","procedure":"Apply on the official Invest Your Talent in Italy portal within the call window, for the eligible Master's programmes listed that year.","provider":"Italian Ministry of Foreign Affairs (MAECI) with Uni-Italia and partner universities","requirements":"Set by the annual call: typically a Bachelor's degree, age and language conditions, and admission to an eligible programme. Read the current call text before applying.","slug":"invest-your-talent-in-italy","sourceUrl":"https://www.esteri.it/en/","status":"published","studentEligibility":"International students from the countries listed in the current call, applying to eligible Master's programmes in Italy.","verificationStatus":"verified"},{"academicYear":"2026/27","benefits":"Grants as defined in each annual call published by the Ministry. No amount is stated here — calls differ by year and grant type.","closesNote":"Published in the annual call on the Ministry's website.","documents":["As specified in the annual call — typically identity documents, academic records and the pre-enrolment reference"],"geographicEligibility":"Foreign citizens and Italians living abroad, per the current call.","id":"s-maeci","kind":"national","lastVerified":"2026-10-30","name":"Italian Government Scholarships (MAECI)","officialUrl":"https://www.esteri.it/en/","opensNote":"Calls are published on the Ministry website — check for the current academic year.","procedure":"Apply through the official Study in Italy / MAECI application portal referenced in the call, after starting pre-enrolment on Universitaly.","provider":"Italian Ministry of Foreign Affairs and International Cooperation (MAECI)","requirements":"Defined in each annual call (degree level, age and language conditions vary). Always read the current call text.","slug":"italian-government-scholarships-maeci","sourceUrl":"https://www.esteri.it/en/","status":"published","studentEligibility":"International students applying for eligible study programmes in Italy, per the current call.","verificationStatus":"needs-review"},{"academicYear":"2026/27","benefits":"Varies by university and programme — may include partial or full tuition reduction and, for some merit awards, a grant. Details live on each university's official fees and scholarships pages.","closesNote":"Set by each university — see the official fees and scholarships pages.","documents":["University application or enrolment documents","Family income documentation for income-based reductions","Merit records where the award is merit-based"],"geographicEligibility":"Students enrolled at the awarding university.","id":"s-uni-waivers","kind":"university","lastVerified":"2026-10-30","name":"University Fee Waivers & Merit Scholarships","officialUrl":"https://www.universitaly.it/","opensNote":"Aligned with each university's enrolment and fee calendar.","procedure":"Follow the procedure on your university's official fees and scholarships pages; income-based reductions usually require an ISEE-equivalent assessment.","provider":"Individual Italian universities","requirements":"Income-based tuition reduction (ISEE) is standard at public universities; merit scholarships have programme-specific rules published by each university.","slug":"university-fee-waivers-merit","sourceUrl":"https://www.universitaly.it/","status":"published","studentEligibility":"Enrolled students of the university, including international students, per each scheme's rules.","verificationStatus":"needs-review"}],"universities":[{"academicYear":"2026/27","admissionNote":"Entry requirements and deadlines are programme-specific — verify on the official programme page and Universitaly before applying.","applicationUrl":"https://www.polimi.it/en","city":"Milan","degreeLevels":["bachelor","master","phd"],"id":"u-polimi","languages":["english","italian"],"lastVerified":"2026-10-30","name":"Politecnico di Milano","region":"Lombardy","slug":"politecnico-di-milano","sourceUrl":"https://www.polimi.it/en","status":"published","subjects":["engineering-technology","architecture-design","computer-science-data"],"tuitionNote":"Public university — tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.","type":"Public","verificationStatus":"needs-review","website":"https://www.polimi.it/en"},{"academicYear":"2026/27","admissionNote":"Entry requirements and deadlines are programme-specific — verify on the official programme page and Universitaly before applying.","applicationUrl":"https://www.polito.it/en","city":"Turin","degreeLevels":["bachelor","master","phd"],"id":"u-polito","languages":["english","italian"],"lastVerified":"2026-10-30","name":"Politecnico di Torino","region":"Piedmont","slug":"politecnico-di-torino","sourceUrl":"https://www.polito.it/en","status":"published","subjects":["engineering-technology","architecture-design","computer-science-data"],"tuitionNote":"Public university — tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.","type":"Public","verificationStatus":"needs-review","website":"https://www.polito.it/en"},{"academicYear":"2026/27","admissionNote":"Entry requirements and deadlines are programme-specific — verify on the official programme page and Universitaly before applying.","applicationUrl":"https://www.unibo.it/en","city":"Bologna","degreeLevels":["bachelor","master","phd"],"id":"u-unibo","languages":["english","italian"],"lastVerified":"2026-10-30","name":"University of Bologna","region":"Emilia-Romagna","slug":"university-of-bologna","sourceUrl":"https://www.unibo.it/en","status":"published","subjects":["computer-science-data","business-management","humanities-social","natural-sciences","medicine-health"],"tuitionNote":"Public university — tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.","type":"Public","verificationStatus":"needs-review","website":"https://www.unibo.it/en"},{"academicYear":"2026/27","admissionNote":"Entry requirements and deadlines are programme-specific — verify on the official programme page and Universitaly before applying.","applicationUrl":"https://www.uniroma1.it/en","city":"Rome","degreeLevels":["bachelor","master","phd"],"id":"u-sapienza","languages":["english","italian"],"lastVerified":"2026-10-30","name":"Sapienza University of Rome","region":"Lazio","slug":"sapienza-university-of-rome","sourceUrl":"https://www.uniroma1.it/en","status":"published","subjects":["computer-science-data","engineering-technology","medicine-health","humanities-social","natural-sciences"],"tuitionNote":"Public university — tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.","type":"Public","verificationStatus":"needs-review","website":"https://www.uniroma1.it/en"},{"academicYear":"2026/27","admissionNote":"Entry requirements and deadlines are programme-specific — verify on the official programme page and Universitaly before applying.","applicationUrl":"https://www.unipd.it/en","city":"Padova (Padua)","degreeLevels":["bachelor","master","phd"],"id":"u-unipd","languages":["english","italian"],"lastVerified":"2026-10-30","name":"University of Padova","region":"Veneto","slug":"university-of-padova","sourceUrl":"https://www.unipd.it/en","status":"published","subjects":["computer-science-data","natural-sciences","medicine-health","engineering-technology","humanities-social"],"tuitionNote":"Public university — tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.","type":"Public","verificationStatus":"needs-review","website":"https://www.unipd.it/en"},{"academicYear":"2026/27","admissionNote":"Entry requirements and deadlines are programme-specific — verify on the official programme page and Universitaly before applying.","applicationUrl":"https://www.unive.it/en","city":"Venice","degreeLevels":["bachelor","master","phd"],"id":"u-unive","languages":["english","italian"],"lastVerified":"2026-10-30","name":"Ca' Foscari University of Venice","region":"Veneto","slug":"ca-foscari-university-of-venice","sourceUrl":"https://www.unive.it/en","status":"published","subjects":["business-management","computer-science-data","humanities-social"],"tuitionNote":"Public university — tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.","type":"Public","verificationStatus":"needs-review","website":"https://www.unive.it/en"},{"academicYear":"2026/27","admissionNote":"Entry requirements and deadlines are programme-specific — verify on the official programme page and Universitaly before applying.","applicationUrl":"https://www.unitn.it/en","city":"Trento","degreeLevels":["bachelor","master","phd"],"id":"u-unitn","languages":["english","italian"],"lastVerified":"2026-10-30","name":"University of Trento","region":"Trentino-Alto Adige","slug":"university-of-trento","sourceUrl":"https://www.unitn.it/en","status":"published","subjects":["computer-science-data","natural-sciences","business-management","humanities-social"],"tuitionNote":"Public university — tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.","type":"Public","verificationStatus":"needs-review","website":"https://www.unitn.it/en"},{"academicYear":"2026/27","admissionNote":"Entry requirements and deadlines are programme-specific — verify on the official programme page and Universitaly before applying.","applicationUrl":"https://www.unifi.it/en","city":"Florence","degreeLevels":["bachelor","master","phd"],"id":"u-unifi","languages":["english","italian"],"lastVerified":"2026-10-30","name":"University of Florence","region":"Tuscany","slug":"university-of-florence","sourceUrl":"https://www.unifi.it/en","status":"published","subjects":["architecture-design","humanities-social","natural-sciences","medicine-health"],"tuitionNote":"Public university — tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.","type":"Public","verificationStatus":"needs-review","website":"https://www.unifi.it/en"},{"academicYear":"2026/27","admissionNote":"Entry requirements and deadlines are programme-specific — verify on the official programme page and Universitaly before applying.","applicationUrl":"https://www.iuav.it/en","city":"Venice","degreeLevels":["bachelor","master","phd"],"id":"u-iuav","languages":["english","italian"],"lastVerified":"2026-10-30","name":"IUAV University of Venice","region":"Veneto","slug":"iuav-university-of-venice","sourceUrl":"https://www.iuav.it/en","status":"published","subjects":["architecture-design"],"tuitionNote":"Public university — tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.","type":"Public","verificationStatus":"needs-review","website":"https://www.iuav.it/en"},{"academicYear":"2026/27","admissionNote":"Entry requirements and deadlines are programme-specific — verify on the official programme page and Universitaly before applying.","applicationUrl":"https://www.unimi.it/en","city":"Milan","degreeLevels":["bachelor","master","phd"],"id":"u-unimi","languages":["english","italian"],"lastVerified":"2026-10-30","name":"University of Milan","region":"Lombardy","slug":"university-of-milan","sourceUrl":"https://www.unimi.it/en","status":"published","subjects":["computer-science-data","natural-sciences","medicine-health","humanities-social"],"tuitionNote":"Public university — tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.","type":"Public","verificationStatus":"needs-review","website":"https://www.unimi.it/en"}]}
+{
+  "calculator": {
+    "fxDate": "2026-10-30",
+    "fxRateInr": 95,
+    "monthly": {
+      "accommodation": 450,
+      "food": 280,
+      "insurance": 15,
+      "materials": 35,
+      "personal": 120,
+      "transport": 40
+    },
+    "notes": "Planning assumptions only \u2014 not official figures. Public-university tuition in Italy is income-based (ISEE); enter the fee from your programme's official page. Living costs vary widely by city and lifestyle.",
+    "oneTime": {
+      "permit": 170,
+      "setup": 600,
+      "travel": 450
+    },
+    "tuitionAnnual": 1600
+  },
+  "courses": [
+    {
+      "academicYear": "2026/27",
+      "credits": 120,
+      "deadlineNote": "Check the official programme page for the current call and deadlines.",
+      "durationYears": 2,
+      "id": "c-polimi-cs",
+      "language": "english",
+      "lastVerified": "2026-10-30",
+      "level": "master",
+      "name": "MSc Computer Science and Engineering",
+      "officialUrl": "https://www.polimi.it/en",
+      "requirements": "A Bachelor's degree in a related field is normally required. English proficiency around B2 level is typically asked for \u2014 verify the exact accepted proofs and any GPA expectations on the official programme page.",
+      "slug": "polimi-msc-computer-science-engineering",
+      "sourceUrl": "https://www.polimi.it/en",
+      "status": "published",
+      "subject": "computer-science-data",
+      "tuitionNote": "Not verified \u2014 see the university's official fees page.",
+      "universityId": "u-polimi",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "academicYear": "2026/27",
+      "credits": 120,
+      "deadlineNote": "Check the official programme page for the current call and deadlines.",
+      "durationYears": 2,
+      "id": "c-polimi-mgmt",
+      "language": "english",
+      "lastVerified": "2026-10-30",
+      "level": "master",
+      "name": "MSc Management Engineering",
+      "officialUrl": "https://www.polimi.it/en",
+      "requirements": "A Bachelor's degree in engineering, economics or a related field is normally required. Verify English requirements and selection rules on the official programme page.",
+      "slug": "polimi-msc-management-engineering",
+      "sourceUrl": "https://www.polimi.it/en",
+      "status": "published",
+      "subject": "business-management",
+      "tuitionNote": "Not verified \u2014 see the university's official fees page.",
+      "universityId": "u-polimi",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "academicYear": "2026/27",
+      "credits": 120,
+      "deadlineNote": "Check the official programme page for the current call and deadlines.",
+      "durationYears": 2,
+      "id": "c-polito-ce",
+      "language": "english",
+      "lastVerified": "2026-10-30",
+      "level": "master",
+      "name": "MSc Computer Engineering",
+      "officialUrl": "https://www.polito.it/en",
+      "requirements": "A Bachelor's degree in a related engineering/IT field is normally required. Verify English requirements on the official programme page.",
+      "slug": "polito-msc-computer-engineering",
+      "sourceUrl": "https://www.polito.it/en",
+      "status": "published",
+      "subject": "computer-science-data",
+      "tuitionNote": "Not verified \u2014 see the university's official fees page.",
+      "universityId": "u-polito",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "academicYear": "2026/27",
+      "credits": 120,
+      "deadlineNote": "Check the official programme page for the current call and deadlines.",
+      "durationYears": 2,
+      "id": "c-polito-ds",
+      "language": "english",
+      "lastVerified": "2026-10-30",
+      "level": "master",
+      "name": "MSc Data Science and Engineering",
+      "officialUrl": "https://www.polito.it/en",
+      "requirements": "A Bachelor's degree in a related field with a solid mathematics/statistics base is normally required. Verify details on the official programme page.",
+      "slug": "polito-msc-data-science-engineering",
+      "sourceUrl": "https://www.polito.it/en",
+      "status": "published",
+      "subject": "computer-science-data",
+      "tuitionNote": "Not verified \u2014 see the university's official fees page.",
+      "universityId": "u-polito",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "academicYear": "2026/27",
+      "credits": 120,
+      "deadlineNote": "Check the official programme page for the current call and deadlines.",
+      "durationYears": 2,
+      "id": "c-unibo-ai",
+      "language": "english",
+      "lastVerified": "2026-10-30",
+      "level": "master",
+      "name": "MSc Artificial Intelligence",
+      "officialUrl": "https://www.unibo.it/en",
+      "requirements": "A Bachelor's degree with adequate computing and mathematics preparation is normally required, plus English proficiency (commonly B2). Verify the official admission criteria \u2014 this programme publishes specific curricular requirements.",
+      "slug": "unibo-msc-artificial-intelligence",
+      "sourceUrl": "https://www.unibo.it/en",
+      "status": "published",
+      "subject": "computer-science-data",
+      "tuitionNote": "Not verified \u2014 see the university's official fees page.",
+      "universityId": "u-unibo",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "academicYear": "2026/27",
+      "credits": 120,
+      "deadlineNote": "Check the official programme page for the current call and deadlines.",
+      "durationYears": 2,
+      "id": "c-sapienza-cs",
+      "language": "english",
+      "lastVerified": "2026-10-30",
+      "level": "master",
+      "name": "MSc Computer Science",
+      "officialUrl": "https://www.uniroma1.it/en",
+      "requirements": "A Bachelor's degree in Computer Science or a related field is normally required, with English proficiency as specified on the official programme page.",
+      "slug": "sapienza-msc-computer-science",
+      "sourceUrl": "https://www.uniroma1.it/en",
+      "status": "published",
+      "subject": "computer-science-data",
+      "tuitionNote": "Not verified \u2014 see the university's official fees page.",
+      "universityId": "u-sapienza",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "academicYear": "2026/27",
+      "credits": 120,
+      "deadlineNote": "Check the official programme page for the current call and deadlines.",
+      "durationYears": 2,
+      "id": "c-sapienza-air",
+      "language": "english",
+      "lastVerified": "2026-10-30",
+      "level": "master",
+      "name": "MSc Artificial Intelligence and Robotics",
+      "officialUrl": "https://www.uniroma1.it/en",
+      "requirements": "A Bachelor's degree in a related engineering/computing field is normally required. Verify English requirements and background checks on the official programme page.",
+      "slug": "sapienza-msc-ai-robotics",
+      "sourceUrl": "https://www.uniroma1.it/en",
+      "status": "published",
+      "subject": "computer-science-data",
+      "tuitionNote": "Not verified \u2014 see the university's official fees page.",
+      "universityId": "u-sapienza",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "academicYear": "2026/27",
+      "credits": 120,
+      "deadlineNote": "Check the official programme page for the current call and deadlines.",
+      "durationYears": 2,
+      "id": "c-unipd-cs",
+      "language": "english",
+      "lastVerified": "2026-10-30",
+      "level": "master",
+      "name": "MSc Computer Science",
+      "officialUrl": "https://www.unipd.it/en",
+      "requirements": "A Bachelor's degree in a related field is normally required, with English proficiency (commonly B2) as specified on the official programme page.",
+      "slug": "unipd-msc-computer-science",
+      "sourceUrl": "https://www.unipd.it/en",
+      "status": "published",
+      "subject": "computer-science-data",
+      "tuitionNote": "Not verified \u2014 see the university's official fees page.",
+      "universityId": "u-unipd",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "academicYear": "2026/27",
+      "credits": 120,
+      "deadlineNote": "Check the official programme page for the current call and deadlines.",
+      "durationYears": 2,
+      "id": "c-unipd-ds",
+      "language": "english",
+      "lastVerified": "2026-10-30",
+      "level": "master",
+      "name": "MSc Data Science",
+      "officialUrl": "https://www.unipd.it/en",
+      "requirements": "A Bachelor's degree with adequate mathematics/statistics/computing preparation is normally required. Verify the official entry requirements.",
+      "slug": "unipd-msc-data-science",
+      "sourceUrl": "https://www.unipd.it/en",
+      "status": "published",
+      "subject": "computer-science-data",
+      "tuitionNote": "Not verified \u2014 see the university's official fees page.",
+      "universityId": "u-unipd",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "academicYear": "2026/27",
+      "credits": 120,
+      "deadlineNote": "Check the official programme page for the current call and deadlines.",
+      "durationYears": 2,
+      "id": "c-unitn-cs",
+      "language": "english",
+      "lastVerified": "2026-10-30",
+      "level": "master",
+      "name": "MSc Computer Science",
+      "officialUrl": "https://www.unitn.it/en",
+      "requirements": "A Bachelor's degree in a related field is normally required, with English proficiency as specified on the official programme page.",
+      "slug": "unitn-msc-computer-science",
+      "sourceUrl": "https://www.unitn.it/en",
+      "status": "published",
+      "subject": "computer-science-data",
+      "tuitionNote": "Not verified \u2014 see the university's official fees page.",
+      "universityId": "u-unitn",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "academicYear": "2026/27",
+      "credits": 120,
+      "deadlineNote": "Check the official programme page for the current call and deadlines.",
+      "durationYears": 2,
+      "id": "c-unitn-ds",
+      "language": "english",
+      "lastVerified": "2026-10-30",
+      "level": "master",
+      "name": "MSc Data Science",
+      "officialUrl": "https://www.unitn.it/en",
+      "requirements": "A Bachelor's degree with adequate quantitative preparation is normally required. Verify the official entry requirements.",
+      "slug": "unitn-msc-data-science",
+      "sourceUrl": "https://www.unitn.it/en",
+      "status": "published",
+      "subject": "computer-science-data",
+      "tuitionNote": "Not verified \u2014 see the university's official fees page.",
+      "universityId": "u-unitn",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "academicYear": "2026/27",
+      "credits": 120,
+      "deadlineNote": "Check the official programme page for the current call and deadlines.",
+      "durationYears": 2,
+      "id": "c-unive-cs",
+      "language": "english",
+      "lastVerified": "2026-10-30",
+      "level": "master",
+      "name": "MSc Computer Science and Software Technologies",
+      "officialUrl": "https://www.unive.it/en",
+      "requirements": "A Bachelor's degree in a related field is normally required, with English proficiency (commonly B2) as specified on the official programme page.",
+      "slug": "unive-msc-computer-science",
+      "sourceUrl": "https://www.unive.it/en",
+      "status": "published",
+      "subject": "computer-science-data",
+      "tuitionNote": "Not verified \u2014 see the university's official fees page.",
+      "universityId": "u-unive",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "academicYear": "2026/27",
+      "credits": 120,
+      "deadlineNote": "Check the official programme page for the current call and deadlines.",
+      "durationYears": 2,
+      "id": "c-unimi-cs",
+      "language": "english",
+      "lastVerified": "2026-10-30",
+      "level": "master",
+      "name": "MSc Computer Science",
+      "officialUrl": "https://www.unimi.it/en",
+      "requirements": "A Bachelor's degree in a related field is normally required, with English proficiency as specified on the official programme page.",
+      "slug": "unimi-msc-computer-science",
+      "sourceUrl": "https://www.unimi.it/en",
+      "status": "published",
+      "subject": "computer-science-data",
+      "tuitionNote": "Not verified \u2014 see the university's official fees page.",
+      "universityId": "u-unimi",
+      "verificationStatus": "needs-review"
+    }
+  ],
+  "faqs": [
+    {
+      "answer": "Yes. The assessment on this website is free, runs in your browser, and shows your preliminary results before you are ever asked for contact details. Requesting a personalised review is always optional.",
+      "category": "Getting started",
+      "id": "f-free",
+      "question": "Is the eligibility check really free?",
+      "status": "published"
+    },
+    {
+      "answer": "No \u2014 and be cautious of anyone who does. Admissions are decided by universities, scholarships by regional agencies and universities, and visas by Italian authorities. We help you prepare a strong, correct application; outcomes are never guaranteed.",
+      "category": "Getting started",
+      "id": "f-guarantee",
+      "question": "Can you guarantee my admission or scholarship?",
+      "status": "published"
+    },
+    {
+      "answer": "Many English-taught programmes ask for proof of English around B2 level. Some accept IELTS or TOEFL, and some accept a Medium of Instruction (MOI) letter from your previous institution. Accepted proofs differ by programme \u2014 always check the official programme page.",
+      "category": "Language",
+      "id": "f-ielts",
+      "question": "Do I need IELTS to study in Italy?",
+      "status": "published"
+    },
+    {
+      "answer": "Diritto allo Studio Universitario (DSU) scholarships are run by Italy's regions for students enrolled at universities in that region. They are assessed mainly on family income and can include a tuition-fee waiver, a cash grant and services like housing and canteens. Deadlines and income rules are set by each region.",
+      "category": "Scholarships",
+      "id": "f-dsu",
+      "question": "What are DSU regional scholarships?",
+      "sourceUrl": "https://www.universitaly.it/",
+      "status": "published"
+    },
+    {
+      "answer": "As early as you can. Programme application windows, scholarship calls and visa appointments run on separate calendars. Starting 9\u201312 months ahead leaves time for language tests, document legalisation and scholarship applications.",
+      "category": "Planning",
+      "id": "f-when",
+      "question": "When should I start for the 2027\u201328 intake?",
+      "status": "published"
+    },
+    {
+      "answer": "Universitaly (the Italian Ministry's portal for international students) is the official starting point for programme search and pre-enrolment. Visa rules are published by the Italian Ministry of Foreign Affairs and the Embassy of Italy in New Delhi.",
+      "category": "Official sources",
+      "id": "f-official",
+      "question": "Where does official information live?",
+      "sourceUrl": "https://www.universitaly.it/",
+      "status": "published"
+    },
+    {
+      "answer": "Use the cost calculator on this website to build your own estimate. As a rough guide, student living costs often fall around \u20ac7,000\u2013\u20ac11,000 per year depending on the city and housing, plus tuition, which at public universities is income-based. Treat every figure as an estimate, never a quote.",
+      "category": "Costs",
+      "id": "f-cost",
+      "question": "How much does it cost to study in Italy for a year?",
+      "status": "published"
+    },
+    {
+      "answer": "International students with a valid study residence permit are generally allowed part-time work up to 20 hours per week (with an annual cap). Rules can change \u2014 verify the current position on official Italian government sources before relying on work income.",
+      "category": "Living in Italy",
+      "id": "f-work",
+      "question": "Can I work part-time while studying in Italy?",
+      "status": "published"
+    },
+    {
+      "answer": "Start with your passport, academic transcripts and certificates, CV, statement of purpose, recommendation letters where required, and your language proof. For regional scholarships you will also need family income documents, usually translated and legalised. The document checklist page on this site walks through each item.",
+      "category": "Documents",
+      "id": "f-docs",
+      "question": "Which documents should I prepare first?",
+      "status": "published"
+    },
+    {
+      "answer": "After choosing a programme you complete pre-enrolment on the Universitaly portal, then apply for a study visa at the Italian Embassy or consulate responsible for your area, following their published checklist. N92 Edu-Italia helps you prepare and check the file, but the decision is made by the authorities.",
+      "category": "Visa",
+      "id": "f-visa",
+      "question": "How does the student visa process work?",
+      "sourceUrl": "https://ambnewdelhi.esteri.it/en/",
+      "status": "published"
+    }
+  ],
+  "scholarships": [
+    {
+      "academicYear": "2026/27",
+      "benefits": "Can combine a tuition-fee waiver with a cash grant and services such as student housing and canteens. Amounts and combinations vary by region and by the student's income band \u2014 no amount is stated here because regions publish their own figures each year.",
+      "closesNote": "Set by each region in its annual call \u2014 check the regional agency for your university's region.",
+      "documents": [
+        "Proof of enrolment or pre-enrolment at a university in the region",
+        "Family income and asset documentation (ISEE-equivalent for international students), typically translated and legalised",
+        "Identity documents and residence details as the regional call specifies"
+      ],
+      "geographicEligibility": "Students enrolled at a university in the awarding region (each Italian region runs its own scheme).",
+      "id": "s-dsu",
+      "kind": "regional",
+      "lastVerified": "2026-10-30",
+      "name": "Regional Right-to-Study (DSU) Scholarships",
+      "officialUrl": "https://www.universitaly.it/",
+      "opensNote": "Calls are usually published in summer before the academic year \u2014 verify on the regional agency site.",
+      "procedure": "Apply through the regional agency's online portal for the region where your university is located, within that region's call deadline. Admission to the university and the DSU application are separate procedures.",
+      "provider": "Regional right-to-study agencies (e.g. ER.GO \u2014 Emilia-Romagna, DSU Toscana, ESU Padova, LazioDisco)",
+      "requirements": "Awarded mainly on family income (ISEE-equivalent assessment for international students); continued eligibility usually requires earning a minimum number of credits (merit condition in later years). Exact thresholds are set by each region's annual call.",
+      "slug": "regional-dsu-scholarships",
+      "sourceUrl": "https://www.universitaly.it/",
+      "status": "published",
+      "studentEligibility": "Students enrolled (or enrolling) at an Italian university in the region, including international students, subject to the region's income rules.",
+      "verificationStatus": "verified"
+    },
+    {
+      "academicYear": "2026/27",
+      "benefits": "Scholarship grant plus possible tuition arrangements with participating universities, as defined in each year's official call. Amounts are published in the call \u2014 check the official site.",
+      "closesNote": "Published in the annual call on the official programme site.",
+      "documents": [
+        "Passport and academic certificates as the call specifies",
+        "Admission or pre-admission to an eligible programme",
+        "Language certificates where the call requires them"
+      ],
+      "geographicEligibility": "Citizens of the countries listed in the current call \u2014 India has been included in recent editions; confirm for the current year.",
+      "id": "s-iyt",
+      "kind": "national",
+      "lastVerified": "2026-10-30",
+      "name": "Invest Your Talent in Italy",
+      "officialUrl": "https://investyourtalent.esteri.it/",
+      "opensNote": "The call is normally published once a year \u2014 check the official site for the current edition.",
+      "procedure": "Apply on the official Invest Your Talent in Italy portal within the call window, for the eligible Master's programmes listed that year.",
+      "provider": "Italian Ministry of Foreign Affairs (MAECI) with Uni-Italia and partner universities",
+      "requirements": "Set by the annual call: typically a Bachelor's degree, age and language conditions, and admission to an eligible programme. Read the current call text before applying.",
+      "slug": "invest-your-talent-in-italy",
+      "sourceUrl": "https://www.esteri.it/en/",
+      "status": "published",
+      "studentEligibility": "International students from the countries listed in the current call, applying to eligible Master's programmes in Italy.",
+      "verificationStatus": "verified"
+    },
+    {
+      "academicYear": "2026/27",
+      "benefits": "Grants as defined in each annual call published by the Ministry. No amount is stated here \u2014 calls differ by year and grant type.",
+      "closesNote": "Published in the annual call on the Ministry's website.",
+      "documents": [
+        "As specified in the annual call \u2014 typically identity documents, academic records and the pre-enrolment reference"
+      ],
+      "geographicEligibility": "Foreign citizens and Italians living abroad, per the current call.",
+      "id": "s-maeci",
+      "kind": "national",
+      "lastVerified": "2026-10-30",
+      "name": "Italian Government Scholarships (MAECI)",
+      "officialUrl": "https://www.esteri.it/en/",
+      "opensNote": "Calls are published on the Ministry website \u2014 check for the current academic year.",
+      "procedure": "Apply through the official Study in Italy / MAECI application portal referenced in the call, after starting pre-enrolment on Universitaly.",
+      "provider": "Italian Ministry of Foreign Affairs and International Cooperation (MAECI)",
+      "requirements": "Defined in each annual call (degree level, age and language conditions vary). Always read the current call text.",
+      "slug": "italian-government-scholarships-maeci",
+      "sourceUrl": "https://www.esteri.it/en/",
+      "status": "published",
+      "studentEligibility": "International students applying for eligible study programmes in Italy, per the current call.",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "academicYear": "2026/27",
+      "benefits": "Varies by university and programme \u2014 may include partial or full tuition reduction and, for some merit awards, a grant. Details live on each university's official fees and scholarships pages.",
+      "closesNote": "Set by each university \u2014 see the official fees and scholarships pages.",
+      "documents": [
+        "University application or enrolment documents",
+        "Family income documentation for income-based reductions",
+        "Merit records where the award is merit-based"
+      ],
+      "geographicEligibility": "Students enrolled at the awarding university.",
+      "id": "s-uni-waivers",
+      "kind": "university",
+      "lastVerified": "2026-10-30",
+      "name": "University Fee Waivers & Merit Scholarships",
+      "officialUrl": "https://www.universitaly.it/",
+      "opensNote": "Aligned with each university's enrolment and fee calendar.",
+      "procedure": "Follow the procedure on your university's official fees and scholarships pages; income-based reductions usually require an ISEE-equivalent assessment.",
+      "provider": "Individual Italian universities",
+      "requirements": "Income-based tuition reduction (ISEE) is standard at public universities; merit scholarships have programme-specific rules published by each university.",
+      "slug": "university-fee-waivers-merit",
+      "sourceUrl": "https://www.universitaly.it/",
+      "status": "published",
+      "studentEligibility": "Enrolled students of the university, including international students, per each scheme's rules.",
+      "verificationStatus": "needs-review"
+    }
+  ],
+  "universities": [
+    {
+      "academicYear": "2026/27",
+      "admissionNote": "Entry requirements and deadlines are programme-specific \u2014 verify on the official programme page and Universitaly before applying.",
+      "applicationUrl": "https://www.polimi.it/en",
+      "city": "Milan",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "id": "u-polimi",
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "lastVerified": "2026-10-30",
+      "name": "Politecnico di Milano",
+      "region": "Lombardy",
+      "slug": "politecnico-di-milano",
+      "sourceUrl": "https://www.polimi.it/en",
+      "status": "published",
+      "subjects": [
+        "engineering-technology",
+        "architecture-design",
+        "computer-science-data"
+      ],
+      "tuitionNote": "Public university \u2014 tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.",
+      "type": "Public",
+      "verificationStatus": "needs-review",
+      "website": "https://www.polimi.it/en"
+    },
+    {
+      "academicYear": "2026/27",
+      "admissionNote": "Entry requirements and deadlines are programme-specific \u2014 verify on the official programme page and Universitaly before applying.",
+      "applicationUrl": "https://www.polito.it/en",
+      "city": "Turin",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "id": "u-polito",
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "lastVerified": "2026-10-30",
+      "name": "Politecnico di Torino",
+      "region": "Piedmont",
+      "slug": "politecnico-di-torino",
+      "sourceUrl": "https://www.polito.it/en",
+      "status": "published",
+      "subjects": [
+        "engineering-technology",
+        "architecture-design",
+        "computer-science-data"
+      ],
+      "tuitionNote": "Public university \u2014 tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.",
+      "type": "Public",
+      "verificationStatus": "needs-review",
+      "website": "https://www.polito.it/en"
+    },
+    {
+      "academicYear": "2026/27",
+      "admissionNote": "Entry requirements and deadlines are programme-specific \u2014 verify on the official programme page and Universitaly before applying.",
+      "applicationUrl": "https://www.unibo.it/en",
+      "city": "Bologna",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "id": "u-unibo",
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "lastVerified": "2026-10-30",
+      "name": "University of Bologna",
+      "region": "Emilia-Romagna",
+      "slug": "university-of-bologna",
+      "sourceUrl": "https://www.unibo.it/en",
+      "status": "published",
+      "subjects": [
+        "computer-science-data",
+        "business-management",
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Public university \u2014 tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.",
+      "type": "Public",
+      "verificationStatus": "needs-review",
+      "website": "https://www.unibo.it/en"
+    },
+    {
+      "academicYear": "2026/27",
+      "admissionNote": "Entry requirements and deadlines are programme-specific \u2014 verify on the official programme page and Universitaly before applying.",
+      "applicationUrl": "https://www.uniroma1.it/en",
+      "city": "Rome",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "id": "u-sapienza",
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "lastVerified": "2026-10-30",
+      "name": "Sapienza University of Rome",
+      "region": "Lazio",
+      "slug": "sapienza-university-of-rome",
+      "sourceUrl": "https://www.uniroma1.it/en",
+      "status": "published",
+      "subjects": [
+        "computer-science-data",
+        "engineering-technology",
+        "medicine-health",
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Public university \u2014 tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.",
+      "type": "Public",
+      "verificationStatus": "needs-review",
+      "website": "https://www.uniroma1.it/en"
+    },
+    {
+      "academicYear": "2026/27",
+      "admissionNote": "Entry requirements and deadlines are programme-specific \u2014 verify on the official programme page and Universitaly before applying.",
+      "applicationUrl": "https://www.unipd.it/en",
+      "city": "Padova (Padua)",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "id": "u-unipd",
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "lastVerified": "2026-10-30",
+      "name": "University of Padova",
+      "region": "Veneto",
+      "slug": "university-of-padova",
+      "sourceUrl": "https://www.unipd.it/en",
+      "status": "published",
+      "subjects": [
+        "computer-science-data",
+        "natural-sciences",
+        "medicine-health",
+        "engineering-technology",
+        "humanities-social"
+      ],
+      "tuitionNote": "Public university \u2014 tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.",
+      "type": "Public",
+      "verificationStatus": "needs-review",
+      "website": "https://www.unipd.it/en"
+    },
+    {
+      "academicYear": "2026/27",
+      "admissionNote": "Entry requirements and deadlines are programme-specific \u2014 verify on the official programme page and Universitaly before applying.",
+      "applicationUrl": "https://www.unive.it/en",
+      "city": "Venice",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "id": "u-unive",
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "lastVerified": "2026-10-30",
+      "name": "Ca' Foscari University of Venice",
+      "region": "Veneto",
+      "slug": "ca-foscari-university-of-venice",
+      "sourceUrl": "https://www.unive.it/en",
+      "status": "published",
+      "subjects": [
+        "business-management",
+        "computer-science-data",
+        "humanities-social"
+      ],
+      "tuitionNote": "Public university \u2014 tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.",
+      "type": "Public",
+      "verificationStatus": "needs-review",
+      "website": "https://www.unive.it/en"
+    },
+    {
+      "academicYear": "2026/27",
+      "admissionNote": "Entry requirements and deadlines are programme-specific \u2014 verify on the official programme page and Universitaly before applying.",
+      "applicationUrl": "https://www.unitn.it/en",
+      "city": "Trento",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "id": "u-unitn",
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "lastVerified": "2026-10-30",
+      "name": "University of Trento",
+      "region": "Trentino-Alto Adige",
+      "slug": "university-of-trento",
+      "sourceUrl": "https://www.unitn.it/en",
+      "status": "published",
+      "subjects": [
+        "computer-science-data",
+        "natural-sciences",
+        "business-management",
+        "humanities-social"
+      ],
+      "tuitionNote": "Public university \u2014 tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.",
+      "type": "Public",
+      "verificationStatus": "needs-review",
+      "website": "https://www.unitn.it/en"
+    },
+    {
+      "academicYear": "2026/27",
+      "admissionNote": "Entry requirements and deadlines are programme-specific \u2014 verify on the official programme page and Universitaly before applying.",
+      "applicationUrl": "https://www.unifi.it/en",
+      "city": "Florence",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "id": "u-unifi",
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "lastVerified": "2026-10-30",
+      "name": "University of Florence",
+      "region": "Tuscany",
+      "slug": "university-of-florence",
+      "sourceUrl": "https://www.unifi.it/en",
+      "status": "published",
+      "subjects": [
+        "architecture-design",
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Public university \u2014 tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.",
+      "type": "Public",
+      "verificationStatus": "needs-review",
+      "website": "https://www.unifi.it/en"
+    },
+    {
+      "academicYear": "2026/27",
+      "admissionNote": "Entry requirements and deadlines are programme-specific \u2014 verify on the official programme page and Universitaly before applying.",
+      "applicationUrl": "https://www.iuav.it/en",
+      "city": "Venice",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "id": "u-iuav",
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "lastVerified": "2026-10-30",
+      "name": "IUAV University of Venice",
+      "region": "Veneto",
+      "slug": "iuav-university-of-venice",
+      "sourceUrl": "https://www.iuav.it/en",
+      "status": "published",
+      "subjects": [
+        "architecture-design"
+      ],
+      "tuitionNote": "Public university \u2014 tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.",
+      "type": "Public",
+      "verificationStatus": "needs-review",
+      "website": "https://www.iuav.it/en"
+    },
+    {
+      "academicYear": "2026/27",
+      "admissionNote": "Entry requirements and deadlines are programme-specific \u2014 verify on the official programme page and Universitaly before applying.",
+      "applicationUrl": "https://www.unimi.it/en",
+      "city": "Milan",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "id": "u-unimi",
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "lastVerified": "2026-10-30",
+      "name": "University of Milan",
+      "region": "Lombardy",
+      "slug": "university-of-milan",
+      "sourceUrl": "https://www.unimi.it/en",
+      "status": "published",
+      "subjects": [
+        "computer-science-data",
+        "natural-sciences",
+        "medicine-health",
+        "humanities-social"
+      ],
+      "tuitionNote": "Public university \u2014 tuition is set by family income (ISEE-based) and varies by programme. Confirm the current amount on the official fees page.",
+      "type": "Public",
+      "verificationStatus": "needs-review",
+      "website": "https://www.unimi.it/en"
+    },
+    {
+      "id": "uni-university-of-eastern-piedmont",
+      "slug": "university-of-eastern-piedmont",
+      "name": "University of Eastern Piedmont",
+      "city": "Vercelli",
+      "region": "Piedmont",
+      "type": "Public",
+      "website": "https://www.uniupo.it",
+      "applicationUrl": "https://www.uniupo.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added with its official website address; programme-level details have NOT been verified for this institution yet, and the site check from our network is still pending. Confirm everything on the official site and Universitaly.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.uniupo.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-naples-parthenope",
+      "slug": "university-of-naples-parthenope",
+      "name": "University of Naples Parthenope",
+      "city": "Naples",
+      "region": "Campania",
+      "type": "Public",
+      "website": "https://www.uniparthenope.it",
+      "applicationUrl": "https://www.uniparthenope.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added with its official website address; programme-level details have NOT been verified for this institution yet, and the site check from our network is still pending. Confirm everything on the official site and Universitaly.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.uniparthenope.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-rome-tor-vergata",
+      "slug": "university-of-rome-tor-vergata",
+      "name": "University of Rome Tor Vergata",
+      "city": "Rome",
+      "region": "Lazio",
+      "type": "Public",
+      "website": "https://www.uniroma2.it",
+      "applicationUrl": "https://www.uniroma2.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added with its official website address; programme-level details have NOT been verified for this institution yet, and the site check from our network is still pending. Confirm everything on the official site and Universitaly.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.uniroma2.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-magna-graecia-university-of-catanzaro",
+      "slug": "magna-graecia-university-of-catanzaro",
+      "name": "Magna Graecia University of Catanzaro",
+      "city": "Catanzaro",
+      "region": "Calabria",
+      "type": "Public",
+      "website": "https://www.unicz.it",
+      "applicationUrl": "https://www.unicz.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unicz.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-marche-polytechnic-university",
+      "slug": "marche-polytechnic-university",
+      "name": "Marche Polytechnic University",
+      "city": "Ancona",
+      "region": "Marche",
+      "type": "Public",
+      "website": "https://www.univpm.it",
+      "applicationUrl": "https://www.univpm.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "engineering-technology",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.univpm.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-polytechnic-university-of-bari",
+      "slug": "polytechnic-university-of-bari",
+      "name": "Polytechnic University of Bari",
+      "city": "Bari",
+      "region": "Apulia",
+      "type": "Public",
+      "website": "https://www.poliba.it",
+      "applicationUrl": "https://www.poliba.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "engineering-technology",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.poliba.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-roma-tre-university",
+      "slug": "roma-tre-university",
+      "name": "Roma Tre University",
+      "city": "Rome",
+      "region": "Lazio",
+      "type": "Public",
+      "website": "https://www.uniroma3.it",
+      "applicationUrl": "https://www.uniroma3.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.uniroma3.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-santanna-school-of-advanced-studies",
+      "slug": "santanna-school-of-advanced-studies",
+      "name": "Sant'Anna School of Advanced Studies",
+      "city": "Pisa",
+      "region": "Tuscany",
+      "type": "Public",
+      "website": "https://www.santannapisa.it",
+      "applicationUrl": "https://www.santannapisa.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.santannapisa.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-scuola-normale-superiore",
+      "slug": "scuola-normale-superiore",
+      "name": "Scuola Normale Superiore",
+      "city": "Pisa",
+      "region": "Tuscany",
+      "type": "Public",
+      "website": "https://www.sns.it",
+      "applicationUrl": "https://www.sns.it",
+      "degreeLevels": [
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.sns.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-for-foreigners-of-perugia",
+      "slug": "university-for-foreigners-of-perugia",
+      "name": "University for Foreigners of Perugia",
+      "city": "Perugia",
+      "region": "Umbria",
+      "type": "Public",
+      "website": "https://www.unistrapg.it",
+      "applicationUrl": "https://www.unistrapg.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unistrapg.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-for-foreigners-of-siena",
+      "slug": "university-for-foreigners-of-siena",
+      "name": "University for Foreigners of Siena",
+      "city": "Siena",
+      "region": "Tuscany",
+      "type": "Public",
+      "website": "https://www.unistrasi.it",
+      "applicationUrl": "https://www.unistrasi.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unistrasi.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-bari-aldo-moro",
+      "slug": "university-of-bari-aldo-moro",
+      "name": "University of Bari Aldo Moro",
+      "city": "Bari",
+      "region": "Apulia",
+      "type": "Public",
+      "website": "https://www.uniba.it",
+      "applicationUrl": "https://www.uniba.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.uniba.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-basilicata",
+      "slug": "university-of-basilicata",
+      "name": "University of Basilicata",
+      "city": "Potenza",
+      "region": "Basilicata",
+      "type": "Public",
+      "website": "https://www.unibas.it",
+      "applicationUrl": "https://www.unibas.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unibas.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-bergamo",
+      "slug": "university-of-bergamo",
+      "name": "University of Bergamo",
+      "city": "Bergamo",
+      "region": "Lombardy",
+      "type": "Public",
+      "website": "https://www.unibg.it",
+      "applicationUrl": "https://www.unibg.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unibg.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-brescia",
+      "slug": "university-of-brescia",
+      "name": "University of Brescia",
+      "city": "Brescia",
+      "region": "Lombardy",
+      "type": "Public",
+      "website": "https://www.unibs.it",
+      "applicationUrl": "https://www.unibs.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unibs.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-cagliari",
+      "slug": "university-of-cagliari",
+      "name": "University of Cagliari",
+      "city": "Cagliari",
+      "region": "Sardinia",
+      "type": "Public",
+      "website": "https://www.unica.it",
+      "applicationUrl": "https://www.unica.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unica.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-calabria",
+      "slug": "university-of-calabria",
+      "name": "University of Calabria",
+      "city": "Rende",
+      "region": "Calabria",
+      "type": "Public",
+      "website": "https://www.unical.it",
+      "applicationUrl": "https://www.unical.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unical.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-camerino",
+      "slug": "university-of-camerino",
+      "name": "University of Camerino",
+      "city": "Camerino",
+      "region": "Marche",
+      "type": "Public",
+      "website": "https://www.unicam.it",
+      "applicationUrl": "https://www.unicam.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unicam.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-cassino-and-southern-lazio",
+      "slug": "university-of-cassino-and-southern-lazio",
+      "name": "University of Cassino and Southern Lazio",
+      "city": "Cassino",
+      "region": "Lazio",
+      "type": "Public",
+      "website": "https://www.unicas.it",
+      "applicationUrl": "https://www.unicas.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unicas.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-catania",
+      "slug": "university-of-catania",
+      "name": "University of Catania",
+      "city": "Catania",
+      "region": "Sicily",
+      "type": "Public",
+      "website": "https://www.unict.it",
+      "applicationUrl": "https://www.unict.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unict.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-chieti-pescara",
+      "slug": "university-of-chieti-pescara",
+      "name": "University of Chieti-Pescara",
+      "city": "Chieti",
+      "region": "Abruzzo",
+      "type": "Public",
+      "website": "https://www.unich.it",
+      "applicationUrl": "https://www.unich.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unich.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-ferrara",
+      "slug": "university-of-ferrara",
+      "name": "University of Ferrara",
+      "city": "Ferrara",
+      "region": "Emilia-Romagna",
+      "type": "Public",
+      "website": "https://www.unife.it",
+      "applicationUrl": "https://www.unife.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unife.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-foggia",
+      "slug": "university-of-foggia",
+      "name": "University of Foggia",
+      "city": "Foggia",
+      "region": "Apulia",
+      "type": "Public",
+      "website": "https://www.unifg.it",
+      "applicationUrl": "https://www.unifg.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unifg.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-genoa",
+      "slug": "university-of-genoa",
+      "name": "University of Genoa",
+      "city": "Genoa",
+      "region": "Liguria",
+      "type": "Public",
+      "website": "https://www.unige.it",
+      "applicationUrl": "https://www.unige.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unige.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-insubria",
+      "slug": "university-of-insubria",
+      "name": "University of Insubria",
+      "city": "Varese",
+      "region": "Lombardy",
+      "type": "Public",
+      "website": "https://www.uninsubria.it",
+      "applicationUrl": "https://www.uninsubria.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.uninsubria.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-laquila",
+      "slug": "university-of-laquila",
+      "name": "University of L'Aquila",
+      "city": "L'Aquila",
+      "region": "Abruzzo",
+      "type": "Public",
+      "website": "https://www.univaq.it",
+      "applicationUrl": "https://www.univaq.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.univaq.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-macerata",
+      "slug": "university-of-macerata",
+      "name": "University of Macerata",
+      "city": "Macerata",
+      "region": "Marche",
+      "type": "Public",
+      "website": "https://www.unimc.it",
+      "applicationUrl": "https://www.unimc.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unimc.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-messina",
+      "slug": "university-of-messina",
+      "name": "University of Messina",
+      "city": "Messina",
+      "region": "Sicily",
+      "type": "Public",
+      "website": "https://www.unime.it",
+      "applicationUrl": "https://www.unime.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unime.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-milano-bicocca",
+      "slug": "university-of-milano-bicocca",
+      "name": "University of Milano-Bicocca",
+      "city": "Milan",
+      "region": "Lombardy",
+      "type": "Public",
+      "website": "https://www.unimib.it",
+      "applicationUrl": "https://www.unimib.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unimib.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-modena-and-reggio-emilia",
+      "slug": "university-of-modena-and-reggio-emilia",
+      "name": "University of Modena and Reggio Emilia",
+      "city": "Modena",
+      "region": "Emilia-Romagna",
+      "type": "Public",
+      "website": "https://www.unimore.it",
+      "applicationUrl": "https://www.unimore.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unimore.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-molise",
+      "slug": "university-of-molise",
+      "name": "University of Molise",
+      "city": "Campobasso",
+      "region": "Molise",
+      "type": "Public",
+      "website": "https://www.unimol.it",
+      "applicationUrl": "https://www.unimol.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unimol.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-naples-federico-ii",
+      "slug": "university-of-naples-federico-ii",
+      "name": "University of Naples Federico II",
+      "city": "Naples",
+      "region": "Campania",
+      "type": "Public",
+      "website": "https://www.unina.it",
+      "applicationUrl": "https://www.unina.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unina.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-naples-lorientale",
+      "slug": "university-of-naples-lorientale",
+      "name": "University of Naples L'Orientale",
+      "city": "Naples",
+      "region": "Campania",
+      "type": "Public",
+      "website": "https://www.unior.it",
+      "applicationUrl": "https://www.unior.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unior.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-palermo",
+      "slug": "university-of-palermo",
+      "name": "University of Palermo",
+      "city": "Palermo",
+      "region": "Sicily",
+      "type": "Public",
+      "website": "https://www.unipa.it",
+      "applicationUrl": "https://www.unipa.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unipa.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-parma",
+      "slug": "university-of-parma",
+      "name": "University of Parma",
+      "city": "Parma",
+      "region": "Emilia-Romagna",
+      "type": "Public",
+      "website": "https://www.unipr.it",
+      "applicationUrl": "https://www.unipr.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unipr.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-pavia",
+      "slug": "university-of-pavia",
+      "name": "University of Pavia",
+      "city": "Pavia",
+      "region": "Lombardy",
+      "type": "Public",
+      "website": "https://www.unipv.it",
+      "applicationUrl": "https://www.unipv.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unipv.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-perugia",
+      "slug": "university-of-perugia",
+      "name": "University of Perugia",
+      "city": "Perugia",
+      "region": "Umbria",
+      "type": "Public",
+      "website": "https://www.unipg.it",
+      "applicationUrl": "https://www.unipg.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unipg.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-pisa",
+      "slug": "university-of-pisa",
+      "name": "University of Pisa",
+      "city": "Pisa",
+      "region": "Tuscany",
+      "type": "Public",
+      "website": "https://www.unipi.it",
+      "applicationUrl": "https://www.unipi.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unipi.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-reggio-calabria",
+      "slug": "university-of-reggio-calabria",
+      "name": "University of Reggio Calabria",
+      "city": "Reggio Calabria",
+      "region": "Calabria",
+      "type": "Public",
+      "website": "https://www.unirc.it",
+      "applicationUrl": "https://www.unirc.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unirc.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-salento",
+      "slug": "university-of-salento",
+      "name": "University of Salento",
+      "city": "Lecce",
+      "region": "Apulia",
+      "type": "Public",
+      "website": "https://www.unisalento.it",
+      "applicationUrl": "https://www.unisalento.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unisalento.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-salerno",
+      "slug": "university-of-salerno",
+      "name": "University of Salerno",
+      "city": "Salerno",
+      "region": "Campania",
+      "type": "Public",
+      "website": "https://www.unisa.it",
+      "applicationUrl": "https://www.unisa.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unisa.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-sannio",
+      "slug": "university-of-sannio",
+      "name": "University of Sannio",
+      "city": "Benevento",
+      "region": "Campania",
+      "type": "Public",
+      "website": "https://www.unisannio.it",
+      "applicationUrl": "https://www.unisannio.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unisannio.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-sassari",
+      "slug": "university-of-sassari",
+      "name": "University of Sassari",
+      "city": "Sassari",
+      "region": "Sardinia",
+      "type": "Public",
+      "website": "https://www.uniss.it",
+      "applicationUrl": "https://www.uniss.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.uniss.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-siena",
+      "slug": "university-of-siena",
+      "name": "University of Siena",
+      "city": "Siena",
+      "region": "Tuscany",
+      "type": "Public",
+      "website": "https://www.unisi.it",
+      "applicationUrl": "https://www.unisi.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unisi.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-teramo",
+      "slug": "university-of-teramo",
+      "name": "University of Teramo",
+      "city": "Teramo",
+      "region": "Abruzzo",
+      "type": "Public",
+      "website": "https://www.unite.it",
+      "applicationUrl": "https://www.unite.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unite.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-trieste",
+      "slug": "university-of-trieste",
+      "name": "University of Trieste",
+      "city": "Trieste",
+      "region": "Friuli-Venezia Giulia",
+      "type": "Public",
+      "website": "https://www.units.it",
+      "applicationUrl": "https://www.units.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.units.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-turin",
+      "slug": "university-of-turin",
+      "name": "University of Turin",
+      "city": "Turin",
+      "region": "Piedmont",
+      "type": "Public",
+      "website": "https://www.unito.it",
+      "applicationUrl": "https://www.unito.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences",
+        "medicine-health"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unito.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-tuscia",
+      "slug": "university-of-tuscia",
+      "name": "University of Tuscia",
+      "city": "Viterbo",
+      "region": "Lazio",
+      "type": "Public",
+      "website": "https://www.unitus.it",
+      "applicationUrl": "https://www.unitus.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.unitus.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-udine",
+      "slug": "university-of-udine",
+      "name": "University of Udine",
+      "city": "Udine",
+      "region": "Friuli-Venezia Giulia",
+      "type": "Public",
+      "website": "https://www.uniud.it",
+      "applicationUrl": "https://www.uniud.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.uniud.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-urbino-carlo-bo",
+      "slug": "university-of-urbino-carlo-bo",
+      "name": "University of Urbino Carlo Bo",
+      "city": "Urbino",
+      "region": "Marche",
+      "type": "Public",
+      "website": "https://www.uniurb.it",
+      "applicationUrl": "https://www.uniurb.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.uniurb.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    },
+    {
+      "id": "uni-university-of-verona",
+      "slug": "university-of-verona",
+      "name": "University of Verona",
+      "city": "Verona",
+      "region": "Veneto",
+      "type": "Public",
+      "website": "https://www.univr.it",
+      "applicationUrl": "https://www.univr.it",
+      "degreeLevels": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "languages": [
+        "english",
+        "italian"
+      ],
+      "subjects": [
+        "humanities-social",
+        "natural-sciences"
+      ],
+      "tuitionNote": "Not verified \u2014 Italian public-university fees are income-based (ISEE); check the official fees page.",
+      "scholarshipNote": "Regional DSU support and merit opportunities may apply \u2014 check the official site.",
+      "applicationStatus": "Check the official admissions page for current calls",
+      "admissionNote": "Institution record added from the official website (checked 2026-10-30). Programme-level details \u2014 including which programmes are taught in English \u2014 have NOT been individually verified for this institution yet. Always confirm programmes, requirements and deadlines on the official catalogue and Universitaly before applying.",
+      "featured": false,
+      "verificationStatus": "needs-review",
+      "sourceUrl": "https://www.univr.it",
+      "lastVerified": "2026-10-30",
+      "academicYear": "2026/27",
+      "status": "published"
+    }
+  ]
+}

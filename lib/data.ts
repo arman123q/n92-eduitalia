@@ -78,3 +78,19 @@ export function courseBySlug(rows: Course[], slug: string | null): Course | unde
 export function scholarshipBySlug(rows: Scholarship[], slug: string | null): Scholarship | undefined {
   return rows.find((s) => s.slug === slug);
 }
+
+/**
+ * Published admission rounds. RLS lets the public read published rows
+ * only. There are deliberately NO seed/sample rounds: deadlines are never
+ * invented, so unconfigured mode returns an honest empty list.
+ */
+export async function getAdmissionRounds(): Promise<import("./types").AdmissionRound[]> {
+  const rows = await restSelect("admission_rounds", "select=*&status=eq.published&order=deadline_at.asc.nullslast");
+  return (rows as unknown as import("./types").AdmissionRound[]) ?? [];
+}
+
+/** Published notices (display-window filtering happens in the UI). */
+export async function getNotices(): Promise<import("./types").Notice[]> {
+  const rows = await restSelect("notices", "select=*&status=eq.published&order=created_at.desc");
+  return (rows as unknown as import("./types").Notice[]) ?? [];
+}

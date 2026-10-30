@@ -19,12 +19,15 @@ export default function Footer() {
             <li><a className="hover:underline" href="/universities/">Universities</a></li>
             <li><a className="hover:underline" href="/courses/">Courses</a></li>
             <li><a className="hover:underline" href="/scholarships/">Scholarships</a></li>
+            <li><a className="hover:underline" href="/admissions/">Admission Rounds &amp; Deadlines</a></li>
+            <li><a className="hover:underline" href="/notices/">Important Notices</a></li>
             <li><a className="hover:underline" href="/calculator/">Cost Calculator</a></li>
             <li><a className="hover:underline" href="/process/">Application Process</a></li>
             <li><a className="hover:underline" href="/visa-guide/">Visa Guide</a></li>
             <li><a className="hover:underline" href="/faq/">FAQ</a></li>
             <li><a className="hover:underline" href="/privacy/">Privacy Notice</a></li>
             <li><a className="hover:underline" href="/terms/">Terms of Use</a></li>
+            <li><a className="hover:underline" href="/admin/">Admin Login</a></li>
           </ul>
         </nav>
         <nav aria-label="Official sources">

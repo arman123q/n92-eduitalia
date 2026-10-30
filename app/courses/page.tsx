@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { getUniversities, getCourses, type DataSource } from "@/lib/data";
 import type { University, Course } from "@/lib/types";
 import { PageHeader, VerifyBadge, DataNotice, SUBJECT_LABELS, LEVEL_LABELS } from "@/components/ui";
+import { detailHref } from "@/lib/links";
 
 const SHORTLIST_KEY = "n92_shortlist";
 const COMPARE_KEY = "n92_compare";
@@ -120,7 +121,7 @@ export default function CoursesPage() {
                 </p>
                 <p className="mt-2 text-[0.85rem] text-[#202824]/65">Fees: {c.tuitionNote}</p>
                 <div className="mt-auto pt-5 flex flex-wrap gap-2">
-                  <a className="btn-primary flex-1 !py-2.5 text-sm" href={`/courses/detail/?slug=${c.slug}`}>Details</a>
+                  <a className="btn-primary flex-1 !py-2.5 text-sm" href={detailHref("courses", c.slug)}>Details</a>
                   <button type="button" className="btn-ghost !py-2.5 text-sm" onClick={() => toggleShort(c.id)} aria-pressed={shortlist.includes(c.id)}>
                     {shortlist.includes(c.id) ? "♥ Saved" : "♡ Save"}
                   </button>

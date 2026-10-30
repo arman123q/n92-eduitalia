@@ -1,6 +1,6 @@
 import { SUBJECT_LABELS, LEVEL_LABELS } from "@/components/ui";
 
-export type FieldType = "text" | "url" | "textarea" | "select" | "date" | "number" | "checks" | "lines";
+export type FieldType = "text" | "url" | "textarea" | "select" | "date" | "number" | "checks" | "lines" | "checkbox" | "datetime";
 export interface Field {
   key: string;
   label: string;
@@ -91,6 +91,60 @@ export const SCHEMAS: Record<string, { title: string; singular: string; idPrefix
       { key: "status", label: "Publishing status", type: "select", options: STATUS },
     ],
   },
+  admission_rounds: {
+    title: "Admission Rounds & Deadlines", singular: "Admission Round", idPrefix: "r-", nameKey: "universityName",
+    fields: [
+      { key: "universityName", label: "University name", type: "text", required: true },
+      { key: "programmeName", label: "Programme / course (optional)", type: "text" },
+      { key: "intakeYear", label: "Intake year", type: "number" },
+      { key: "intakeSemester", label: "Intake semester", type: "select", options: [["Fall", "Fall (Sep)"], ["Spring", "Spring (Feb)"], ["Full Year", "Full Year"]] },
+      { key: "roundName", label: "Round", type: "select", options: [["First Call", "First Call"], ["Second Call", "Second Call"], ["Third Call", "Third Call"], ["Custom Round", "Custom Round"]] },
+      { key: "customRoundLabel", label: "Custom round label (if Custom)", type: "text" },
+      { key: "opensAt", label: "Applications open (date & time, Italy)", type: "datetime" },
+      { key: "deadlineAt", label: "Application deadline (date & time, Italy)", type: "datetime", hint: "Times are Europe/Rome. The public status (Upcoming/Open/Closing Soon/Closed) is calculated automatically from these dates." },
+      { key: "deadlineVerified", label: "Deadline verified against the official source", type: "checkbox", hint: "Leave OFF until you have checked the official announcement — unverified deadlines are publicly labelled NOT VERIFIED and never shown as open/closed." },
+      { key: "manualStatus", label: "Manual status override", type: "select", options: [["", "Automatic (from dates)"], ["results-published", "Results Published"], ["awaiting-confirmation", "Awaiting Official Confirmation"]] },
+      { key: "officialUrl", label: "Official application URL", type: "url" },
+      { key: "sourceUrl", label: "Official announcement / source URL", type: "url" },
+      { key: "lastVerified", label: "Last verified date", type: "date" },
+      { key: "message", label: "Short notice / message", type: "textarea" },
+      { key: "pinned", label: "Pin to the front of the ticker", type: "checkbox" },
+      { key: "status", label: "Publishing status", type: "select", options: STATUS },
+      { key: "adminNotes", label: "Admin notes (private)", type: "textarea" },
+    ],
+  },
+  notices: {
+    title: "Important Notices", singular: "Notice", idPrefix: "n-", nameKey: "title",
+    fields: [
+      { key: "title", label: "Title", type: "text", required: true },
+      { key: "message", label: "Message", type: "textarea", required: true },
+      { key: "category", label: "Category", type: "select", options: [
+        ["University admission calls", "University admission calls"],
+        ["Applications opening soon", "Applications opening soon"],
+        ["Approaching deadlines", "Approaching deadlines"],
+        ["Deadline extensions", "Application deadline extensions"],
+        ["Results and rankings", "Results and rankings"],
+        ["Scholarship applications", "Scholarship applications"],
+        ["DSU / regional scholarships", "DSU / regional scholarship announcements"],
+        ["Tuition fees & waivers", "Tuition-fee and fee-waiver announcements"],
+        ["Document deadlines", "Document submission deadlines"],
+        ["Universitaly updates", "Universitaly pre-enrolment updates"],
+        ["Visa & appointments", "Visa and appointment information"],
+        ["Official announcements", "Official university announcements"],
+        ["Website & consultations", "Website alerts and consultation announcements"],
+      ] },
+      { key: "priority", label: "Priority", type: "select", options: [["low", "Low"], ["normal", "Normal"], ["high", "High"], ["urgent", "Urgent (red)"]] },
+      { key: "startsAt", label: "Show from (date & time, Italy)", type: "datetime", hint: "Leave empty to show immediately when published." },
+      { key: "endsAt", label: "Show until (date & time, Italy)", type: "datetime", hint: "After this time the notice stops appearing publicly but stays in your admin history." },
+      { key: "sourceUrl", label: "Source URL (official)", type: "url" },
+      { key: "lastVerified", label: "Last verified date", type: "date" },
+      { key: "linkText", label: "Link text (optional)", type: "text" },
+      { key: "linkUrl", label: "Link URL (optional)", type: "url" },
+      { key: "pinned", label: "Pin to the front", type: "checkbox" },
+      { key: "status", label: "Publishing status", type: "select", options: STATUS },
+      { key: "adminNotes", label: "Admin notes (private)", type: "textarea" },
+    ],
+  },
 };
 
-export const TABLES = ["universities", "courses", "scholarships", "faqs"] as const;
+export const TABLES = ["universities", "courses", "scholarships", "faqs", "admission_rounds", "notices"] as const;

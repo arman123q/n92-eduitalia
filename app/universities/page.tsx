@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { getUniversities, getCourses, type DataSource } from "@/lib/data";
 import type { University, Course } from "@/lib/types";
 import { PageHeader, VerifyBadge, DataNotice, SUBJECT_LABELS, LEVEL_LABELS } from "@/components/ui";
+import { detailHref } from "@/lib/links";
 
 export default function UniversitiesPage() {
   const [unis, setUnis] = useState<University[]>([]);
@@ -16,6 +17,17 @@ export default function UniversitiesPage() {
   const [subject, setSubject] = useState("");
   const [language, setLanguage] = useState("");
   const [sort, setSort] = useState("name");
+  const [compareIds, setCompareIds] = useState<string[]>(() => {
+    try { return JSON.parse(localStorage.getItem("n92_uni_compare") || "[]"); } catch { return []; }
+  });
+
+  useEffect(() => {
+    try { localStorage.setItem("n92_uni_compare", JSON.stringify(compareIds)); } catch { /* private mode */ }
+  }, [compareIds]);
+
+  const toggleCompare = (id: string) =>
+    setCompareIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : prev.length >= 3 ? prev : [...prev, id]));
+  const compareUnis = compareIds.map((id) => unis.find((u) => u.id === id)).filter(Boolean) as University[];
 
   useEffect(() => {
     (async () => {
@@ -97,6 +109,39 @@ export default function UniversitiesPage() {
         ) : (
           <>
             <p className="mt-6 text-sm text-[#202824]/60">{filtered.length} {filtered.length === 1 ? "university" : "universities"}</p>
+            {compareUnis.length >= 2 && (
+              <section className="mt-6 overflow-x-auto rounded-2xl border border-[#103f35]/15 bg-white" aria-label="University comparison">
+                <div className="flex items-center justify-between p-4 pb-0">
+                  <h2 className="font-display text-lg font-bold text-[#103f35]">Comparing {compareUnis.length} universities</h2>
+                  <button type="button" className="btn-ghost !py-1.5 text-sm" onClick={() => setCompareIds([])}>Clear</button>
+                </div>
+                <table className="mt-3 w-full min-w-[560px] text-left text-[0.9rem]">
+                  <thead>
+                    <tr className="border-y border-[#103f35]/10 bg-[#faf9f5]">
+                      <th className="p-3.5 font-semibold text-[#103f35]">Compare</th>
+                      {compareUnis.map((u) => <th key={u.id} className="p-3.5 font-semibold text-[#103f35]">{u.name}</th>)}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {([
+                      ["Location", (u: University) => `${u.city} · ${u.region}`],
+                      ["Type", (u: University) => u.type],
+                      ["Degree levels", (u: University) => u.degreeLevels.map((l) => LEVEL_LABELS[l]).join(" · ")],
+                      ["Subject areas", (u: University) => u.subjects.map((s) => SUBJECT_LABELS[s] || s).join(" · ")],
+                      ["Languages", (u: University) => u.languages.join(" · ")],
+                      ["Tuition", (u: University) => u.tuitionNote],
+                      ["Applications", (u: University) => u.applicationStatus],
+                      ["Listed courses here", (u: University) => String(courseCount.get(u.id) || 0)],
+                    ] as [string, (u: University) => string][]).map(([label, get]) => (
+                      <tr key={label} className="border-b border-[#103f35]/8 last:border-0 align-top">
+                        <th className="p-3.5 font-semibold text-[#103f35]">{label}</th>
+                        {compareUnis.map((u) => <td key={u.id} className="p-3.5 text-[#202824]/85">{get(u)}</td>)}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </section>
+            )}
             <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {filtered.map((u) => (
                 <article key={u.id} className="card flex flex-col p-6">
@@ -115,8 +160,13 @@ export default function UniversitiesPage() {
                     {courseCount.get(u.id) ? ` · ${courseCount.get(u.id)} listed courses` : ""}
                   </p>
                   <div className="mt-auto pt-5 flex gap-2">
-                    <a className="btn-primary flex-1 !py-2.5 text-sm" href={`/universities/detail/?slug=${u.slug}`}>View details</a>
+                    <a className="btn-primary flex-1 !py-2.5 text-sm" href={detailHref("universities", u.slug)}>View details</a>
                     <a className="btn-ghost !py-2.5 text-sm" href={u.website} target="_blank" rel="noopener noreferrer">Official site ↗</a>
+                    <button type="button" aria-pressed={compareIds.includes(u.id)}
+                      className={`rounded-xl border px-3 py-2.5 text-sm font-semibold ${compareIds.includes(u.id) ? "bg-[#103f35] text-white border-[#103f35]" : "border-[#103f35]/30 text-[#103f35]"}`}
+                      onClick={() => toggleCompare(u.id)}>
+                      {compareIds.includes(u.id) ? "✓ Compare" : "+ Compare"}
+                    </button>
                   </div>
                 </article>
               ))}

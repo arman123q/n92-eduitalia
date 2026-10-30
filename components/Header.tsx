@@ -7,6 +7,7 @@ const LINKS = [
   ["Universities", "/universities/"],
   ["Courses", "/courses/"],
   ["Scholarships", "/scholarships/"],
+  ["Admissions", "/admissions/"],
   ["Cost Calculator", "/calculator/"],
   ["Visa Guide", "/visa-guide/"],
   ["About", "/about/"],
@@ -17,11 +18,11 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-[#103f35]/10 bg-[#faf9f5]/92 backdrop-blur">
       <div className="tricolour-bar" aria-hidden="true" />
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
-        <a href="/" className="flex items-center gap-3" aria-label="N92 Edu-Italia — home">
-          <span className="rounded-xl bg-white p-1 shadow-sm border border-[#103f35]/10">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-4 py-2 sm:gap-4 sm:px-6 sm:py-2.5">
+        <a href="/" className="flex min-w-0 items-center gap-3" aria-label="N92 Edu-Italia — home">
+          <span className="shrink-0 rounded-xl bg-white p-1 shadow-sm border border-[#103f35]/10">
             {/* The original N92 Edu-Italia logo file, used exactly as supplied. */}
-            <img src="/logo.jpg" alt="N92 Edu-Italia logo" className="h-11 w-auto" width="88" height="44" />
+            <img src="/logo.jpg" alt="N92 Edu-Italia logo" className="h-9 w-auto sm:h-11" width="88" height="44" />
           </span>
           <span className="hidden md:block leading-tight">
             <span className="font-display block text-lg font-bold text-[#103f35]">N92 Edu-Italia</span>

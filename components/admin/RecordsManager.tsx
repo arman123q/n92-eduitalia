@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { adminSelect, adminInsert, adminUpdate, adminDelete, audit, snapshot, toDb, fromDb } from "@/lib/admin";
 import { SCHEMAS, type Field } from "./schemas";
+// @ts-ignore - plain JS module
+import { romeLocalToUtcIso, utcToRomeLocal, computeRoundStatus, ROUND_STATUS_META } from "@/lib/rounds.js";
 
 type Row = Record<string, unknown>;
 
@@ -43,8 +45,13 @@ export default function RecordsManager({ table }: { table: string }) {
 
   function startNew() {
     const blank: Row = { status: "draft", verificationStatus: "needs-review", academicYear: "2026/27", lastVerified: new Date().toISOString().slice(0, 10) };
-    fields.forEach((f) => { if (f.type === "checks" || f.type === "lines") blank[f.key] = []; });
+    fields.forEach((f) => {
+      if (f.type === "checks" || f.type === "lines") blank[f.key] = [];
+      if (f.type === "checkbox") blank[f.key] = false;
+    });
     if (table === "universities") { blank.type = "Public"; blank.degreeLevels = []; blank.subjects = []; blank.languages = []; }
+    if (table === "admission_rounds") { blank.roundName = "First Call"; blank.intakeYear = 2027; blank.intakeSemester = "Fall"; blank.deadlineVerified = false; blank.pinned = false; }
+    if (table === "notices") { blank.priority = "normal"; blank.category = "University admission calls"; blank.pinned = false; }
     setEditing(blank);
     setIsNew(true);
     setMsg(null);
@@ -54,7 +61,7 @@ export default function RecordsManager({ table }: { table: string }) {
     if (!editing) return;
     const name = String(editing[schema.nameKey] || "").trim();
     if (!name) { setMsg({ ok: false, text: `Please fill the ${schema.nameKey === "question" ? "question" : "name"} field.` }); return; }
-    if (!editing.slug && table !== "faqs") editing.slug = slugify(name);
+    if (!editing.slug && schema.fields.some((f) => f.key === "slug")) editing.slug = slugify(name);
     if (table === "faqs" && !editing.id) editing.id = `f-${slugify(name)}`;
     const payload = toDb({ ...editing });
     delete payload.createdAt; delete payload.updatedAt; delete payload.created_at; delete payload.updated_at;
@@ -115,6 +122,17 @@ export default function RecordsManager({ table }: { table: string }) {
                   <textarea id={`f-${f.key}`} className="field-input" rows={f.type === "lines" ? 5 : 3}
                     value={f.type === "lines" ? (Array.isArray(editing[f.key]) ? (editing[f.key] as string[]).join("\n") : "") : String(editing[f.key] ?? "")}
                     onChange={(e) => setF(f.key, f.type === "lines" ? e.target.value.split("\n").filter(Boolean) : e.target.value)} />
+                ) : f.type === "checkbox" ? (
+                  <div className="flex items-center gap-2.5 pt-2">
+                    <input id={`f-${f.key}`} type="checkbox" className="h-5 w-5 accent-[#103f35]"
+                      checked={Boolean(editing[f.key])}
+                      onChange={(e) => setF(f.key, e.target.checked)} />
+                    <span className="text-[0.88rem] text-[#202824]/75">{editing[f.key] ? "Yes" : "No"}</span>
+                  </div>
+                ) : f.type === "datetime" ? (
+                  <input id={`f-${f.key}`} className="field-input" type="datetime-local"
+                    value={utcToRomeLocal(editing[f.key] ? String(editing[f.key]) : null)}
+                    onChange={(e) => setF(f.key, e.target.value ? romeLocalToUtcIso(e.target.value) : null)} />
                 ) : f.type === "select" ? (
                   <select id={`f-${f.key}`} className="field-input" value={String(editing[f.key] ?? "")} onChange={(e) => setF(f.key, e.target.value)}>
                     <option value="">Select…</option>
@@ -162,7 +180,7 @@ export default function RecordsManager({ table }: { table: string }) {
               <tr className="border-b border-[#103f35]/10 bg-[#faf9f5]">
                 <th className="p-3.5 font-semibold text-[#103f35]">{schema.nameKey === "question" ? "Question" : "Name"}</th>
                 <th className="p-3.5 font-semibold text-[#103f35]">Status</th>
-                {table !== "faqs" && <th className="p-3.5 font-semibold text-[#103f35]">Verification</th>}
+                {table !== "faqs" && <th className="p-3.5 font-semibold text-[#103f35]">{table === "admission_rounds" ? "Live status" : table === "notices" ? "Priority" : "Verification"}</th>}
                 <th className="p-3.5 font-semibold text-[#103f35]">Actions</th>
               </tr>
             </thead>
@@ -177,9 +195,19 @@ export default function RecordsManager({ table }: { table: string }) {
                   </td>
                   {table !== "faqs" && (
                     <td className="p-3.5 text-[0.82rem]">
-                      {String(r.verificationStatus || "")}
-                      {r.verificationStatus === "needs-review" && <span className="ml-1.5 text-amber-600" title="Needs an official check">⚠</span>}
-                      {r.verificationStatus === "expired" && <span className="ml-1.5 text-red-600" title="Expired">⛔</span>}
+                      {table === "admission_rounds" ? (() => {
+                        const st = computeRoundStatus(r as never);
+                        const meta = ROUND_STATUS_META[st as keyof typeof ROUND_STATUS_META];
+                        return <span className={`rounded-full px-2.5 py-0.5 text-[0.72rem] font-bold ${st === "closing-soon" ? "bg-red-600 text-white" : st === "open" ? "bg-[#103f35] text-white" : "bg-[#202824]/10 text-[#202824]/75"}`}>{meta ? meta.label : st}</span>;
+                      })() : table === "notices" ? (
+                        <span className={`rounded-full px-2.5 py-0.5 text-[0.72rem] font-bold ${r.priority === "urgent" ? "bg-red-600 text-white" : r.priority === "high" ? "bg-amber-500 text-white" : "bg-[#202824]/10 text-[#202824]/75"}`}>{String(r.priority || "normal")}</span>
+                      ) : (
+                        <>
+                          {String(r.verificationStatus || "")}
+                          {r.verificationStatus === "needs-review" && <span className="ml-1.5 text-amber-600" title="Needs an official check">⚠</span>}
+                          {r.verificationStatus === "expired" && <span className="ml-1.5 text-red-600" title="Expired">⛔</span>}
+                        </>
+                      )}
                     </td>
                   )}
                   <td className="p-3.5">

@@ -30,9 +30,9 @@ export default function HeroText() {
   }, []);
 
   return (
-    <div className="pt-2 lg:pt-8">
+    <div className="min-w-0 pt-2 lg:pt-8">
       <p className="kicker">Study · Plan · Grow in Italy</p>
-      <h1 className="font-display mt-4 text-[2.7rem] leading-[1.04] font-black text-[#103f35] sm:text-6xl lg:text-[4.2rem]">
+      <h1 className="font-display mt-4 text-[clamp(2.05rem,10vw,2.7rem)] leading-[1.06] font-black text-[#103f35] sm:text-6xl lg:text-[4.2rem]">
         {c.headlineA}
         <span className="block text-[#c7a05a]">{c.headlineB}</span>
       </h1>

@@ -165,7 +165,7 @@ export default function Eligibility() {
   const progressPct = step === 4 ? 100 : (step - 1) * 33 + 11;
 
   return (
-    <section id="check" className="panel p-6 sm:p-8" aria-label="Eligibility assessment">
+    <section id="check" className="panel min-w-0 p-4 sm:p-8" aria-label="Eligibility assessment">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h2 ref={headingRef} tabIndex={-1} className="font-display text-[1.65rem] leading-tight font-bold text-[#103f35]">
@@ -182,15 +182,15 @@ export default function Eligibility() {
 
       {/* progress */}
       <div className="mt-5" aria-hidden={step === 4}>
-        <ol className="flex items-center gap-2 text-[0.8rem] font-semibold text-[#103f35]">
+        <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-2 text-[0.8rem] font-semibold text-[#103f35] sm:gap-2">
           {["Profile", "Preferences", "Finance", "Results"].map((label, i) => {
             const n = i + 1;
             const active = step === n;
             const done = step > n;
             return (
-              <li key={label} className="flex items-center gap-2">
+              <li key={label} className="flex items-center gap-1.5 sm:gap-2">
                 <span
-                  className={`flex h-6 w-6 items-center justify-center rounded-full text-[0.72rem] font-bold ${
+                  className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[0.72rem] font-bold ${
                     active
                       ? "bg-[#103f35] text-white"
                       : done
@@ -200,8 +200,8 @@ export default function Eligibility() {
                 >
                   {done ? "✓" : n}
                 </span>
-                <span className={active ? "" : "text-[#103f35]/55"}>{label}</span>
-                {n < 4 && <span className="mx-1 h-px w-4 sm:w-7 bg-[#103f35]/20" aria-hidden="true" />}
+                <span className={`${active ? "" : "hidden min-[480px]:inline"} ${active ? "" : "text-[#103f35]/55"}`}>{label}</span>
+                {n < 4 && <span className="mx-0.5 h-px w-3 sm:mx-1 sm:w-7 bg-[#103f35]/20" aria-hidden="true" />}
               </li>
             );
           })}

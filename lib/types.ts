@@ -16,7 +16,10 @@ export interface University {
   subjects: string[];
   languages: string[]; // english | italian
   tuitionNote: string;
+  scholarshipNote: string;
+  applicationStatus: string;
   admissionNote: string;
+  featured?: boolean;
   academicYear: string;
   sourceUrl: string;
   lastVerified: string;
@@ -98,4 +101,45 @@ export interface CalculatorDefaults {
   fxRateInr: number; // EUR -> INR, an editable assumption with a date label
   fxDate: string;
   notes: string;
+}
+
+export interface AdmissionRound {
+  id: string;
+  universityId?: string | null;
+  universityName: string;
+  programmeName?: string | null;
+  intakeYear?: number | null;
+  intakeSemester?: string | null;
+  roundName: string;
+  customRoundLabel?: string | null;
+  opensAt?: string | null;
+  deadlineAt?: string | null;
+  deadlineVerified: boolean;
+  manualStatus?: string | null;
+  officialUrl?: string | null;
+  sourceUrl?: string | null;
+  lastVerified?: string | null;
+  message?: string | null;
+  pinned: boolean;
+  status: PublishStatus;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface Notice {
+  id: string;
+  title: string;
+  message: string;
+  category: string;
+  priority: "low" | "normal" | "high" | "urgent";
+  startsAt?: string | null;
+  endsAt?: string | null;
+  sourceUrl?: string | null;
+  lastVerified?: string | null;
+  linkText?: string | null;
+  linkUrl?: string | null;
+  pinned: boolean;
+  status: PublishStatus;
+  createdAt?: string;
+  updatedAt?: string;
 }

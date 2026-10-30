@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getUniversities, getCourses } from "@/lib/data";
 import type { University, Course } from "@/lib/types";
 import { SUBJECT_LABELS, LEVEL_LABELS } from "@/components/ui";
+import { detailHref } from "@/lib/links";
 
 /** Homepage featured records — always drawn from the live data layer. */
 export default function Featured() {
@@ -34,7 +35,7 @@ export default function Featured() {
         </div>
         <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {unis.map((u) => (
-            <a key={u.id} href={`/universities/detail/?slug=${u.slug}`} className="card group block p-6">
+            <a key={u.id} href={detailHref("universities", u.slug)} className="card group block p-6">
               <div className="flex h-24 items-end">
                 <p className="font-display text-4xl font-black text-[#103f35]/12 group-hover:text-[#c7a05a]/50 transition-colors">{u.city.split(" ")[0]}</p>
               </div>
@@ -55,7 +56,7 @@ export default function Featured() {
           </div>
           <div className="mt-6 grid gap-5 md:grid-cols-3">
             {courses.map((c) => (
-              <a key={c.id} href={`/courses/detail/?slug=${c.slug}`} className="card block p-6">
+              <a key={c.id} href={detailHref("courses", c.slug)} className="card block p-6">
                 <h3 className="font-display text-lg font-bold leading-snug text-[#103f35]">{c.name}</h3>
                 <p className="mt-1.5 text-[0.87rem] font-medium text-[#202824]/65">{uniMap.get(c.universityId)}</p>
                 <p className="mt-2 text-[0.83rem] text-[#202824]/60">{LEVEL_LABELS[c.level]} · {c.language === "english" ? "English-taught" : c.language} · {c.durationYears} years</p>

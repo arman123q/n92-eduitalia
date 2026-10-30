@@ -58,3 +58,115 @@ RLS probes **7/7 PASSED**; public reads unchanged (10/13/4/10 published,
 disable_signup=true; wrong-password login 400; public signup 422.
 Nothing regressed. Admin-session operations remain NOT TESTED for the
 reason stated above.
+
+---
+
+## Update build — routing fix, admission rounds & notices (30 Oct 2026)
+
+**Live-site audit (before fixing):** every tested URL on
+https://n92-eduitalia.pages.dev/ returned HTTP 200, including the
+Ca' Foscari query-detail URL and /admin/ (which 308-redirects from
+/admin). The deployed JS contains the Supabase project ref, so the
+build was configured. Root causes identified for the reported problems:
+(1) detail pages existed ONLY as a single query-param page per section —
+path-style slug URLs (the natural shareable form) had no file and hit
+the host 404, and the in-page "not found" state reads as a 404;
+(2) /admin is a client-rendered page whose first paint is
+"Checking your session…" — the login form only appears after JS runs,
+and there was no public Admin Login link anywhere on the site.
+
+**Fixes implemented in this build:**
+- Real static detail pages per record: /universities/<slug>,
+  /courses/<slug>, /scholarships/<slug> generated for all seed records
+  (61 + 13 + 4), dynamicParams=false; the query-param detail page is
+  kept as a runtime fallback for database-only records; every internal
+  card/detail link now uses lib/links.ts to pick the right form.
+- scripts/check-links.mjs audits the production export: all 78 detail
+  routes exist and every internal href resolves. PASSED.
+- Footer gains "Admin Login" (/admin), "Admission Rounds & Deadlines"
+  and "Important Notices" links; header nav gains "Admissions".
+- Universities directory: compare-up-to-3 added (courses already had it).
+- Migration 004 adds admission_rounds + notices (RLS published-read for
+  anon, admin-only writes, least-privilege grants). Rounds status engine
+  in lib/rounds.js (Europe/Rome conversions, unverified deadlines are
+  never shown open/closed) with 10 new unit tests. Homepage ticker reads
+  Supabase at runtime (no rebuild needed for publish/unpublish), red for
+  urgent/closing-soon, pauses on hover, honours prefers-reduced-motion,
+  honest empty state. Public /admissions and /notices pages. Admin gains
+  "Admission Rounds & Deadlines" and "Important Notices" managers
+  (create/edit/publish/unpublish/delete, snapshots + audit entries).
+- Directory expanded from 10 to 61 institutions (51 added; official
+  websites reachability-checked 2026-10-30: 48 confirmed live from our
+  network, 3 canonical domains — uniupo.it, uniparthenope.it,
+  uniroma2.it — unreachable from this network and flagged in their
+  records). Programme-level facts for the new institutions remain
+  needs-review; nothing was invented. Migration 005 inserts the same
+  records into the live database (INSERT-only, idempotent).
+
+**Results:** unit tests 25/25 PASSED (15 existing + 10 new). Production
+build PASSED (103 static pages). Link audit PASSED. Local static-serve
+smoke test: /universities/ca-foscari-university-of-venice/ 200,
+/admissions/ 200, /notices/ 200, /admin/ 200.
+
+**NOT TESTED (unchanged honesty rules):** the NEW deployment is not
+live yet — all live-site items (new slug URLs in production, ticker
+with real admin-published rounds, admin CRUD on the new tables) verify
+only after (a) migrations 004 and 005 are run in Supabase and
+(b) this build is deployed. Admin login/logout/reset remain for the
+owner's guided session (Option B). scripts/test-rounds.mjs verifies
+the new tables' RLS after migration 004 (7 checks).
+
+---
+
+## Mobile responsive release (30 Oct 2026)
+
+**Real-browser verification:** Chrome for Testing 156 driven by
+Playwright against the production export. scripts/responsive-check.mjs
+loaded 12 pages (home, directories, Ca' Foscari detail, admissions,
+notices, eligibility, calculator, contact, admin, FAQ) at 8 widths
+(320/360/375/390/414/430/768/1280) = 96 combinations, measuring
+document scrollWidth vs clientWidth and listing offenders.
+
+**Result: 96/96 PASSED — zero horizontal overflow.** Screenshots at
+360px and 390px (home + eligibility) were visually inspected.
+
+**Root cause found by screenshot inspection:** Tailwind v4 puts the
+`hidden` utility in a cascade layer, while the site's custom .btn-*
+classes were unlayered and therefore won — so the header's
+"Check My Eligibility" CTA rendered on mobile despite `hidden`,
+overlapping the logo (visible in the owner's Android screenshot and in
+our first Playwright screenshot). Fix: all custom component classes
+moved into @layer components so utilities override them correctly.
+
+**Other mobile fixes:** compact header (smaller logo, tighter spacing;
+CTAs live in the menu on mobile); hero headline uses clamp() sizing;
+eligibility step indicator shows numbers + active label only on narrow
+screens and wraps; eligibility card padding reduced on mobile; hero
+grid children min-w-0; Guidance Assistant launcher becomes a compact
+round button on mobile (panel already full-width-sheet under sm);
+course/scholarship detail tables wrapped in local horizontal scroll;
+global overflow-x: clip safety net + media max-width: 100%.
+
+**Migrations status (live-checked 30 Oct 2026):** migration 004 NOT
+applied (admission_rounds/notices tables do not exist yet — PGRST205);
+migration 005 NOT applied (live directory still returns the original
+10 published universities). Both files ship in supabase/ and are safe
+to run once, in order 004 then 005.
+
+**NOT TESTED:** the live website still serves the previous build —
+mobile fix verification applies to this release's export; live
+verification follows the owner's deployment. Admin login/CRUD remain
+for the owner's guided session.
+
+**Migration 005 correction (30 Oct 2026):** the first version of
+migration_005 failed on the live database with ERROR 42703 —
+it referenced scholarship_note / application_status / featured columns
+that do not exist in the real universities table (the file had been
+generated from the TypeScript type, not the table definition; owned as
+our error). The corrected v2 uses only the table's actual columns
+(scholarship text folded into admission_note) and was FULLY TESTED
+before delivery on a local PostgreSQL 18.4 instance built from the
+exact schema.sql DDL: original 10 seed rows loaded → migration applied
+→ 61 rows; original-10 checksum identical before/after
+(4619f6f1e07445b3842f7787a2a74194); no duplicate ids/slugs; all 61
+published; second run changed nothing (idempotent).

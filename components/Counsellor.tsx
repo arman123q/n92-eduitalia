@@ -70,9 +70,9 @@ export default function Counsellor() {
         type="button"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
-        className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-[#103f35] px-5 py-3.5 font-semibold text-white shadow-2xl border border-[#c7a05a]/60 hover:bg-[#1a5747]"
+        className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-50 flex items-center gap-2 rounded-full bg-[#103f35] px-4 py-3 sm:px-5 sm:py-3.5 font-semibold text-white shadow-2xl border border-[#c7a05a]/60 hover:bg-[#1a5747]"
       >
-        <span aria-hidden="true">💬</span> {open ? "Close assistant" : "Guidance Assistant"}
+        <span aria-hidden="true">💬</span> <span className="hidden sm:inline">{open ? "Close assistant" : "Guidance Assistant"}</span><span className="sr-only sm:hidden">{open ? "Close assistant" : "Open Guidance Assistant"}</span>
       </button>
       {open && (
         <section

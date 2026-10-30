@@ -1,5 +1,6 @@
 import Eligibility from "@/components/Eligibility";
 import Featured from "@/components/Featured";
+import Ticker from "@/components/Ticker";
 import HeroText from "@/components/HeroText";
 import SectionToggles from "@/components/SectionToggles";
 import HeroScene from "@/components/HeroScene";
@@ -68,6 +69,7 @@ const FAQS = [
 export default function HomePage() {
   return (
     <>
+      <Ticker />
       <SectionToggles />
       {/* ---------- HERO + ELIGIBILITY (first screen) ---------- */}
       <section className="hero-sky relative overflow-hidden">
