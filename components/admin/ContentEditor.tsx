@@ -165,8 +165,9 @@ export default function ContentEditor() {
 
   async function saveDraft(key: string, title: string) {
     await ensureRow(key, title);
-    const ok = await adminUpdate("site_content", `key=eq.${key}`, { draft: drafts[key] || {} });
-    setMsg(ok ? { ok: true, text: `Draft saved for “${title}”. It is NOT live yet — publish when ready.` } : { ok: false, text: "Draft save failed." });
+    const res = await adminUpdate("site_content", `key=eq.${key}`, { draft: drafts[key] || {} });
+    const ok = res.ok;
+    setMsg(ok ? { ok: true, text: `Draft saved for “${title}”. It is NOT live yet — publish when ready.` } : { ok: false, text: `Draft save failed — ${res.error || "the database rejected the change."}` });
     if (ok) { await audit("save-draft", "site_content", key); load(); }
   }
 
@@ -174,14 +175,16 @@ export default function ContentEditor() {
     await ensureRow(key, title);
     const current = rows[key];
     if (current?.published) await snapshot("site_content", key, current.published);
-    const ok = await adminUpdate("site_content", `key=eq.${key}`, { draft: drafts[key] || {}, published: drafts[key] || {} });
-    setMsg(ok ? { ok: true, text: `“${title}” is now LIVE on the website.` } : { ok: false, text: "Publish failed." });
+    const res = await adminUpdate("site_content", `key=eq.${key}`, { draft: drafts[key] || {}, published: drafts[key] || {} });
+    const ok = res.ok;
+    setMsg(ok ? { ok: true, text: `“${title}” is now LIVE on the website.` } : { ok: false, text: `Publish failed — ${res.error || "the database rejected the change."}` });
     if (ok) { await audit("publish", "site_content", key); load(); }
   }
 
   async function restore(v: { entity_key: string; snapshot: unknown }) {
-    const ok = await adminUpdate("site_content", `key=eq.${v.entity_key}`, { draft: v.snapshot as Record<string, unknown> });
-    setMsg(ok ? { ok: true, text: "Earlier version restored as the draft. Review it, then Publish to make it live." } : { ok: false, text: "Restore failed." });
+    const res = await adminUpdate("site_content", `key=eq.${v.entity_key}`, { draft: v.snapshot as Record<string, unknown> });
+    const ok = res.ok;
+    setMsg(ok ? { ok: true, text: "Earlier version restored as the draft. Review it, then Publish to make it live." } : { ok: false, text: `Restore failed — ${res.error || "the database rejected the change."}` });
     if (ok) load();
   }
 

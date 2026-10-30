@@ -88,6 +88,18 @@ export default function RecordsManager({ table }: { table: string }) {
   }
   useEffect(() => { load(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [table]);
 
+  /* RC-4: the form renders above the list — on a phone, tapping Edit on a
+     row far down looked like nothing happened. Scroll the form into view
+     when it OPENS (not on every keystroke). */
+  const formRef = useRef<HTMLElement | null>(null);
+  const wasEditingRef = useRef(false);
+  useEffect(() => {
+    if (editing && !wasEditingRef.current) {
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    wasEditingRef.current = Boolean(editing);
+  }, [editing]);
+
   const fields = useMemo<Field[]>(
     () => schema.fields.map((f) => (f.key === "universityId" ? { ...f, options: uniOptions } : f)),
     [schema, uniOptions]
@@ -98,7 +110,17 @@ export default function RecordsManager({ table }: { table: string }) {
   );
 
   function startNew() {
-    const blank: Row = { status: "draft", verificationStatus: "needs-review", academicYear: "2026/27", lastVerified: new Date().toISOString().slice(0, 10) };
+    // Seed the generic defaults ONLY for tables whose schema actually has
+    // those columns. (The previous blanket defaults put verification_status,
+    // academic_year and last_verified into EVERY new record — tables like
+    // testimonials, notices, faqs and admission_rounds have no such columns,
+    // so PostgREST rejected their inserts outright with PGRST204.)
+    const hasField = (k: string) => fields.some((f) => f.key === k);
+    const blank: Row = {};
+    if (hasField("status")) blank.status = "draft";
+    if (hasField("verificationStatus")) blank.verificationStatus = "needs-review";
+    if (hasField("academicYear")) blank.academicYear = "2026/27";
+    if (hasField("lastVerified")) blank.lastVerified = new Date().toISOString().slice(0, 10);
     fields.forEach((f) => {
       if (f.type === "checks" || f.type === "lines") blank[f.key] = [];
       if (f.type === "checkbox") blank[f.key] = false;
@@ -117,17 +139,31 @@ export default function RecordsManager({ table }: { table: string }) {
     if (!name) { setMsg({ ok: false, text: `Please fill the ${schema.nameKey === "question" ? "question" : "name"} field.` }); return; }
     if (!editing.slug && schema.fields.some((f) => f.key === "slug")) editing.slug = slugify(name);
     if (table === "faqs" && !editing.id) editing.id = `f-${slugify(name)}`;
-    const payload = toDb({ ...editing });
+    // Whitelist: send ONLY this table's declared fields (+ id). Any stray
+    // key in the form state can never reach the database — an unknown
+    // column makes PostgREST reject the whole write before RLS is checked.
+    const allowed = new Set<string>(["id", ...schema.fields.map((f) => f.key)]);
+    const clean: Row = {};
+    for (const k of Object.keys(editing)) if (allowed.has(k)) clean[k] = editing[k];
+    // Optional date/datetime/number fields left blank must go as NULL,
+    // never as "" (PostgreSQL rejects "" for those types).
+    for (const f of schema.fields) {
+      if ((f.type === "date" || f.type === "datetime" || f.type === "number") && clean[f.key] === "") clean[f.key] = null;
+    }
+    const payload = toDb(clean);
     delete payload.createdAt; delete payload.updatedAt; delete payload.created_at; delete payload.updated_at;
     let ok = false;
+    let dbError = "";
     if (isNew) {
       if (!payload.id) payload.id = schema.idPrefix + slugify(String(editing.slug || name));
-      ok = await adminInsert(table, payload);
+      const res = await adminInsert(table, payload);
+      ok = res.ok; dbError = res.error || "";
       if (ok) await audit("create", table, String(payload.id));
     } else {
       const old = rows.find((r) => r.id === editing.id);
       if (old) await snapshot(table, String(editing.id), toDb(old));
-      ok = await adminUpdate(table, `id=eq.${encodeURIComponent(String(editing.id))}`, payload);
+      const res = await adminUpdate(table, `id=eq.${encodeURIComponent(String(editing.id))}`, payload);
+      ok = res.ok; dbError = res.error || "";
       if (ok) await audit("update", table, String(editing.id));
     }
     if (ok) {
@@ -135,30 +171,29 @@ export default function RecordsManager({ table }: { table: string }) {
       setEditing(null);
       load();
     } else {
-      setMsg({ ok: false, text: "Save failed — the database rejected the change. Check required fields and try again." });
+      setMsg({ ok: false, text: `Save failed — ${dbError || "the database rejected the change. Check required fields and try again."}` });
     }
   }
 
   async function togglePublish(r: Row) {
     const next = r.status === "published" ? "draft" : "published";
     await snapshot(table, String(r.id), toDb(r));
-    const ok = await adminUpdate(table, `id=eq.${encodeURIComponent(String(r.id))}`, { status: next });
-    if (ok) { await audit(next === "published" ? "publish" : "unpublish", table, String(r.id)); load(); }
-    else setMsg({ ok: false, text: "Status change failed." });
+    const res = await adminUpdate(table, `id=eq.${encodeURIComponent(String(r.id))}`, { status: next });
+    if (res.ok) { await audit(next === "published" ? "publish" : "unpublish", table, String(r.id)); load(); }
+    else setMsg({ ok: false, text: `Status change failed — ${res.error || "the database rejected the change."}` });
   }
 
   async function remove(r: Row) {
     if (!confirm(`Delete this ${schema.singular.toLowerCase()} permanently? This cannot be undone.`)) return;
-    const ok = await adminDelete(table, `id=eq.${encodeURIComponent(String(r.id))}`);
-    if (ok) { await audit("delete", table, String(r.id)); load(); }
-    else setMsg({ ok: false, text: "Delete failed." });
+    const res = await adminDelete(table, `id=eq.${encodeURIComponent(String(r.id))}`);
+    if (res.ok) { await audit("delete", table, String(r.id)); load(); }
+    else setMsg({ ok: false, text: `Delete failed — ${res.error || "the database rejected the change."}` });
   }
 
   const setF = (key: string, v: unknown) => setEditing((e) => (e ? { ...e, [key]: v } : e));
 
   /* ----- Courses CSV ----- */
-  const [csvMsg, setCsvMsg] = useState<{ ok: boolean; text: string } | null>(null);
-  const [csvBusy, setCsvBusy] = useState(false);
+  const [csvMsg, setCsvMsg] = useState<{ ok: boolean; text: string } | null>(null);  const [csvBusy, setCsvBusy] = useState(false);
   const fileRef = useRef<HTMLInputElement | null>(null);
 
   function exportCsv() {
@@ -216,14 +251,14 @@ export default function RecordsManager({ table }: { table: string }) {
           lastVerified: raw.lastVerified || new Date().toISOString().slice(0, 10),
           adminNotes: raw.adminNotes || "",
         };
-        const ok = await adminInsert("courses", toDb(record));
-        if (ok) {
+        const res = await adminInsert("courses", toDb(record));
+        if (res.ok) {
           imported++;
           seenIds.add(id);
           seenSlugs.add(slug);
           await audit("create", "courses", id);
         } else {
-          errors.push(`Row ${rowNo} (“${name}”): database rejected the insert`);
+          errors.push(`Row ${rowNo} (“${name}”): database rejected the insert — ${res.error || "unknown error"}`);
         }
       }
       setCsvMsg({
@@ -263,7 +298,7 @@ export default function RecordsManager({ table }: { table: string }) {
       {msg && <p className={`mt-3 rounded-lg px-4 py-2.5 text-sm ${msg.ok ? "bg-green-50 border border-green-300 text-green-900" : "bg-red-50 border border-red-300 text-red-900"}`} role="status">{msg.text}</p>}
 
       {editing && (
-        <section className="panel mt-5 p-6" aria-label={`${isNew ? "New" : "Edit"} ${schema.singular}`}>
+        <section ref={formRef} className="panel mt-5 p-6 scroll-mt-24" aria-label={`${isNew ? "New" : "Edit"} ${schema.singular}`}>
           <h3 className="font-display text-lg font-bold text-[#103f35]">{isNew ? `New ${schema.singular}` : `Edit ${schema.singular}`}</h3>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {fields.map((f) => (

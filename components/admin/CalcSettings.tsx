@@ -20,10 +20,11 @@ export default function CalcSettings() {
   async function save() {
     if (!form) return;
     const existing = await adminSelect<{ id: number }>("calculator_settings", "select=id&limit=1");
-    const ok = existing && existing.length > 0
+    const res = existing && existing.length > 0
       ? await adminUpdate("calculator_settings", "id=eq.1", { value: form })
       : await adminInsert("calculator_settings", { id: 1, value: form });
-    setMsg(ok ? { ok: true, text: "Calculator defaults updated — the public calculator now starts from these numbers." } : { ok: false, text: "Save failed." });
+    const ok = res.ok;
+    setMsg(ok ? { ok: true, text: "Calculator defaults updated — the public calculator now starts from these numbers." } : { ok: false, text: `Save failed — ${res.error || "the database rejected the change."}` });
     if (ok) await audit("update", "calculator_settings", "1");
   }
 

@@ -387,3 +387,128 @@ branding and RLS preserved. Builds on the selected-upgrades release
   Option B — same outstanding item); the Google listing's address /
   phone / hours (blocked as described above, owner's confirmation
   requested).
+
+## Addendum — Migration 007 hardened to owner-only writes (30 Oct 2026)
+
+At the owner's request, the testimonials policies in migration_007 were
+strengthened before deployment (the file was re-issued in full and
+re-tested; the earlier draft's "admin: full access (any authenticated)"
+policy is dropped by the file itself if ever present):
+- anon SELECT: published AND permission_confirmed only (unchanged).
+- authenticated SELECT: same published+permitted set — any other
+  signed-in user is read-only at most.
+- ONE write policy: FOR ALL to authenticated, gated on
+  (auth.jwt() ->> 'email') = 'sh10ad786@gmail.com' — only the owner's
+  actual Admin account can insert/update/delete/approve/publish.
+Behavioural PG test (Supabase-style auth.jwt() stub via the
+request.jwt.claims setting, three simulated identities): anon sees
+only published+permitted and cannot insert; a different authenticated
+user sees only published+permitted, INSERT raises an RLS error, and
+UPDATE/DELETE silently affect 0 rows (verified unchanged afterwards);
+the owner-admin identity sees all rows and full CRUD works. ALL 13
+checks PASSED. Scope note: the identity pin applies to testimonials
+only, exactly as requested; other tables keep the previously approved
+single-admin model (sign-ups OFF) and the Admin Dashboard is
+unaffected — the owner's session satisfies the new policy because he
+signs in with that email.
+
+## Root-cause fix — Admin save failures on tables without generic columns (30 Oct 2026)
+
+Owner reported: Student Reviews form fails with "Save failed — the database
+rejected the change" even with all fields corrected.
+
+ROOT CAUSE (frontend bug, proven by reproduction — NOT RLS, NOT the JWT):
+components/admin/RecordsManager.tsx startNew() seeded EVERY new record with
+generic defaults verificationStatus/academicYear/lastVerified. save() then
+spread the whole form state into the insert payload. Tables without those
+columns (testimonials, notices, faqs, admission_rounds) therefore sent
+non-existent columns; PostgREST rejects such writes before RLS is even
+evaluated: HTTP 400, code PGRST204 ("Could not find the 'verification_status'
+column of 'testimonials' in the schema cache"); at the SQL layer the same
+payload errors 42703 column "verification_status" of relation "testimonials"
+does not exist (reproduced on the local PostgreSQL rig with the exact
+traced payload). lib/admin.ts swallowed the error body and returned a bare
+boolean, so the UI could only show the generic message. Universities and
+courses were unaffected because those tables genuinely have the columns —
+the same defect explains the owner's earlier "Important Notices form showed
+a database save failure" report. Verified live before fixing: the
+testimonials table exists (migration 007 applied), anon read returns
+HTTP 200 []; the clean payload (phantom keys removed) INSERT/UPDATE/DELETE
+all succeed on the rig under the owner's admin identity claim, so
+Migration 007's owner-only policies pass for his account.
+
+FIX (frontend only; no database, RLS or policy changes):
+- RecordsManager.startNew(): generic defaults are seeded only when the
+  table's schema declares those fields.
+- RecordsManager.save(): payload is whitelisted to the schema's declared
+  fields + id; empty strings for date/datetime/number fields are sent as
+  NULL instead of "".
+- lib/admin.ts: adminInsert/adminUpdate/adminDelete now return
+  { ok, error } with the database's own message; all callers updated
+  (RecordsManager incl. CSV import, ContentEditor, CalcSettings, LeadsCRM).
+  Any future rejection now displays the real Supabase error in the admin.
+
+TESTS: scripts/functional-check-3.mjs drives the REAL admin UI (signed in
+as the owner identity) against a strict PostgREST emulator that rejects
+unknown columns with the exact PGRST204 error: CREATE (payload verified
+phantom-free, valid text id, permission flag stored), EDIT, PUBLISH and
+DELETE of a fixture record — 8/8 PASSED. Regressions: build PASSED, unit
+25/25, functional #1 45/45, functional #2 30/30, link audit PASSED.
+NOT TESTED: the live save with the owner's real browser session (his
+credentials are never requested); after deploying this build, his first
+real review save is the live confirmation — and if anything still
+rejects, the admin will now show the exact database error to report.
+
+## Repair release RC-1…RC-4 (30 Oct 2026, owner-approved after the full audit)
+
+Builds on docs/FULL_AUDIT_2026-10-30.md. All fixes are frontend-only —
+no database migration, no RLS/policy/grant change, no production data
+touched. Migration 007's hardened policies were VERIFIED LIVE by the
+owner on 30 Oct 2026 (pg_policies: all three expected policies present).
+
+- RC-1 (phantom columns): previously fixed and re-verified here —
+  payload whitelisting to schema fields + id, conditional new-record
+  defaults, real error surfacing.
+- RC-2 (session renewal): lib/admin.ts now stores the full session
+  (access + refresh token) at login; ensureFreshToken() runs before
+  every admin read/write/storage call and transparently renews an
+  expired/expiring access token via the refresh grant (single-flight;
+  a dead refresh token ends the session cleanly to the login screen;
+  a transient network error keeps the session). Expiry is read from
+  the JWT's own exp claim. Legacy sessions without a stored refresh
+  token simply end at expiry as before — the next login is
+  refresh-capable. Sub-finding fixed in the same change: the PUBLIC
+  data layer (lib/supabase.ts authHeaders) previously reused whatever
+  admin token sat in localStorage for public reads and lead inserts —
+  an expired leftover token would have made PostgREST reject those
+  requests. It now uses the stored token only while it is a JWT
+  comfortably within validity, otherwise the publishable key.
+- RC-3 (false success): adminInsert/adminUpdate/adminDelete now use
+  Prefer: return=representation and report success only when at least
+  one affected row comes back. Zero-row update/delete produce explicit
+  errors ("No record was changed (0 rows updated)…" / "…deleted…")
+  instead of a false success.
+- RC-4 (mobile edit form): the RecordsManager form now scrolls into
+  view when it opens (transition-only, not per keystroke) with a
+  scroll margin; the form already carried a visible "New/Edit <record>"
+  heading.
+
+TESTS (this release):
+- Build: PASSED (Next.js production, TypeScript clean, 126 pages).
+- scripts/functional-check-4.mjs (new) — real admin UI against a
+  Supabase-faithful emulator: expired-token session is refreshed
+  exactly via the refresh grant; the expired token is NEVER sent to
+  the database; admin-table calls carry the fresh token; zero-row
+  PATCH shows the explicit error and does not publish; zero-row DELETE
+  shows its error; healthy publish/delete still work; Edit on the
+  last row of a long list scrolls the form into the viewport
+  (top ≈ 96px at 390×844). 9/9 PASSED.
+- Regressions: functional-check-3 (RC-1 admin save flow) 8/8;
+  functional #1 45/45; functional #2 30/30; unit 25/25; link audit
+  PASSED. Responsive suite re-run for this release (public layer
+  touched): PASSED at all widths (18 pages × 8 widths).
+- NOT VERIFIED (unchanged, by design): authenticated CRUD against the
+  production database with the owner's real session, and the live JWT
+  email — both are scheduled for the guided session AFTER the owner
+  deploys this release. No claim is made that production admin CRUD
+  has passed.

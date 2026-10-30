@@ -11,8 +11,31 @@ export function isDbConfigured(): boolean {
   return Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
 }
 
+/**
+ * Bearer for public-layer requests: the stored admin token is used only
+ * while it is a JWT that is still comfortably valid. An expired leftover
+ * token must never leak into public reads or lead submissions (PostgREST
+ * would reject the request outright); the publishable key is always safe
+ * because RLS serves public data to it. (Part of the RC-2 session repair:
+ * lib/admin.ts renews the session itself via the refresh token.)
+ */
+function usableStoredToken(): string | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const token = window.localStorage.getItem("n92_admin_token");
+    if (!token) return null;
+    const part = token.split(".")[1];
+    if (!part) return null;
+    const claims = JSON.parse(atob(part.replace(/-/g, "+").replace(/_/g, "/")));
+    if (typeof claims.exp !== "number") return null;
+    return claims.exp * 1000 - Date.now() > 60_000 ? token : null;
+  } catch {
+    return null;
+  }
+}
+
 export function authHeaders(extra: Record<string, string> = {}): Record<string, string> {
-  const token = typeof window !== "undefined" ? window.localStorage.getItem("n92_admin_token") : null;
+  const token = usableStoredToken();
   return {
     apikey: SUPABASE_ANON_KEY,
     Authorization: `Bearer ${token || SUPABASE_ANON_KEY}`,

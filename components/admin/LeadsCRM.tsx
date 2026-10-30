@@ -52,16 +52,17 @@ export default function LeadsCRM() {
   );
 
   async function patch(lead: Lead, changes: Record<string, unknown>) {
-    const ok = await adminUpdate("leads", `id=eq.${lead.id}`, changes);
-    setMsg(ok ? { ok: true, text: "Lead updated." } : { ok: false, text: "Update failed." });
+    const res = await adminUpdate("leads", `id=eq.${lead.id}`, changes);
+    const ok = res.ok;
+    setMsg(ok ? { ok: true, text: "Lead updated." } : { ok: false, text: `Update failed — ${res.error || "the database rejected the change."}` });
     if (ok) { await audit("lead-update", "leads", lead.id); load(); if (open?.id === lead.id) setOpen({ ...open, ...changes }); }
   }
 
   async function remove(lead: Lead) {
     if (!confirm(`Delete the enquiry from ${lead.name}? Keep records only as long as needed (see the retention note in the admin guide).`)) return;
-    const ok = await adminDelete("leads", `id=eq.${lead.id}`);
-    if (ok) { await audit("lead-delete", "leads", lead.id); setOpen(null); load(); }
-    else setMsg({ ok: false, text: "Delete failed." });
+    const res = await adminDelete("leads", `id=eq.${lead.id}`);
+    if (res.ok) { await audit("lead-delete", "leads", lead.id); setOpen(null); load(); }
+    else setMsg({ ok: false, text: `Delete failed — ${res.error || "the database rejected the change."}` });
   }
 
   function exportCsv() {
