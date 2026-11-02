@@ -6,8 +6,12 @@ export default function Footer() {
     <footer className="bg-[#0b2e27] text-[#faf9f5]">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
         <div>
-          <span className="inline-block rounded-xl bg-white p-1.5">
-            <img src="/logo.jpg" alt="N92 Edu-Italia logo" className="h-12 w-auto" width="96" height="48" />
+          <span className="inline-block">
+            {/* Same transparent N92 mark as the header (owner request,
+                3 Nov 2026) — no white chip: the artwork sits directly on
+                the footer's dark forest background. The old /logo.jpg is
+                no longer displayed anywhere on the site. */}
+            <img src="/logo-header.png" alt="N92 Edu-Italia logo" className="h-20 w-auto" width="720" height="598" />
           </span>
           <p className="mt-4 text-sm leading-relaxed text-[#faf9f5]/75">
             Personalised guidance for Indian students planning higher education in Italy — universities,
