@@ -37,6 +37,7 @@ const SIDE_GROUPS: { heading: string; links: [string, string][] }[] = [
       ["Cost Calculator", "/calculator/"],
       ["Visa Guide", "/visa-guide/"],
       ["Application Process", "/process/"],
+      ["Student Essentials", "/student-checklist/"],
     ],
   },
   {

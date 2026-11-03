@@ -1,0 +1,2030 @@
+{
+ "meta": {
+  "source": "Book1.ods via scripts/convert-checklist.py",
+  "itemCount": 217,
+  "blankNumberedRowsSkipped": 12,
+  "continuationRowsAttached": 13
+ },
+ "categories": [
+  {
+   "code": "A",
+   "name": "Document Checklist (Hard and E-Copies)",
+   "displayOrder": 1,
+   "packLocation": "Handbag"
+  },
+  {
+   "code": "B",
+   "name": "Medicine Checklist",
+   "displayOrder": 2,
+   "packLocation": "Cabin",
+   "intro": "(Prescription of medicine by a MD Doctor with the quantity and the medicine)"
+  },
+  {
+   "code": "C1",
+   "name": "Kitchen Essentials",
+   "displayOrder": 3,
+   "packLocation": "Check-in Large"
+  },
+  {
+   "code": "C2",
+   "name": "Kitchen and Food Checklist",
+   "displayOrder": 4,
+   "packLocation": "Check-in Medium"
+  },
+  {
+   "code": "D",
+   "name": "Household Items/ Hygiene Products",
+   "displayOrder": 5,
+   "packLocation": "Check-in Large"
+  },
+  {
+   "code": "E1",
+   "name": "Basic Essential Clothes",
+   "displayOrder": 6,
+   "packLocation": "Cabin Small, Check-in Medium and Large"
+  },
+  {
+   "code": "E2",
+   "name": "Extra Apparel",
+   "displayOrder": 7,
+   "packLocation": "Cabin Small, Check-in Medium and Large"
+  },
+  {
+   "code": "F",
+   "name": "Essential Electronic Gadgets",
+   "displayOrder": 8
+  },
+  {
+   "code": "G",
+   "name": "Stationery",
+   "displayOrder": 9
+  },
+  {
+   "code": "H",
+   "name": "Personal Stuff",
+   "displayOrder": 10,
+   "packLocation": "Check-in"
+  },
+  {
+   "code": "J",
+   "name": "To buy in Brooklyn",
+   "displayOrder": 11,
+   "intro": "Sheet note: Wallmart, Best Buy"
+  }
+ ],
+ "items": [
+  {
+   "categoryCode": "A",
+   "name": "College Bag (Laptop Size: 15'6\")",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 1,
+   "id": "a-3"
+  },
+  {
+   "categoryCode": "A",
+   "name": "A Wallet for a Passport",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 2,
+   "id": "a-4"
+  },
+  {
+   "categoryCode": "A",
+   "name": "A Good Wallet (Leather)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 3,
+   "id": "a-5"
+  },
+  {
+   "categoryCode": "A",
+   "name": "Foreign (Euro) Currency",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 4,
+   "id": "a-6"
+  },
+  {
+   "categoryCode": "A",
+   "name": "Passport and Xerox",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 5,
+   "id": "a-7"
+  },
+  {
+   "categoryCode": "A",
+   "name": "VISA Xerox",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 6,
+   "id": "a-8"
+  },
+  {
+   "categoryCode": "A",
+   "name": "File Folder",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 7,
+   "id": "a-9"
+  },
+  {
+   "categoryCode": "A",
+   "name": "I-20",
+   "description": "",
+   "note": "US student-visa document — not used for Italy. Italy requires a national study visa and, after arrival, a residence permit (permesso di soggiorno).",
+   "italyStatus": "not-applicable",
+   "displayOrder": 8,
+   "id": "a-10"
+  },
+  {
+   "categoryCode": "A",
+   "name": "SEVIS Fee Receipt",
+   "description": "",
+   "note": "SEVIS is a US-only system — it has no role in the Italian visa process.",
+   "italyStatus": "not-applicable",
+   "displayOrder": 9,
+   "id": "a-11"
+  },
+  {
+   "categoryCode": "A",
+   "name": "IELTS Xerox Copies",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 10,
+   "id": "a-12"
+  },
+  {
+   "categoryCode": "A",
+   "name": "Air Ticket",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 11,
+   "id": "a-13"
+  },
+  {
+   "categoryCode": "A",
+   "name": "Copies of your photos (Passport Size)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 12,
+   "id": "a-14"
+  },
+  {
+   "categoryCode": "A",
+   "name": "Rental Agreement/Proof of Accommodation",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 13,
+   "id": "a-15"
+  },
+  {
+   "categoryCode": "A",
+   "name": "Health Insurance Documents + Travel Insurance",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 14,
+   "id": "a-16"
+  },
+  {
+   "categoryCode": "A",
+   "name": "Evidence of Financial Resources",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 15,
+   "id": "a-17"
+  },
+  {
+   "categoryCode": "A",
+   "name": "Paid Tuition Fees Receipt",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 16,
+   "id": "a-18"
+  },
+  {
+   "categoryCode": "A",
+   "name": "University-specific Letters",
+   "description": "(Admit, Aid, Forms, and Acceptance Letter)",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 17,
+   "id": "a-19"
+  },
+  {
+   "categoryCode": "A",
+   "name": "Syllabus Copies",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 18,
+   "id": "a-20"
+  },
+  {
+   "categoryCode": "A",
+   "name": "Medical Documents/Health Evaluation Report",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 19,
+   "id": "a-21"
+  },
+  {
+   "categoryCode": "A",
+   "name": "Vaccination Certificate",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 20,
+   "id": "a-22"
+  },
+  {
+   "categoryCode": "A",
+   "name": "LORs and SOP",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 21,
+   "id": "a-23"
+  },
+  {
+   "categoryCode": "A",
+   "name": "Portfolio Print/Final Year Project Report",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 22,
+   "id": "a-24"
+  },
+  {
+   "categoryCode": "A",
+   "name": "Original Mark Sheets + Degree Certificate",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 23,
+   "id": "a-25"
+  },
+  {
+   "categoryCode": "A",
+   "name": "Original Transcripts + Degree Certificate",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 24,
+   "id": "a-26"
+  },
+  {
+   "categoryCode": "A",
+   "name": "Attested (10th + 12th) Mark Sheets + Certificates",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 25,
+   "id": "a-27"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Crocin or Painkiller (For Cold and Fever)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 1,
+   "id": "b-29"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Combiflam (For Body Pain, Toothache)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 2,
+   "id": "b-30"
+  },
+  {
+   "categoryCode": "B",
+   "name": "B-Complex Tablets",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 3,
+   "id": "b-31"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Lotimil/Digine/Gelucil /Zantac (For Indigestion and Gastric Problems)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 4,
+   "id": "b-32"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Erythromycin (For Throat Infection)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 5,
+   "id": "b-33"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Avil. 25 (For General Allergies)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 6,
+   "id": "b-34"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Avomine (For Vomiting/Air Sickness)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 7,
+   "id": "b-35"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Iodex/Zandu Balm/Amurtanjan (For Cold and Headache)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 8,
+   "id": "b-36"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Cyclopam (For Stomach Pain)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 9,
+   "id": "b-37"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Lopomide (For Diarrhoea)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 10,
+   "id": "b-38"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Eldopar (For Loose Motions)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 11,
+   "id": "b-39"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Diziron (For Dizziness)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 12,
+   "id": "b-40"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Esgypyrin (For Sprains)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 13,
+   "id": "b-41"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Coldact and Vicks Vaporub (For Common Cold)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 14,
+   "id": "b-42"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Nasel Inhaler (Vicks)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 15,
+   "id": "b-43"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Baralgam (abdominal colic pain/backaches)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 16,
+   "id": "b-44"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Soframycin (For superficial wounds)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 17,
+   "id": "b-45"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Burn Ointment (Burnol)",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 18,
+   "id": "b-46"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Pain Relief Spray",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 19,
+   "id": "b-47"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Antiseptic Lotion (Dettol) + Cream",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 20,
+   "id": "b-48"
+  },
+  {
+   "categoryCode": "B",
+   "name": "Cotton, Body Tapes, and Band Aid Assorted Box",
+   "description": "",
+   "note": "Informational only — this is not medical advice and N92 does not recommend medicines or dosages. Carry medicines only with your doctor's prescription, and check airline and Italian customs rules before travelling.",
+   "italyStatus": "review",
+   "displayOrder": 21,
+   "id": "b-49"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Light-weight Pressure + Rice Cooker (1-4Ltr)",
+   "description": "(Spare Handle 3. Safety Valves. Base Plate & 3 Gaskets)",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 1,
+   "id": "c1-51"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Pressure/Fry Pan (Non-stick)",
+   "description": "(get both the cooker and the pan from the same brand to interchange the gaskets and the weights)",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 2,
+   "id": "c1-52"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Stacking containers Including Plastic Box",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 3,
+   "id": "c1-53"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Medium-size Kadai for Cooking Vegetables",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 4,
+   "id": "c1-54"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Kadai for Boiling Milk/Water (Oven Free)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 5,
+   "id": "c1-55"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Kadai for Making Sambar/Dal",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 6,
+   "id": "c1-56"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "SS/Oven Free Plate",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 7,
+   "id": "c1-57"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Oven Free Bowls",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 8,
+   "id": "c1-58"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Oven Free/Stainless Steel Glasses/Tumblers",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 9,
+   "id": "c1-59"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Serving Spoons (of various sizes)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 10,
+   "id": "c1-60"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "SS Spoons (2Tea + 2Table)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 11,
+   "id": "c1-61"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "SS Forks",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 12,
+   "id": "c1-62"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Knives",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 13,
+   "id": "c1-63"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Butter Knives",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 14,
+   "id": "c1-64"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Vegetable Chopping Board",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 15,
+   "id": "c1-65"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Extra weights and gaskets for the cookers",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 16,
+   "id": "c1-66"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Chapati Roller",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 17,
+   "id": "c1-67"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Tea Strainer",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 18,
+   "id": "c1-68"
+  },
+  {
+   "categoryCode": "C1",
+   "name": "Water Bottle (preferably Tupperware)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 19,
+   "id": "c1-69"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Ready-to-eat Paste Bottles",
+   "description": "",
+   "note": "Check current EU/Italy customs rules for food items before packing.",
+   "italyStatus": "review",
+   "displayOrder": 1,
+   "id": "c2-71"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Ginger-garlic Paste Bottles",
+   "description": "",
+   "note": "Check current EU/Italy customs rules for food items before packing.",
+   "italyStatus": "review",
+   "displayOrder": 2,
+   "id": "c2-72"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Rice (in kgs)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 3,
+   "id": "c2-73"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Dal (in kgs)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 4,
+   "id": "c2-74"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Dal Churnner",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 5,
+   "id": "c2-75"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Ataa",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 6,
+   "id": "c2-76"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Belan",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 7,
+   "id": "c2-77"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Cheese Grater and Peeler",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 8,
+   "id": "c2-78"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "All Curry Powders/Spices",
+   "description": "(Haldi, Red Chilli Powder, Garam Masala, Rai, Jeera, Dhania, Rasam, Sambar, Asafoetida, and other spices that you may likely require while studying abroad – 0.5 to 1 kg each)",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 9,
+   "id": "c2-79"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Lentils",
+   "description": "(whichever you prefer, mainly for lentil-based curries) – 2 kg each)",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 10,
+   "id": "c2-80"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Tamarind (in kgs)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 11,
+   "id": "c2-81"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Salt and Sugar – 0.5 kg each",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 12,
+   "id": "c2-82"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Tea",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 13,
+   "id": "c2-83"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Coffee and Coco Powder",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 14,
+   "id": "c2-84"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Pickle Bottles (1kg)",
+   "description": "",
+   "note": "Check current EU/Italy customs rules for food items before packing.",
+   "italyStatus": "review",
+   "displayOrder": 15,
+   "id": "c2-85"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Papad Packs",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 16,
+   "id": "c2-86"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Maggi Packets",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 17,
+   "id": "c2-87"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Snacks Namkeen (in kgs)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 18,
+   "id": "c2-88"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Some homemade sweets for yourself (in kgs)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 19,
+   "id": "c2-89"
+  },
+  {
+   "categoryCode": "C2",
+   "name": "Kitchen Napkin",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 20,
+   "id": "c2-90"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Toothpaste (Colgate, Close-Up, Pepsodent)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 1,
+   "id": "d-92"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Toothbrushes",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 2,
+   "id": "d-93"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Dental Floss and Retainers",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 3,
+   "id": "d-94"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Soap/Body Wash (Dove and Pears)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 4,
+   "id": "d-95"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Shampoo and Conditioner + Dry Shampoo",
+   "description": "(HeadNShoulders, Sunsilk, Dove, Pantene)",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 5,
+   "id": "d-96"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Face Wash",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 6,
+   "id": "d-97"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Face and Hair Serum",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 7,
+   "id": "d-98"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Moisturizer and Cold Cream Bottle",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 8,
+   "id": "d-99"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Vaseline Bottle",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 9,
+   "id": "d-100"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Lip Balm Tubes",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 10,
+   "id": "d-101"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Sunscreen Bottle",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 11,
+   "id": "d-102"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Makeup and Cosmetics",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 12,
+   "id": "d-103"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Mirror",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 13,
+   "id": "d-104"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Hand Sanitizers",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 14,
+   "id": "d-105"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Deodorant Can",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 15,
+   "id": "d-106"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Perfume or Body Spray",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 16,
+   "id": "d-107"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Hairbrush and Combs",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 17,
+   "id": "d-108"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Hair Ties, Clips, or Accessories",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 18,
+   "id": "d-109"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Sanitary Pads or Tampons",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 19,
+   "id": "d-110"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Nail Care Kit (nail cutter/clippers, file, polish)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 20,
+   "id": "d-111"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Face and Body Shaving Razors",
+   "description": "(A couple of disposable ones)",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 21,
+   "id": "d-112"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Shaving Foam (don’t buy cream, get small can)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 22,
+   "id": "d-113"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Comb cleaner/old toothbrush for cleaning the combs",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 23,
+   "id": "d-114"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Soap Cases",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 24,
+   "id": "d-115"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Hair Oil Bottles",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 25,
+   "id": "d-116"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Earbuds Small Pack",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 26,
+   "id": "d-117"
+  },
+  {
+   "categoryCode": "D",
+   "name": "Washing Powder (1 kg)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 27,
+   "id": "d-118"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "T-shirts (round neck)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 1,
+   "id": "e1-120"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "T-shirts (with collar)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 2,
+   "id": "e1-121"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "Jeans + Pants (stick to blue/black)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 3,
+   "id": "e1-122"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "Formal Shirts (Cotton)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 4,
+   "id": "e1-123"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "Formal Trousers",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 5,
+   "id": "e1-124"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "Blazer",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 6,
+   "id": "e1-125"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "Formal Suit (Black and Dark Blue/Grey)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 7,
+   "id": "e1-126"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "Ties",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 8,
+   "id": "e1-127"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "Winter Jackets and Sweatshirts",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 9,
+   "id": "e1-128"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "Undergarments",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 10,
+   "id": "e1-129"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "Casual Clothes/Dresses",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 11,
+   "id": "e1-130"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "Pajama",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 12,
+   "id": "e1-131"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "Shorts/Three-fourths",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 13,
+   "id": "e1-132"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "Sportswear/Track Pants",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 14,
+   "id": "e1-133"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "Swimming T-shirt + Trunks",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 15,
+   "id": "e1-134"
+  },
+  {
+   "categoryCode": "E1",
+   "name": "One Traditional Dress for Festivals",
+   "description": "(2Saree, 3 Kurti, 2Suits)",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 16,
+   "id": "e1-135"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Eye Glasses (Blue Lens)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 1,
+   "id": "e2-137"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Handbags",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 2,
+   "id": "e2-138"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Raincoat",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 3,
+   "id": "e2-139"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "A Light Jacket",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 4,
+   "id": "e2-140"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Heavy Jacket",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 5,
+   "id": "e2-141"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Woolen Socks",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 6,
+   "id": "e2-142"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Muffler/Scarves/Shawl",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 7,
+   "id": "e2-143"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Gloves",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 8,
+   "id": "e2-144"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Towels (Turkish/Tunisian)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 9,
+   "id": "e2-145"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Hand Towels",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 10,
+   "id": "e2-146"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Handkerchiefs",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 11,
+   "id": "e2-147"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Hawaii Slippers (for wearing inside the apartment)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 12,
+   "id": "e2-148"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Flip-flops (for summer and spring)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 13,
+   "id": "e2-149"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Socks",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 14,
+   "id": "e2-150"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Sneakers (Nike/Reebok)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 15,
+   "id": "e2-151"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Flats/Sandals/Loafers/Kolhapuris",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 16,
+   "id": "e2-152"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Sports Shoes",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 17,
+   "id": "e2-153"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "All-weather Shoes (Woodland)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 18,
+   "id": "e2-154"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Formal Leather Shoes",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 19,
+   "id": "e2-155"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Laces",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 20,
+   "id": "e2-156"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Shoe Polish (No liquid)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 21,
+   "id": "e2-157"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Shoe Polishing Brush + Cloth",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 22,
+   "id": "e2-158"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Bedsheets (Cotton and Satin)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 23,
+   "id": "e2-159"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Pillow Covers (Satin)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 24,
+   "id": "e2-160"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Blanket",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 25,
+   "id": "e2-161"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Hats and Monkey Cap",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 26,
+   "id": "e2-162"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Sunglasses",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 27,
+   "id": "e2-163"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "A Good Umbrella",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 28,
+   "id": "e2-164"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Leather Belts",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 29,
+   "id": "e2-165"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Belt for Jeans",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 30,
+   "id": "e2-166"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Needle with Tread/Mini Sewing Kit",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 31,
+   "id": "e2-167"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Buttons",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 32,
+   "id": "e2-168"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Safety Pins",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 33,
+   "id": "e2-169"
+  },
+  {
+   "categoryCode": "E2",
+   "name": "Cloth Hangers",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 34,
+   "id": "e2-170"
+  },
+  {
+   "categoryCode": "F",
+   "name": "Indian pin to US pin Converters/Universal Adapters",
+   "description": "",
+   "note": "Italy uses Type C/L plugs at 230V — you need India-to-EU (Type C/L) adapters, not US-pin ones.",
+   "italyStatus": "review",
+   "displayOrder": 1,
+   "id": "f-172"
+  },
+  {
+   "categoryCode": "F",
+   "name": "HP Laptop and Charger",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 2,
+   "id": "f-173"
+  },
+  {
+   "categoryCode": "F",
+   "name": "USB Mouse (Logitech)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 3,
+   "id": "f-174"
+  },
+  {
+   "categoryCode": "F",
+   "name": "IPad",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 4,
+   "id": "f-175"
+  },
+  {
+   "categoryCode": "F",
+   "name": "Headphones with mic, Earphones or Earpods",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 5,
+   "id": "f-176"
+  },
+  {
+   "categoryCode": "F",
+   "name": "External HDD",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 6,
+   "id": "f-177"
+  },
+  {
+   "categoryCode": "F",
+   "name": "Pen Drives",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 7,
+   "id": "f-178"
+  },
+  {
+   "categoryCode": "F",
+   "name": "Power Bank",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 8,
+   "id": "f-179"
+  },
+  {
+   "categoryCode": "F",
+   "name": "USB Cable",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 9,
+   "id": "f-180"
+  },
+  {
+   "categoryCode": "F",
+   "name": "A small Table Clock with alarm functionality",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 10,
+   "id": "f-181"
+  },
+  {
+   "categoryCode": "F",
+   "name": "A Scientific Calculator (Casio fx991MS or fx991ES)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 11,
+   "id": "f-182"
+  },
+  {
+   "categoryCode": "F",
+   "name": "A good branded, decent Wristwatch",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 12,
+   "id": "f-183"
+  },
+  {
+   "categoryCode": "F",
+   "name": "An Extra Battery for your wristwatch",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 13,
+   "id": "f-184"
+  },
+  {
+   "categoryCode": "F",
+   "name": "Digital Camera/Polaroid with 100 Tapes",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 14,
+   "id": "f-185"
+  },
+  {
+   "categoryCode": "F",
+   "name": "Extra Batteries",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 15,
+   "id": "f-186"
+  },
+  {
+   "categoryCode": "F",
+   "name": "A branded Spike-Buster",
+   "description": "",
+   "note": "Check plug compatibility for Italy (Type C/L sockets, 230V) before packing.",
+   "italyStatus": "review",
+   "displayOrder": 16,
+   "id": "f-187"
+  },
+  {
+   "categoryCode": "F",
+   "name": "Electric Iron",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 17,
+   "id": "f-188"
+  },
+  {
+   "categoryCode": "F",
+   "name": "Brush Straightener/Dryer",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 18,
+   "id": "f-189"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Tracing Rolls and Books",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 1,
+   "id": "g-191"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Sketch Books A6, A5, A4, and A3",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 2,
+   "id": "g-192"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Pro Markers, UniBalls, Microns Sets",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 3,
+   "id": "g-193"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Markers",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 4,
+   "id": "g-194"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Highlighters",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 5,
+   "id": "g-195"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Pencils",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 6,
+   "id": "g-196"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Erasers",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 7,
+   "id": "g-197"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Sharpeners",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 8,
+   "id": "g-198"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Key Chains",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 9,
+   "id": "g-199"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Staple Machine",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 10,
+   "id": "g-200"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Pins Boxes",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 11,
+   "id": "g-201"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Glue Sticks",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 12,
+   "id": "g-202"
+  },
+  {
+   "categoryCode": "G",
+   "name": "A4 Sheets - 1quire",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 13,
+   "id": "g-203"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Small Ruler and Triangular",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 14,
+   "id": "g-204"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Cellophane Tape",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 15,
+   "id": "g-205"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Scissors and Cutters",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 16,
+   "id": "g-206"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Measuring Tape",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 17,
+   "id": "g-207"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Copy Address Book/Telephone Book Dairy",
+   "description": "Keep all your friends’ and relatives’ phone numbers written inside before you leave ( or use Google Sync like a normal person)",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 18,
+   "id": "g-208"
+  },
+  {
+   "categoryCode": "G",
+   "name": "Books (Religious and other)",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 19,
+   "id": "g-209"
+  },
+  {
+   "categoryCode": "H",
+   "name": "Frames and Photos",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 1,
+   "id": "h-211"
+  },
+  {
+   "categoryCode": "H",
+   "name": "Life Lessons",
+   "description": "",
+   "note": "",
+   "italyStatus": "applicable",
+   "displayOrder": 2,
+   "id": "h-212"
+  },
+  {
+   "categoryCode": "J",
+   "name": "Induction",
+   "description": "",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 1,
+   "id": "j-214"
+  },
+  {
+   "categoryCode": "J",
+   "name": "Kettle",
+   "description": "",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 2,
+   "id": "j-215"
+  },
+  {
+   "categoryCode": "J",
+   "name": "Mattress",
+   "description": "",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 3,
+   "id": "j-216"
+  },
+  {
+   "categoryCode": "J",
+   "name": "Pillows",
+   "description": "",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 4,
+   "id": "j-217"
+  },
+  {
+   "categoryCode": "J",
+   "name": "Mirror",
+   "description": "",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 5,
+   "id": "j-218"
+  },
+  {
+   "categoryCode": "J",
+   "name": "Closet Organizer",
+   "description": "",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 6,
+   "id": "j-219"
+  },
+  {
+   "categoryCode": "J",
+   "name": "Handwash",
+   "description": "",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 7,
+   "id": "j-220"
+  },
+  {
+   "categoryCode": "J",
+   "name": "Dell Alienware x14 Laptop",
+   "description": "",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 8,
+   "id": "j-221"
+  },
+  {
+   "categoryCode": "J",
+   "name": "Dell Alienware Gaming Bluetooth Mouse",
+   "description": "",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 9,
+   "id": "j-222"
+  },
+  {
+   "categoryCode": "J",
+   "name": "iPhone, Adapter, 2Cases, Airpods, Series 9 Watch",
+   "description": "Power Bank and Phone Wallet, 3Charger",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 10,
+   "id": "j-223"
+  },
+  {
+   "categoryCode": "J",
+   "name": "Sunglasses",
+   "description": "",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 11,
+   "id": "j-235"
+  },
+  {
+   "categoryCode": "J",
+   "name": "Blue lens glasses",
+   "description": "",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 12,
+   "id": "j-236"
+  },
+  {
+   "categoryCode": "J",
+   "name": "Bottle mini and large",
+   "description": "",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 13,
+   "id": "j-238"
+  },
+  {
+   "categoryCode": "J",
+   "name": "6Kurtis",
+   "description": "",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 14,
+   "id": "j-239"
+  },
+  {
+   "categoryCode": "J",
+   "name": "Inner garments",
+   "description": "",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 15,
+   "id": "j-240"
+  },
+  {
+   "categoryCode": "J",
+   "name": "Go colors",
+   "description": "",
+   "note": "This item comes from a list written for buying in Brooklyn, USA (Walmart/Best Buy). The item itself may still be useful — buy it in Italy or from an Italian/EU store instead, and check EU plugs and voltage for electronics.",
+   "italyStatus": "review",
+   "displayOrder": 16,
+   "id": "j-241"
+  }
+ ]
+}

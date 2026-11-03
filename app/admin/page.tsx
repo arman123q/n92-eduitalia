@@ -9,10 +9,11 @@ import CalcSettings from "@/components/admin/CalcSettings";
 import LeadsCRM from "@/components/admin/LeadsCRM";
 import MediaManager from "@/components/admin/MediaManager";
 import BlogManager from "@/components/admin/BlogManager";
+import EssentialsManager from "@/components/admin/EssentialsManager";
 import { TABLES } from "@/components/admin/schemas";
 import { ArrowUpRight } from "lucide-react";
 
-type View = "dashboard" | "leads" | "content" | "calculator" | "media" | "blog" | (typeof TABLES)[number];
+type View = "dashboard" | "leads" | "content" | "calculator" | "media" | "blog" | "essentials" | (typeof TABLES)[number];
 
 const NAV: { id: View; label: string }[] = [
   { id: "dashboard", label: "Dashboard" },
@@ -25,6 +26,7 @@ const NAV: { id: View; label: string }[] = [
   { id: "notices", label: "Important Notices" },
   { id: "testimonials", label: "Student Reviews" },
   { id: "blog", label: "Blog / Articles" },
+  { id: "essentials", label: "Student Essentials" },
   { id: "content", label: "Website Content" },
   { id: "calculator", label: "Calculator Settings" },
   { id: "media", label: "Media Library" },
@@ -134,6 +136,7 @@ export default function AdminPage() {
         {view === "calculator" && (isDbConfigured() ? <CalcSettings /> : <DemoNotice />)}
         {view === "media" && (isDbConfigured() ? <MediaManager /> : <DemoNotice />)}
         {view === "blog" && (isDbConfigured() ? <BlogManager /> : <DemoNotice />)}
+        {view === "essentials" && (isDbConfigured() ? <EssentialsManager /> : <DemoNotice />)}
         {(TABLES as readonly string[]).includes(view) &&
           (isDbConfigured() ? <RecordsManager key={view} table={view} /> : <DemoNotice />)}
       </div>

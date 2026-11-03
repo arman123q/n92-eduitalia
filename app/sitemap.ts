@@ -28,6 +28,8 @@ const STATIC_ROUTES = [
   "/accommodation-support/",
   "/admissions/",
   "/blog/",
+  "/student-checklist/",
+  "/student-checklist/products/",
   "/book-consultation/",
   "/calculator/",
   "/contact/",

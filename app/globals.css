@@ -253,3 +253,11 @@ body {
 .tiptap p.is-editor-empty:first-child::before { content: "Write your article…"; color: rgba(32, 40, 36, 0.35); float: left; height: 0; pointer-events: none; }
 .tiptap table { display: table; }
 .tiptap .selectedCell { background: rgba(199, 160, 90, 0.18); }
+
+/* Print: when a visitor prints (e.g. the Student Essentials
+   checklist's Print / PDF button), show only the page content —
+   the site header, ticker and footer are screen furniture. */
+@media print {
+  header, footer, .tricolour-bar { display: none !important; }
+  body { background: #fff !important; }
+}
