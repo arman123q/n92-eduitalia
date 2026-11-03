@@ -963,3 +963,47 @@ was touched during implementation.
   draft rows + 1 intentionally broken row that demonstrates
   the error UI).
 
+## Products Import — Workbook Column Aliases — 2026-11-03
+
+Owner's enriched workbook (N92_Student_Essentials_Enriched_
+Working.xlsx, sheet "Product Master", 220 data rows) parsed
+with "Product name is required" on every row because its name
+column is headed "P" (not "Original item" as described).
+lib/import-products.js KEY_ALIASES now also maps: p /
+original_item / product / product_name -> name,
+short_description -> description, "Specifications / selection
+notes" (and variants) -> specifications, "Product image URL /
+filename" (and variants) -> images. All existing validation
+and duplicate protection unchanged.
+
+Deliberately NOT mapped: the workbook's Amazon/Flipkart/
+Myntra columns are marketplace SEARCH links (its own Read Me
+warns they are not verified listings), so they are never
+turned into product offers; "Verification status" is not a
+publish flag — all rows import as Drafts.
+
+Workbook census through the real engine (parse only, no
+writes): 220 rows -> 220 products resolved, 0 name errors,
+0 error rows, 2 in-file duplicates flagged (Mirror row 209,
+Sunglasses row 216 — the known checklist duplicates), 220
+drafts, 0 offers, all 220 rows carry the guidance-prose specs
+warning (the notes column is prose, not 'Label: Value' pairs).
+Categories: Documents 25, Medicines 21, Kitchen Essentials
+21, Food & Kitchen 20, Hygiene & Household 27, Basic Clothing
+16, Apparel & Bedding 34, Electronics 18, Stationery 19,
+Personal Items 2, To Buy in Italy 17.
+
+Tests: 2 new alias unit tests (suite 78/78);
+functional-check-19 ALL PASSED — the REAL workbook uploaded
+through the admin UI against a fake backend, PREVIEW ONLY
+(Import never pressed, store verified empty): "218 ready",
+0 errors, duplicates flagged, product names rendering from
+the P column (College Bag, A Wallet for a Passport, Passport
+and Xerox). check-18 regression ALL PASSED; production build
+passed. No production data was read for writing or modified
+at any point (a read-only anon probe only).
+
+Corrected template: docs/N92_Products_Import_Template.xlsx —
+"Product Master" sheet with the workbook's exact 16 headers
+plus a Read Me sheet explaining what the importer reads.
+

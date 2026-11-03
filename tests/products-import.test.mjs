@@ -110,6 +110,30 @@ test("dates and prices edge cases", () => {
   assert.equal(parsePrice("free"), undefined);
 });
 
+test("owner workbook headers: P / Original item / Product all resolve as the name column", () => {
+  for (const header of ["P", "Original item", "Product", "Product Name"]) {
+    const [row] = prepareImport([{ [header]: "College Bag", Category: "Documents" }], []);
+    assert.equal(row.product?.name, "College Bag", `header: ${header}`);
+  }
+});
+
+test("owner workbook headers: Short description, Specifications / selection notes, Product image URL / filename", () => {
+  const [row] = prepareImport([{
+    P: "Passport Wallet",
+    Category: "Documents",
+    "Short description": "Leather wallet for a passport",
+    "Specifications / selection notes": "Material: Leather; Colour: Brown",
+    "Product image URL / filename": "https://cdn.example.com/wallet.jpg",
+    "Amazon India search link": "https://www.amazon.in/s?k=wallet",
+  }], []);
+  assert.deepEqual(row.errors, []);
+  assert.equal(row.product.description, "Leather wallet for a passport");
+  assert.deepEqual(row.product.specs, [{ label: "Material", value: "Leather" }, { label: "Colour", value: "Brown" }]);
+  assert.equal(row.product.imageUrl, "https://cdn.example.com/wallet.jpg");
+  // Marketplace SEARCH links are deliberately NOT turned into offers.
+  assert.deepEqual(row.product.offers, []);
+});
+
 test("template has every documented column; XLSX round-trips through the same normaliser", () => {
   assert.ok(buildTemplateCsv().startsWith(TEMPLATE_HEADERS.join(",")));
   const ws = XLSX.utils.json_to_sheet([{ name: "XLSX Widget", category: "Study", offer1_price: 250, offer1_last_verified_date: "2026-11-01" }]);
