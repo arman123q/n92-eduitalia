@@ -3,16 +3,74 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
-const LINKS = [
+/**
+ * Header navigation hierarchy (owner redesign, 3 Nov 2026):
+ *
+ * DESKTOP BAR (from 1400px up): logo, the SIX main links, both CTA
+ * buttons (Check My Eligibility, Book Consultation) and the Menu
+ * button — the main navigation is never collapsed into the side
+ * menu on wide screens. The bar fits because only six links live
+ * here; everything else moved to the side menu.
+ *
+ * SIDE MENU (the Menu button, every width): SECONDARY links only,
+ * grouped as below. Below 1400px the bar keeps logo + Book
+ * Consultation + Menu, and the menu additionally shows the six
+ * main links (first group) and the CTA buttons, so nothing is
+ * ever unreachable on tablet or mobile.
+ *
+ * All destinations are the site's existing routes — no page or
+ * URL was created, moved or deleted by this redesign.
+ */
+const MAIN_LINKS = [
   ["Study in Italy", "/study-in-italy/"],
   ["Universities", "/universities/"],
   ["Courses", "/courses/"],
   ["Scholarships", "/scholarships/"],
   ["Admissions", "/admissions/"],
-  ["Cost Calculator", "/calculator/"],
-  ["Visa Guide", "/visa-guide/"],
   ["Blog & Articles", "/blog/"],
-  ["About", "/about/"],
+];
+
+const SIDE_GROUPS: { heading: string; links: [string, string][] }[] = [
+  {
+    heading: "Planning",
+    links: [
+      ["Cost Calculator", "/calculator/"],
+      ["Visa Guide", "/visa-guide/"],
+      ["Application Process", "/process/"],
+    ],
+  },
+  {
+    heading: "Updates",
+    links: [
+      ["Admission Rounds & Deadlines", "/admissions/"],
+      ["Important Notices", "/notices/"],
+    ],
+  },
+  {
+    heading: "About N92",
+    links: [
+      ["About", "/about/"],
+      ["Contact", "/contact/"],
+      ["Student Reviews", "/reviews/"],
+      ["FAQ", "/faq/"],
+    ],
+  },
+  {
+    heading: "Services",
+    links: [
+      ["IELTS Online Coaching", "/ielts-coaching/"],
+      ["Visa & Documentation Support", "/visa-support/"],
+      ["Accommodation & Arrival Support", "/accommodation-support/"],
+    ],
+  },
+  {
+    heading: "Policies",
+    links: [
+      ["Consultancy Fee Refund Policy", "/refund-policy/"],
+      ["Privacy Notice", "/privacy/"],
+      ["Terms of Use", "/terms/"],
+    ],
+  },
 ];
 
 export default function Header() {
@@ -27,8 +85,7 @@ export default function Header() {
                 2026): the black matte of the supplied JPG was keyed out to
                 transparency so it sits on the ivory header exactly as in the
                 owner's reference screenshot; the artwork itself is untouched
-                (no redraw, no crop of the mark, aspect preserved). The footer
-                keeps the previous /logo.jpg — this asset is header-only. */}
+                (no redraw, no crop of the mark, aspect preserved). */}
             <img src="/logo-header.png" alt="N92 Edu-Italia logo" className="h-14 w-auto sm:h-16 xl:h-20" width="720" height="598" />
           </span>
           {/* The logo artwork already contains "Edu-Italia", so the text
@@ -42,20 +99,11 @@ export default function Header() {
           </span>
         </a>
 
-        {/* Full navigation only from 1600px up: brand (342px) + nine
-            nowrap links (~735px + gaps) + both CTA buttons (~380px)
-            need ~1500px, which cannot fit a 1280px container — below
-            1600px the hamburger menu is used instead of letting the
-            row overflow and clip the Book Consultation button (owner
-            report, 31 Oct 2026). Gaps/font tightened slightly on
-            3 Nov 2026 when the ninth link (Blog & Articles) was
-            added: measured overflow was 19px at gap-4; gap-2.5 +
-            0.9rem keeps the full bar ~28px inside its container. */}
-        <nav className="hidden min-[1600px]:block flex-1 min-w-0" aria-label="Primary">
-          <ul className="flex items-center justify-center gap-2.5 text-[0.9rem] font-medium text-[#202824]">
-            {LINKS.map(([label, href]) => (
+        <nav className="hidden min-[1400px]:block flex-1 min-w-0" aria-label="Primary">
+          <ul className="flex items-center justify-center gap-2 text-[0.88rem] font-medium text-[#202824]">
+            {MAIN_LINKS.map(([label, href]) => (
               <li key={href}>
-                <a className="whitespace-nowrap hover:text-[#103f35] hover:underline underline-offset-4 decoration-[#c7a05a] decoration-2" href={href}>
+                <a className="whitespace-nowrap px-1 hover:text-[#103f35] hover:underline underline-offset-4 decoration-[#c7a05a] decoration-2" href={href}>
                   {label}
                 </a>
               </li>
@@ -63,16 +111,16 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div className="flex flex-none items-center gap-3">
-          <a href="/eligibility/" className="btn-ghost hidden min-[1600px]:inline-flex whitespace-nowrap !py-2.5 !px-5 text-sm">
+        <div className="flex flex-none items-center gap-2 sm:gap-3">
+          <a href="/eligibility/" className="btn-ghost hidden min-[1400px]:inline-flex whitespace-nowrap !py-2.5 !px-4 text-sm">
             Check My Eligibility
           </a>
-          <a href="/contact/" className="btn-primary hidden sm:inline-flex whitespace-nowrap !py-2.5 !px-5 text-sm">
+          <a href="/contact/" className="btn-primary inline-flex whitespace-nowrap !py-2.5 !px-4 text-sm sm:!px-5">
             Book Consultation
           </a>
           <button
             type="button"
-            className="min-[1600px]:hidden rounded-lg border border-[#103f35]/25 px-3 py-2 text-sm font-semibold text-[#103f35]"
+            className="rounded-lg border border-[#103f35]/25 px-3 py-2 text-sm font-semibold text-[#103f35]"
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen(!open)}
@@ -83,26 +131,51 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav id="mobile-menu" className="min-[1600px]:hidden border-t border-[#103f35]/10 bg-[#faf9f5]" aria-label="Mobile">
-          <ul className="space-y-1 px-4 py-3 text-[0.95rem] font-medium">
-            {LINKS.map(([label, href]) => (
-              <li key={href}>
-                <a className="block rounded-lg px-3 py-2 hover:bg-[#103f35]/5" href={href} onClick={() => setOpen(false)}>
-                  {label}
-                </a>
-              </li>
-            ))}
-            <li>
-              <a className="btn-primary mt-2 w-full" href="/eligibility/" onClick={() => setOpen(false)}>
+        <nav id="mobile-menu" className="border-t border-[#103f35]/10 bg-[#faf9f5]" aria-label="Menu">
+          <div className="mx-auto max-w-[1600px] px-4 py-5 sm:px-6">
+            {/* Main links live in the menu ONLY below desktop width —
+                on desktop they are already visible in the bar. */}
+            <div className="min-[1400px]:hidden">
+              <p className="px-3 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-[#8a6d35]">Explore</p>
+              <ul className="mt-1.5 space-y-1 text-[0.95rem] font-medium">
+                {MAIN_LINKS.map(([label, href]) => (
+                  <li key={href}>
+                    <a className="block rounded-lg px-3 py-2 hover:bg-[#103f35]/5" href={href} onClick={() => setOpen(false)}>
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="mt-2 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 min-[1400px]:mt-0">
+              {SIDE_GROUPS.map((g) => (
+                <div key={g.heading}>
+                  <p className="px-3 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-[#8a6d35]">{g.heading}</p>
+                  <ul className="mt-1.5 space-y-1 text-[0.95rem] font-medium">
+                    {g.links.map(([label, href]) => (
+                      <li key={label}>
+                        <a className="block rounded-lg px-3 py-2 hover:bg-[#103f35]/5" href={href} onClick={() => setOpen(false)}>
+                          {label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            {/* CTAs inside the menu only below desktop width — on
+                desktop both are already in the bar. */}
+            <div className="mt-6 grid gap-2 min-[1400px]:hidden sm:grid-cols-2">
+              <a className="btn-primary w-full" href="/eligibility/" onClick={() => setOpen(false)}>
                 Check My Eligibility
               </a>
-            </li>
-            <li>
-              <a className="btn-ghost mt-2 w-full" href="/contact/" onClick={() => setOpen(false)}>
+              <a className="btn-ghost w-full" href="/contact/" onClick={() => setOpen(false)}>
                 Book Consultation
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
         </nav>
       )}
     </header>
