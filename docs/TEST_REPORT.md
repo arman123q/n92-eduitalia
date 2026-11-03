@@ -910,3 +910,56 @@ reference image; plan approved verbatim before the build.
   (not rerun), live DB records. check-14 (v1 UI) retired,
   superseded by check-16.
 
+## Products Bulk Import (Excel/CSV) — 2026-11-03
+
+Admin → Student Essentials → Products gains "Import Products
+(Excel/CSV)" beside "New product" (components/admin/
+ProductsImport.tsx + lib/import-products.js; SheetJS `xlsx`
+added as a dependency, lazy-loaded only when an .xlsx file is
+chosen). NO database migration was needed — every import field
+already exists in essential_products — and no production data
+was touched during implementation.
+
+- Spreadsheet contract (template downloadable from the panel
+  and shipped as docs/products-import-template.csv): name
+  (the only required field), category, description,
+  specifications ('Label: Value; …' or a JSON object), images
+  (pipe/comma-separated HTTPS URLs; first = main image),
+  status (blank/unrecognised = Draft), display_order, and up
+  to 4 offer groups (offerN_marketplace / product_url /
+  affiliate_url / price / currency / last_verified_date /
+  availability). Unprefixed marketplace/price/… columns are
+  accepted as offer 1.
+- Validation: HTTPS-only URLs, real-number prices (₹/commas
+  stripped), dates normalised from ISO or DD/MM/YYYY with real
+  calendar checks, marketplace aliases (Amazon/Amazon India ->
+  amazon-in; unknown stores become a labelled custom store with
+  a warning), price-without-date warns (it will publicly show
+  "Check current price"). Nothing is ever invented.
+- Safety: rows whose name matches an existing product (any
+  status) or an earlier file row are flagged Duplicate and
+  excluded — existing products are never overwritten or
+  deleted. Preview shows per-row errors/warnings and selection
+  checkboxes; nothing is saved until Import is pressed; the
+  import runs in small batches with a progress bar and per-row
+  results, using the existing adminInsert + audit path (owner
+  auth + RLS; no service-role key in the browser).
+- Tests: 9 new unit tests (tests/products-import.test.mjs —
+  CSV quoting/BOM/CRLF, full/minimal rows, error + warning
+  matrix, duplicate detection, date/price edges, XLSX
+  round-trip through the same normaliser); suite total 76/76.
+  functional-check-18 ALL PASSED (fake backend seeded with a
+  published Portronics-shaped fixture): button placement,
+  template download, CSV preview (2 ready / duplicate flagged /
+  name+price+date errors shown / nothing saved pre-import),
+  batch import with correct stored values (price 1299, date
+  normalised to 2026-11-02, 2 specs), the pre-existing product
+  BYTE-IDENTICAL after import, and an XLSX workbook imported
+  through the Excel path. check-17 (full admin lifecycle)
+  re-passed on the same build; tsc clean; clean production
+  build passed.
+- Shipped for the owner's own trial: docs/
+  products-import-sample.csv (2 clearly-labelled IMPORT TEST
+  draft rows + 1 intentionally broken row that demonstrates
+  the error UI).
+

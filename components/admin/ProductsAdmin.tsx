@@ -15,6 +15,7 @@ import { adminSelect, adminInsert, adminUpdate, adminDelete, audit, snapshot, to
 // @ts-ignore - plain JS module
 import { isSafeImageUrl } from "@/lib/sanitize.js";
 import { MARKETPLACES, marketplaceLabel, type EssentialProduct, type ProductOffer } from "@/lib/essentials-shared";
+import ProductsImport from "./ProductsImport";
 
 const inputCls = "w-full rounded-lg border border-[#103f35]/25 px-3 py-2 text-[0.92rem]";
 const labelCls = "block text-[0.8rem] font-bold text-[#103f35]";
@@ -43,6 +44,7 @@ export default function ProductsAdmin() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [busy, setBusy] = useState(false);
+  const [showImport, setShowImport] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const extraFileRef = useRef<HTMLInputElement>(null);
 
@@ -119,10 +121,21 @@ export default function ProductsAdmin() {
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h3 className="font-display text-lg font-bold text-[#103f35]">Products Catalogue</h3>
-        {!form && <button type="button" className="btn-primary !px-4 !py-2 text-sm" onClick={() => { setForm(blank()); setError(""); }}>New product</button>}
+        {!form && (
+          <div className="flex flex-wrap gap-2">
+            <button type="button" className="btn-ghost !px-4 !py-2 text-sm" aria-expanded={showImport} onClick={() => setShowImport((v) => !v)}>Import Products (Excel/CSV)</button>
+            <button type="button" className="btn-primary !px-4 !py-2 text-sm" onClick={() => { setForm(blank()); setError(""); }}>New product</button>
+          </div>
+        )}
       </div>
       {notice && <p className="mt-3 rounded-lg bg-[#103f35]/8 px-4 py-2.5 text-sm text-[#103f35]" role="status">{notice}</p>}
       {error && <p className="mt-3 rounded-lg bg-[#b3392e]/10 px-4 py-2.5 text-sm text-[#b3392e]" role="alert">{error}</p>}
+      {showImport && !form && (
+        <ProductsImport
+          existingNames={(rows ?? []).map((r) => r.name)}
+          onImported={() => { void load(); }}
+        />
+      )}
 
       {!form && (
         rows === null ? <p className="mt-4 text-sm text-[#202824]/60">Could not load products (is migration_009 applied?).</p> :

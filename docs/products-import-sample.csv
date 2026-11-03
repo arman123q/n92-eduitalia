@@ -1,0 +1,4 @@
+name,category,description,specifications,images,status,display_order,offer1_marketplace,offer1_product_url,offer1_affiliate_url,offer1_price,offer1_currency,offer1_last_verified_date,offer1_availability,offer2_marketplace,offer2_product_url,offer2_affiliate_url,offer2_price,offer2_currency,offer2_last_verified_date,offer2_availability
+IMPORT TEST — Stainless Steel Bottle 1L,Travel,"Insulated bottle (safe test row — delete after testing)","Capacity: 1 L; Material: Stainless steel",,draft,90,Amazon India,https://www.amazon.in/dp/EXAMPLE,,,,,
+IMPORT TEST — Notebook Pack,Study,Set of notebooks (safe test row),,,draft,91,,,,,,,,
+,Kitchen,This row intentionally has no name — it shows the error message,,,,,,,,,,,
