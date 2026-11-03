@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import seed from "@/data/seed.json";
+import { fetchPublishedPosts } from "@/lib/blog";
 
 /**
  * XML sitemap for the static export (added 3 Nov 2026 — /sitemap.xml
@@ -26,6 +27,7 @@ const STATIC_ROUTES = [
   "/about/",
   "/accommodation-support/",
   "/admissions/",
+  "/blog/",
   "/book-consultation/",
   "/calculator/",
   "/contact/",
@@ -60,11 +62,23 @@ function detailEntries(rows: SeedRow[], prefix: string): MetadataRoute.Sitemap {
   });
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Published blog articles join the sitemap from the same build-time
+  // fetch that generates their pages (drafts are never returned, so
+  // they can never be listed). On a snapshot-fallback build this
+  // mirrors the snapshot, exactly like the generated pages.
+  const { posts } = await fetchPublishedPosts();
+  const blogEntries: MetadataRoute.Sitemap = posts.map((p) => {
+    const entry: MetadataRoute.Sitemap[number] = { url: `${BASE}/blog/${p.slug}/` };
+    const modified = p.updatedAt || p.publishedDate;
+    if (modified && !Number.isNaN(new Date(modified).getTime())) entry.lastModified = new Date(modified);
+    return entry;
+  });
   return [
     ...STATIC_ROUTES.map((path) => ({ url: `${BASE}${path}` })),
     ...detailEntries(seed.universities as SeedRow[], "/universities/"),
     ...detailEntries(seed.courses as SeedRow[], "/courses/"),
     ...detailEntries(seed.scholarships as SeedRow[], "/scholarships/"),
+    ...blogEntries,
   ];
 }

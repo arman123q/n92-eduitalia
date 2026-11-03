@@ -222,3 +222,34 @@ body {
   .ticker-viewport { min-width: 0; }
 
 }
+/* ---------- Blog article typography (public page + admin editor) ----------
+   Scoped to .article-body so no existing page is affected. The admin
+   rich-text editor renders with the same classes, so the preview the
+   author sees while writing matches the published page. */
+.article-body { font-size: 1.03rem; line-height: 1.8; color: rgba(32, 40, 36, 0.88); overflow-wrap: break-word; }
+.article-body > *:first-child { margin-top: 0; }
+.article-body p { margin: 0 0 1.15em; }
+.article-body h2 { font-family: var(--font-display, Georgia, serif); font-size: 1.65rem; font-weight: 700; line-height: 1.25; color: #103f35; margin: 1.6em 0 0.6em; }
+.article-body h3 { font-family: var(--font-display, Georgia, serif); font-size: 1.3rem; font-weight: 700; line-height: 1.3; color: #103f35; margin: 1.4em 0 0.5em; }
+.article-body h4 { font-size: 1.08rem; font-weight: 700; color: #103f35; margin: 1.3em 0 0.45em; }
+.article-body ul, .article-body ol { margin: 0 0 1.15em; padding-left: 1.5em; }
+.article-body ul { list-style: disc; }
+.article-body ol { list-style: decimal; }
+.article-body li { margin-bottom: 0.35em; }
+.article-body li > ul, .article-body li > ol { margin-top: 0.35em; }
+.article-body a { color: #103f35; font-weight: 600; text-decoration: underline; text-decoration-color: #c7a05a; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.article-body a:hover { color: #8a6d35; }
+.article-body strong { color: #103f35; }
+.article-body blockquote { border-left: 3px solid #c7a05a; margin: 1.4em 0; padding: 0.2em 0 0.2em 1.1em; font-style: italic; color: rgba(32, 40, 36, 0.75); }
+.article-body img { border-radius: 0.9rem; margin: 1.2em auto; }
+.article-body hr { border: none; border-top: 1px solid rgba(16, 63, 53, 0.15); margin: 2em 0; }
+.article-body table { width: 100%; border-collapse: collapse; margin: 1.4em 0; font-size: 0.94rem; display: block; overflow-x: auto; }
+.article-body th, .article-body td { border: 1px solid rgba(16, 63, 53, 0.18); padding: 0.55em 0.8em; text-align: left; vertical-align: top; }
+.article-body th { background: rgba(16, 63, 53, 0.06); color: #103f35; font-weight: 700; }
+.article-body pre { background: #103f35; color: #faf9f5; border-radius: 0.75rem; padding: 1em 1.2em; overflow-x: auto; font-size: 0.88rem; line-height: 1.6; margin: 1.3em 0; }
+.article-body code { font-size: 0.9em; }
+/* Editor-only affordances */
+.tiptap { outline: none; min-height: 300px; }
+.tiptap p.is-editor-empty:first-child::before { content: "Write your article…"; color: rgba(32, 40, 36, 0.35); float: left; height: 0; pointer-events: none; }
+.tiptap table { display: table; }
+.tiptap .selectedCell { background: rgba(199, 160, 90, 0.18); }
