@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ArticleView from "@/components/ArticleView";
+import BlogCta from "@/components/BlogCta";
 import { fetchPublishedPosts } from "@/lib/blog";
 // @ts-ignore - plain JS module
 import { isSafeImageUrl } from "@/lib/sanitize.js";
@@ -116,6 +117,8 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <ArticleView post={post} url={url} />
+
+      <BlogCta />
 
       {related.length > 0 && (
         <section className="mx-auto mt-16 max-w-6xl px-4 sm:px-6" aria-labelledby="related-heading">

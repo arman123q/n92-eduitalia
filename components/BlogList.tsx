@@ -33,32 +33,32 @@ export default function BlogList({ posts }: { posts: BlogPost[] }) {
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((p) => (
-          <article key={p.id} className="card flex flex-col overflow-hidden p-0">
-            <Link href={`/blog/${p.slug}/`} className="block">
+          <article key={p.id} className="card group flex flex-col overflow-hidden p-0 transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <Link href={`/blog/${p.slug}/`} className="relative block">
               {p.featuredImageUrl && isSafeImageUrl(p.featuredImageUrl) ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={p.featuredImageUrl} alt={p.imageAlt} className="h-44 w-full object-cover" loading="lazy" />
+                <img src={p.featuredImageUrl} alt={p.imageAlt} className="h-48 w-full object-cover" loading="lazy" />
               ) : (
-                <span className="flex h-44 w-full items-center justify-center bg-[#103f35]">
+                <span className="flex h-48 w-full items-center justify-center bg-[#103f35]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/logo-header.png" alt="" className="h-20 w-auto opacity-90" />
                 </span>
               )}
+              <span className="absolute left-4 top-4 rounded-full bg-[#C7A05A] px-3 py-1 text-xs font-semibold text-[#103F35]">
+                {p.category}
+              </span>
             </Link>
             <div className="flex flex-1 flex-col p-5">
-              <div className="flex items-center gap-3 text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-[#8a6d35]">
-                <span>{p.category}</span>
-                {p.publishedDate && (
-                  <span className="inline-flex items-center gap-1 font-medium normal-case tracking-normal text-[#202824]/50">
-                    <CalendarDays size={12} aria-hidden="true" /> {formatBlogDate(p.publishedDate)}
-                  </span>
-                )}
-              </div>
-              <h2 className="mt-2.5 font-display text-[1.3rem] font-bold leading-snug text-[#103f35]">
+              {p.publishedDate && (
+                <span className="inline-flex items-center gap-1 text-[0.8rem] font-medium text-[#202824]/50">
+                  <CalendarDays size={13} aria-hidden="true" /> {formatBlogDate(p.publishedDate)}
+                </span>
+              )}
+              <h2 className="mt-2 font-display text-[1.3rem] font-bold leading-snug text-[#103f35]">
                 <Link href={`/blog/${p.slug}/`} className="hover:underline">{p.title}</Link>
               </h2>
               {p.excerpt && <p className="mt-2 line-clamp-3 text-[0.92rem] leading-relaxed text-[#202824]/70">{p.excerpt}</p>}
-              <Link href={`/blog/${p.slug}/`} className="mt-4 inline-flex items-center gap-1.5 pt-1 text-[0.88rem] font-semibold text-[#103f35] hover:gap-2.5">
+              <Link href={`/blog/${p.slug}/`} className="mt-auto inline-flex items-center gap-1.5 pt-4 text-[0.88rem] font-semibold text-[#103f35] hover:gap-2.5">
                 Read article <ArrowRight size={15} aria-hidden="true" />
               </Link>
             </div>

@@ -8,6 +8,7 @@ import Hero3DLoader from "@/components/Hero3DLoader";
 import { ServicesOverview, IeltsHomeBand, RefundHomeBand } from "@/components/ServiceSections";
 import { JourneySection, ConsultationBand } from "@/components/JourneySection";
 import { ReviewsSection } from "@/components/Testimonials";
+import LatestArticles from "@/components/LatestArticles";
 import type { LucideIcon } from "lucide-react";
 import { Landmark, GraduationCap, FolderCheck, Handshake } from "lucide-react";
 
@@ -218,6 +219,9 @@ export default function HomePage() {
 
       {/* ---------- STUDENT REVIEWS ---------- */}
       <ReviewsSection />
+
+      {/* ---------- LATEST FROM N92 (blog) ---------- */}
+      <LatestArticles />
 
       {/* ---------- FAQ ---------- */}
       <section id="faq" className="border-t border-[#103f35]/10 bg-white">
