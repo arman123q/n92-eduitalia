@@ -9,12 +9,16 @@
  */
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, PackageOpen } from "lucide-react";
+import { ArrowRight, ImageOff, PackageOpen } from "lucide-react";
 import { formatPrice, marketplaceLabel, offerHasVerifiedPrice, type EssentialProduct } from "@/lib/essentials-shared";
+// @ts-ignore - plain JS module
+import { sensitiveCategoryKind } from "@/lib/product-url.js";
 // @ts-ignore - plain JS module
 import { isSafeImageUrl } from "@/lib/sanitize.js";
 
-export default function RecommendedProducts({ products }: { products: EssentialProduct[] }) {
+export default function RecommendedProducts({ products: allProducts }: { products: EssentialProduct[] }) {
+  // Documents / Medicines / Food are informational, never "recommended shopping".
+  const products = useMemo(() => allProducts.filter((p) => !sensitiveCategoryKind(p.category)), [allProducts]);
   const categories = useMemo(() => ["All", ...Array.from(new Set(products.map((p) => p.category).filter(Boolean)))], [products]);
   const [active, setActive] = useState("All");
   const visible = (active === "All" ? products : products.filter((p) => p.category === active)).slice(0, 4);
@@ -62,7 +66,10 @@ export default function RecommendedProducts({ products }: { products: EssentialP
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={img} alt="" className="h-16 w-16 flex-none rounded-xl object-cover ring-1 ring-[#103f35]/10" loading="lazy" />
                   ) : (
-                    <span className="flex h-16 w-16 flex-none items-center justify-center rounded-xl bg-[#103f35] font-display text-lg font-bold text-[#C7A05A]">N92</span>
+                    <span className="flex h-16 w-16 flex-none flex-col items-center justify-center gap-0.5 rounded-xl bg-[#f1ead9] text-[#8a7a55] ring-1 ring-[#C7A05A]/35" role="img" aria-label="Product image coming soon">
+                      <ImageOff size={17} aria-hidden="true" />
+                      <span className="px-1 text-center text-[0.5rem] font-bold uppercase leading-tight tracking-wide">Image soon</span>
+                    </span>
                   )}
                   <div className="min-w-0">
                     <p className="truncate font-semibold text-[#202824]">{p.name}</p>

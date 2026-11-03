@@ -45,6 +45,7 @@ export default function ProductsAdmin() {
   const [notice, setNotice] = useState("");
   const [busy, setBusy] = useState(false);
   const [showImport, setShowImport] = useState(false);
+  const [listQuery, setListQuery] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
   const extraFileRef = useRef<HTMLInputElement>(null);
 
@@ -137,6 +138,22 @@ export default function ProductsAdmin() {
         />
       )}
 
+      {!form && rows !== null && rows.length > 0 && (
+        <div className="relative mt-4 max-w-md" role="search">
+          <input
+            type="search"
+            value={listQuery}
+            onChange={(e) => setListQuery(e.target.value)}
+            placeholder="Search products by name or category…"
+            aria-label="Search products"
+            className="w-full rounded-full border border-[#103f35]/25 bg-white py-2.5 pl-4 pr-10 text-[0.92rem] outline-none focus:border-[#C7A05A] focus:ring-2 focus:ring-[#C7A05A]/30 [&::-webkit-search-cancel-button]:hidden"
+          />
+          {listQuery && (
+            <button type="button" onClick={() => setListQuery("")} aria-label="Clear product search" className="absolute right-2.5 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-[#103f35]/8 text-[#103f35] hover:bg-[#103f35]/15">×</button>
+          )}
+        </div>
+      )}
+
       {!form && (
         rows === null ? <p className="mt-4 text-sm text-[#202824]/60">Could not load products (is migration_009 applied?).</p> :
         rows.length === 0 ? <p className="mt-4 text-sm text-[#202824]/60">No products yet. Add your first product — you provide the real store links, prices and images; nothing is invented.</p> : (
@@ -144,7 +161,7 @@ export default function ProductsAdmin() {
             <table className="w-full min-w-[640px] text-left text-sm">
               <thead><tr className="bg-[#103f35]/5 text-[#103f35]"><th className="px-4 py-2.5">Product</th><th className="px-4 py-2.5">Category</th><th className="px-4 py-2.5">Offers</th><th className="px-4 py-2.5">Status</th><th className="px-4 py-2.5">Order</th><th className="px-4 py-2.5">Actions</th></tr></thead>
               <tbody>
-                {rows.map((r) => (
+                {rows.filter((r) => { const q = listQuery.trim().toLowerCase(); return !q || r.name.toLowerCase().includes(q) || (r.category ?? "").toLowerCase().includes(q); }).map((r) => (
                   <tr key={r.id} className="border-t border-[#103f35]/8 align-top">
                     <td className="px-4 py-3 font-medium">{r.name}</td>
                     <td className="px-4 py-3">{r.category || "—"}</td>
@@ -162,6 +179,12 @@ export default function ProductsAdmin() {
                 ))}
               </tbody>
             </table>
+            {listQuery.trim() && rows.filter((r) => { const q = listQuery.trim().toLowerCase(); return r.name.toLowerCase().includes(q) || (r.category ?? "").toLowerCase().includes(q); }).length === 0 && (
+              <p className="px-4 py-3 text-sm text-[#202824]/60">No products match “{listQuery.trim()}”. <button type="button" className="font-bold text-[#103f35] underline" onClick={() => setListQuery("")}>Clear search</button></p>
+            )}
+            {listQuery.trim() && (
+              <p className="px-4 py-2 text-[0.8rem] text-[#202824]/50" role="status">Showing {rows.filter((r) => { const q = listQuery.trim().toLowerCase(); return r.name.toLowerCase().includes(q) || (r.category ?? "").toLowerCase().includes(q); }).length} of {rows.length} products</p>
+            )}
           </div>
         )
       )}

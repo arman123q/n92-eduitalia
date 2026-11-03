@@ -1007,3 +1007,57 @@ Corrected template: docs/N92_Products_Import_Template.xlsx —
 "Product Master" sheet with the workbook's exact 16 headers
 plus a Read Me sheet explaining what the importer reads.
 
+## Catalogue Quality + Search (Admin & Public) — 2026-11-03
+
+Audit (live, read-only, anon view; full report in
+docs/catalogue-audit-2026-11-03.md): 219 published products
+(218 imported + Portronics). Only 1 has an image and only 1
+has offers/purchase links (the Portronics); 0 stored links are
+search-shaped; 218 products carry ONE identical generic specs
+line; 66 carry one of 3 repeated boilerplate descriptions
+(Documents x25, Medicines x21, Food x20). Root cause of the
+logo cards: ProductsCatalogue rendered /logo-header.png as
+the no-image fallback.
+
+Code changes:
+- lib/product-url.js (new, unit-tested): isDirectProductUrl
+  (Amazon /dp/, Flipkart /p/, Myntra /buy, other HTTPS
+  non-search retailer pages; search-shaped URLs ALWAYS
+  rejected), directOfferUrl (direct affiliate preferred,
+  else direct product URL, else null), sensitiveCategoryKind
+  + SENSITIVE_NOTICES for Documents/Medicines/Food.
+- ProductsCatalogue.tsx: prominent search bar (name +
+  category + description, instant, x clear) ABOVE the category
+  pills; search and category filters combine; "Showing X of Y"
+  line; "No products found" state with Clear search and
+  filters; no-image cards show a neutral "Image coming soon"
+  placeholder (logo fallback REMOVED); "View Product" button
+  renders ONLY for directOfferUrl; sensitive-category cards
+  get an Information chip + guidance notice and never render
+  offers/prices/links.
+- RecommendedProducts.tsx: N92-monogram fallback replaced by
+  the same neutral placeholder; sensitive categories excluded
+  from the panel entirely.
+- ProductsAdmin.tsx: search bar above the catalogue table
+  (name + category, instant, x clear, match count + no-match
+  row); the importer still receives the FULL unfiltered name
+  list for duplicate detection; no records changed.
+
+Data: NO production records were edited. A review-only SQL
+file (supabase/cleanup_catalogue_boilerplate_FOR_REVIEW.sql)
+blanks the 3 boilerplate descriptions (66 rows) and the
+generic specs payload (218 rows) by exact-text match only —
+Portronics cannot match; Muse has not run it.
+
+Tests: 5 new unit tests (suite 83/83);
+functional-check-20 ALL PASSED (19 checks: public search
+name/category/description, combined filters, no-results +
+clear-all, logo never a product image, search-URL offer shows
+price but no View Product, direct offer links View Product,
+Medicines card informational with no price/link; admin search
+by name and by category, count line, clear, import panel
+intact) against an extended stub (Searchy Blender + Medicines
+fixtures). check-16 and check-18 regressions ALL PASSED;
+clean production build passed; Header.tsx and homepage
+checksums unchanged.
+
