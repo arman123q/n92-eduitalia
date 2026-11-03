@@ -9,9 +9,10 @@
 import { useState } from "react";
 import ProductsAdmin from "./ProductsAdmin";
 import ChecklistAdmin from "./ChecklistAdmin";
+import TutorialAdmin from "./TutorialAdmin";
 
 export default function EssentialsManager() {
-  const [view, setView] = useState<"products" | "checklist">("products");
+  const [view, setView] = useState<"products" | "checklist" | "tutorial">("products");
   return (
     <div>
       <div className="rounded-xl border border-[#C7A05A]/60 bg-[#C7A05A]/10 p-4 text-[0.85rem] leading-relaxed text-[#202824]/80">
@@ -27,8 +28,11 @@ export default function EssentialsManager() {
         <button type="button" onClick={() => setView("checklist")} aria-pressed={view === "checklist"} className={`rounded-full px-4 py-2 text-sm font-semibold ${view === "checklist" ? "bg-[#103f35] text-white" : "border border-[#103f35]/25 bg-white text-[#103f35]"}`}>
           Checklist
         </button>
+        <button type="button" onClick={() => setView("tutorial")} aria-pressed={view === "tutorial"} className={`rounded-full px-4 py-2 text-sm font-semibold ${view === "tutorial" ? "bg-[#103f35] text-white" : "border border-[#103f35]/25 bg-white text-[#103f35]"}`}>
+          Tutorial Video
+        </button>
       </div>
-      <div className="mt-5">{view === "products" ? <ProductsAdmin /> : <ChecklistAdmin />}</div>
+      <div className="mt-5">{view === "products" ? <ProductsAdmin /> : view === "checklist" ? <ChecklistAdmin /> : <TutorialAdmin />}</div>
     </div>
   );
 }
