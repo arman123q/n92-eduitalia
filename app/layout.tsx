@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
       { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
       { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
     ],
@@ -32,8 +33,9 @@ export const metadata: Metadata = {
   },
   description:
     "Discover suitable Italian universities, explore scholarship opportunities and plan your next steps with personalised study guidance. Free preliminary eligibility assessment for Indian students.",
-  metadataBase: new URL("https://n92eduitalia.example/"),
+  metadataBase: new URL("https://n92-eduitalia.pages.dev/"),
   openGraph: {
+    siteName: "N92 Edu-Italia",
     title: "N92 Edu-Italia — Your Italian Dream. A Clearer Plan.",
     description:
       "Free eligibility check, university and scholarship guidance for Indian students planning to study in Italy.",
@@ -45,6 +47,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <head>
+        {/* WebSite structured data — Google's primary site-name
+            signal in Search results (approved fix, 4 Nov 2026).
+            Static brand facts only; rendered on every page via
+            this root layout, and read by Google from the
+            homepage. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "N92 Edu-Italia",
+              alternateName: "N92",
+              url: "https://n92-eduitalia.pages.dev/",
+            }),
+          }}
+        />
         {/* Google AdSense site verification — owner's publisher script,
             added 31 Oct 2026. Loads in the head of every page via this
             root layout; do not duplicate it elsewhere. */}
