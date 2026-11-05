@@ -16,6 +16,11 @@ const body = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap
 const GA_MEASUREMENT_ID = "G-5QYEH4Q69Q";
 
 export const metadata: Metadata = {
+  verification: {
+  other: {
+    "p:domain_verify": "47e8e524412b14a07991645cafdade5c",
+  },
+},
   title: "N92 Edu-Italia — Study in Italy | Eligibility Check, Universities & Scholarships",
   // Favicons generated 3 Nov 2026 from the official logo artwork
   // (public/logo-header.png): a symbol-only square crop (arch, Italian
