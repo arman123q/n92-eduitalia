@@ -31,9 +31,20 @@ test("unverified deadline is NEVER shown open/closed", () => {
   assert.equal(computeRoundStatus({ ...base, deadlineVerified: false, deadlineAt: "2020-01-01T00:00:00Z" }, NOW), "not-verified");
 });
 
-test("manual status overrides computation", () => {
+test("manual status overrides computation ONLY when the deadline is verified", () => {
   assert.equal(computeRoundStatus({ ...base, manualStatus: "results-published" }, NOW), "results-published");
-  assert.equal(computeRoundStatus({ ...base, manualStatus: "awaiting-confirmation", deadlineVerified: false, deadlineAt: null }, NOW), "awaiting-confirmation");
+  assert.equal(computeRoundStatus({ ...base, manualStatus: "awaiting-confirmation" }, NOW), "awaiting-confirmation");
+  // Owner's rule: an unverified deadline displays NOT VERIFIED regardless
+  // of the manual status — a manual label never presents it as confirmed.
+  assert.equal(computeRoundStatus({ ...base, manualStatus: "results-published", deadlineVerified: false }, NOW), "not-verified");
+  assert.equal(computeRoundStatus({ ...base, manualStatus: "awaiting-confirmation", deadlineVerified: false, deadlineAt: null }, NOW), "not-verified");
+});
+
+test("empty and invalid dates never produce a calculated status", () => {
+  assert.equal(computeRoundStatus({ ...base, deadlineAt: "not-a-date" }, NOW), "not-verified");
+  assert.equal(computeRoundStatus({ ...base, opensAt: null, deadlineAt: null }, NOW), "not-verified");
+  // Deadline already passed wins over a future opening (inconsistent pair).
+  assert.equal(computeRoundStatus({ ...base, opensAt: "2027-01-01T00:00:00Z", deadlineAt: "2026-01-01T00:00:00Z" }, NOW), "closed");
 });
 
 test("sortRounds: pinned first, closing-soon before open, closed last, dedupes", () => {

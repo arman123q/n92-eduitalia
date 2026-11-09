@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Cookie, ShieldCheck, X } from "lucide-react";
 
 /**
@@ -27,7 +27,17 @@ type Prefs = { analytics: boolean; advertising: boolean };
 
 function gtag(...args: unknown[]) {
   if (typeof window === "undefined") return;
-  const w = window as unknown as { dataLayer?: unknown[] };
+  const w = window as unknown as { gtag?: (...a: unknown[]) => void; dataLayer?: unknown[] };
+  // IMPORTANT (found by the 31 Oct 2026 GA4 audit): gtag.js only
+  // processes dataLayer entries pushed as an Arguments object by the
+  // real gtag() stub — plain-array pushes are silently IGNORED (no
+  // consent update, no events). The root layout's head bootstrap
+  // defines window.gtag before anything else runs, so always call it.
+  if (typeof w.gtag === "function") {
+    w.gtag(...args);
+    return;
+  }
+  // Fallback (unreachable in practice): queue for the library.
   w.dataLayer = w.dataLayer || [];
   w.dataLayer.push(args);
 }
@@ -100,12 +110,22 @@ export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
   const [customizing, setCustomizing] = useState(false);
   const [draft, setDraft] = useState<Prefs>({ analytics: false, advertising: false });
+  // Consent-timing fix (31 Oct 2026): if the visitor's saved choice
+  // already granted Analytics when this page loaded, the layout's head
+  // bootstrap used it as the consent default, so this page's first
+  // page_view was counted WITH consent — no make-up hit is needed.
+  // Otherwise (new visitor, or a previously denied choice), granting
+  // Analytics from the banner must send exactly one make-up page_view
+  // for the current page, right after the consent update.
+  const grantedOnLoad = useRef(false);
+  const makeUpSent = useRef(false);
 
   useEffect(() => {
     setMounted(true);
     const stored = loadStored();
     if (stored) {
       setDraft(stored);
+      grantedOnLoad.current = stored.analytics;
       applyConsent(stored); // re-apply the saved choice on every visit
     } else {
       setVisible(true);
@@ -125,6 +145,17 @@ export default function CookieConsent() {
   const choose = (p: Prefs) => {
     store(p);
     applyConsent(p);
+    if (p.analytics && !grantedOnLoad.current && !makeUpSent.current) {
+      // The page_view for this page was already sent (denied) before
+      // the visitor granted consent — send exactly one make-up
+      // page_view now that consent is granted, so this visit counts.
+      makeUpSent.current = true;
+      gtag("event", "page_view", {
+        page_location: window.location.href,
+        page_path: window.location.pathname,
+        page_title: document.title,
+      });
+    }
     setVisible(false);
     setCustomizing(false);
   };

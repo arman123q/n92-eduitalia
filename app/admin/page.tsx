@@ -10,14 +10,16 @@ import LeadsCRM from "@/components/admin/LeadsCRM";
 import MediaManager from "@/components/admin/MediaManager";
 import BlogManager from "@/components/admin/BlogManager";
 import EssentialsManager from "@/components/admin/EssentialsManager";
+import StudentsManager from "@/components/admin/StudentsManager";
 import { TABLES } from "@/components/admin/schemas";
 import { ArrowUpRight } from "lucide-react";
 
-type View = "dashboard" | "leads" | "content" | "calculator" | "media" | "blog" | "essentials" | (typeof TABLES)[number];
+type View = "dashboard" | "leads" | "students" | "content" | "calculator" | "media" | "blog" | "essentials" | (typeof TABLES)[number];
 
 const NAV: { id: View; label: string }[] = [
   { id: "dashboard", label: "Dashboard" },
   { id: "leads", label: "Student Leads" },
+  { id: "students", label: "Student Portal" },
   { id: "universities", label: "Universities" },
   { id: "courses", label: "Courses" },
   { id: "scholarships", label: "Scholarships" },
@@ -132,6 +134,7 @@ export default function AdminPage() {
       <div className="mt-8">
         {view === "dashboard" && (isDbConfigured() ? <Dashboard /> : <DemoNotice />)}
         {view === "leads" && <LeadsCRM />}
+        {view === "students" && (isDbConfigured() ? <StudentsManager /> : <DemoNotice />)}
         {view === "content" && (isDbConfigured() ? <ContentEditor /> : <DemoNotice />)}
         {view === "calculator" && (isDbConfigured() ? <CalcSettings /> : <DemoNotice />)}
         {view === "media" && (isDbConfigured() ? <MediaManager /> : <DemoNotice />)}

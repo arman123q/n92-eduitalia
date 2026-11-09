@@ -109,11 +109,14 @@ export function scholarshipBySlug(rows: Scholarship[], slug: string | null): Sch
  */
 export async function getAdmissionRounds(): Promise<import("./types").AdmissionRound[]> {
   const rows = await restSelect("admission_rounds", "select=*&status=eq.published&order=deadline_at.asc.nullslast");
-  return (rows as unknown as import("./types").AdmissionRound[]) ?? [];
+  // Map snake_case DB columns to the camelCase the status engine reads
+  // (manualStatus, deadlineVerified, opensAt, deadlineAt). Without this
+  // every round computed as NOT VERIFIED and manual statuses never showed.
+  return ((rows as unknown as Record<string, unknown>[] | null) ?? []).map((r) => snakeToCamel(r) as unknown as import("./types").AdmissionRound);
 }
 
 /** Published notices (display-window filtering happens in the UI). */
 export async function getNotices(): Promise<import("./types").Notice[]> {
   const rows = await restSelect("notices", "select=*&status=eq.published&order=created_at.desc");
-  return (rows as unknown as import("./types").Notice[]) ?? [];
+  return ((rows as unknown as Record<string, unknown>[] | null) ?? []).map((r) => snakeToCamel(r) as unknown as import("./types").Notice);
 }

@@ -16,12 +16,7 @@ const body = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap
 const GA_MEASUREMENT_ID = "G-5QYEH4Q69Q";
 
 export const metadata: Metadata = {
-  verification: {
-  other: {
-    "p:domain_verify": "47e8e524412b14a07991645cafdade5c",
-  },
-},
-  title: "N92 Edu-Italia — Study in Italy | Eligibility Check, Universities & Scholarships",
+  title: "N92 Edu-Italia — Study in Italy for Indian Students",
   // Favicons generated 3 Nov 2026 from the official logo artwork
   // (public/logo-header.png): a symbol-only square crop (arch, Italian
   // flag and "92" — the Edu-Italia wordmark is unreadable at tab size).
@@ -37,14 +32,33 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
   },
   description:
-    "Discover suitable Italian universities, explore scholarship opportunities and plan your next steps with personalised study guidance. Free preliminary eligibility assessment for Indian students.",
-  metadataBase: new URL("https://n92-eduitalia.pages.dev/"),
+    "N92 Edu-Italia helps Indian students study in Italy: free eligibility check, universities, scholarships and visa guidance.",
+  metadataBase: new URL("https://n92eduitalia.example/"),
   openGraph: {
     siteName: "N92 Edu-Italia",
     title: "N92 Edu-Italia — Your Italian Dream. A Clearer Plan.",
     description:
       "Free eligibility check, university and scholarship guidance for Indian students planning to study in Italy.",
     type: "website",
+    // Social-sharing thumbnail (owner-supplied branded image,
+    // 1200x630, hosted in Supabase media storage). Used ONLY as
+    // the link-preview image — it never replaces the live
+    // homepage or its 3D hero. Blog articles define their own
+    // openGraph images and are unaffected.
+    images: [
+      {
+        url: "https://ymcvjghgyfipgwnsgfbj.supabase.co/storage/v1/object/public/media/1794010295204-N92_Homepage_Branded_OG_1200x630.jpg",
+        width: 1200,
+        height: 630,
+        alt: "N92 Edu-Italia — Study in Italy for Indian Students",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [
+      "https://ymcvjghgyfipgwnsgfbj.supabase.co/storage/v1/object/public/media/1794010295204-N92_Homepage_Branded_OG_1200x630.jpg",
+    ],
   },
 };
 
