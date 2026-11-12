@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import StudentGate, { useStudent } from "@/components/student/StudentGate";
+import ProfilePhoto from "@/components/student/ProfilePhoto";
 import { studentUpdate, type StudentProfile } from "@/lib/student";
 
 /**
@@ -93,6 +94,7 @@ function Inner() {
         Keep these details current — your counsellor uses them for your applications and visa file.
         Only you and the N92 team can see them.
       </p>
+      <ProfilePhoto userId={userId} displayName={profile.full_name} />
       <form className="panel mt-6 space-y-4 p-6" onSubmit={save} noValidate>
         <div className="grid gap-4 sm:grid-cols-2">
           {TEXT_FIELDS.map((f) => (

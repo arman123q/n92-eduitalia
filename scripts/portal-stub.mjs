@@ -38,7 +38,7 @@ function jwtPayload(token) {
 }
 
 const accountRow = (id, email, role, status) => ({ id, email, role, account_status: status, created_at: "2026-11-01T10:00:00Z" });
-const profileRow = { user_id: STUDENT_ID, full_name: "Stub Student", phone: null, date_of_birth: null, nationality: "Indian", passport_name: null, current_country: "India", current_city: null, current_address: null, preferred_intake: "Fall 2027", target_degree: "Master's", preferred_destination: "Italy", education_history: null, graduation_year: 2024, cgpa: null, english_proficiency: null, passport_number: null, notes_from_student: null, created_at: "2026-11-01T10:00:00Z", updated_at: "2026-11-01T10:00:00Z" };
+let profileRow = { user_id: STUDENT_ID, full_name: "Stub Student", phone: "+91 99999 88888", date_of_birth: "2003-05-14", nationality: "Indian", passport_name: "STUB STUDENT", current_country: "India", current_city: "Jaipur", current_address: null, preferred_intake: "Fall 2027", target_degree: "Master's", preferred_destination: "Padua", education_history: "BSc Computer Science, Stub University", graduation_year: 2024, cgpa: "8.5", english_proficiency: "IELTS 7.0", passport_number: "P1234567", notes_from_student: null, created_at: "2026-11-01T10:00:00Z", updated_at: "2026-11-01T10:00:00Z" };
 const appRow = { id: "57bb0000-0000-4000-8000-000000000001", student_id: STUDENT_ID, university_id: "uni-padova", university_name: "University of Padua", course_id: null, programme_name: "MSc Planning", intake: "Fall 2027", application_status: "submitted", application_reference: "REF-1", submitted_at: "2026-10-01T00:00:00Z", decision_at: null, student_notes: null, owner_notes: null, created_by: OWNER_ID, created_at: "2026-09-01T10:00:00Z", updated_at: "2026-10-02T10:00:00Z" };
 
 function send(res, code, body, type = "application/json") {
@@ -59,6 +59,7 @@ const server = http.createServer(async (req, res) => {
 
   if (path === "/__scenario" && req.method === "POST") { scenario = jsonBody().name || "active"; raceStep = 0; armed = null; return send(res, 200, { ok: true, scenario }); }
   if (path === "/__arm" && req.method === "POST") { const b = jsonBody(); armed = b.mode === "off" ? null : { mode: b.mode || "fail", succeed: b.succeed ?? 1 }; return send(res, 200, { ok: true, armed }); }
+  if (path === "/__set-profile" && req.method === "POST") { Object.assign(profileRow, jsonBody()); return send(res, 200, { ok: true }); }
   if (path === "/__reset" && req.method === "POST") { log = []; raceStep = 0; armed = null; return send(res, 200, { ok: true }); }
   if (path === "/__log") return send(res, 200, log);
   if (path === "/__token") {
@@ -96,6 +97,20 @@ const server = http.createServer(async (req, res) => {
     return send(res, 200, [{ signedURL: "/object/sign/student-documents/stub?token=stub", path: "stub" }]);
   }
 
+  // ---- Avatars (Migration 014 surface): sign OK, folder lists empty (no photo) ----
+  if (path === "/storage/v1/object/sign/student-avatars" && req.method === "POST") {
+    return send(res, 200, [{ signedURL: "/object/sign/student-avatars/stub?token=stub", path: "stub" }]);
+  }
+  if (path === "/storage/v1/object/list/student-avatars" && req.method === "POST") {
+    return send(res, 200, []);
+  }
+  if (path.startsWith("/storage/v1/object/student-avatars/") && req.method === "POST") {
+    return send(res, 200, { Id: "stub-avatar" });
+  }
+  if (path === "/storage/v1/object/student-avatars" && req.method === "DELETE") {
+    return send(res, 200, []);
+  }
+
   // ---- PostgREST ----
   if (path.startsWith("/rest/v1/")) {
     const table = decodeURIComponent(path.slice("/rest/v1/".length));
@@ -124,6 +139,7 @@ const server = http.createServer(async (req, res) => {
     }
     if (table === "student_profiles") {
       if (req.method === "GET") {
+        if (q.get("passport_number") === "not.is.null") return send(res, 200, [{ user_id: STUDENT_ID }]);
         if (scenario === "race") { raceStep += 1; return send(res, 200, raceStep <= 1 ? [] : [profileRow]); }
         if (scenario === "profile-error") return send(res, 200, []);
         return send(res, 200, [profileRow]);
@@ -136,7 +152,7 @@ const server = http.createServer(async (req, res) => {
       if (req.method === "PATCH") return send(res, 200, [{ ...profileRow, ...jsonBody() }]);
     }
     if (table === "student_applications" && req.method === "GET") return send(res, 200, [appRow]);
-    if (table === "universities" && req.method === "GET") return send(res, 200, [{ id: "uni-padova", name: "University of Padua" }]);
+    if (table === "universities" && req.method === "GET") return send(res, 200, [{ id: "uni-padova", name: "University of Padua", city: "Padua", region: "Veneto", slug: "university-of-padua", subjects: ["Urban Planning"], rows: [] }]);
     if (req.method === "GET") return send(res, 200, []);
     if (req.method === "POST") return send(res, 201, [{ id: "57cc0000-0000-4000-8000-000000000001" }]);
     if (req.method === "PATCH") return send(res, 200, [{ id: "57cc0000-0000-4000-8000-000000000001" }]);

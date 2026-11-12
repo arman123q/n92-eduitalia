@@ -355,3 +355,133 @@ test("F6 ensureStudentProfile: genuine duplicate race still recovers by refetch"
   assert.equal(r.ok, true);
   assert.equal(r.profile.user_id, "user-1");
 });
+
+/* ------------- Feature round: completion, avatars, export ------------- */
+
+let exporter;
+let exportDir;
+before(async () => {
+  const { fileURLToPath } = await import("node:url");
+  const { rmSync } = await import("node:fs");
+  const repoRoot = fileURLToPath(new URL("../", import.meta.url));
+  exportDir = mkdtempSync(join(repoRoot, "tests", ".tmp-export-"));
+  process.on("exit", () => { try { rmSync(exportDir, { recursive: true, force: true }); } catch { /* ignore */ } });
+  writeFileSync(join(exportDir, "supabase-stub.mjs"), `
+    export const SUPABASE_URL = "http://stub.local";
+    export const SUPABASE_ANON_KEY = "anon-stub";
+    export function isDbConfigured() { return true; }
+  `);
+  const studentSrc = readFileSync(new URL("../lib/student.ts", import.meta.url), "utf8");
+  const t1 = ts.transpileModule(studentSrc, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } });
+  writeFileSync(join(exportDir, "student.mjs"), t1.outputText.replaceAll('"@/lib/supabase"', '"./supabase-stub.mjs"'));
+  const exportSrc = readFileSync(new URL("../lib/students-export.ts", import.meta.url), "utf8");
+  const t2 = ts.transpileModule(exportSrc, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } });
+  writeFileSync(join(exportDir, "students-export.mjs"), t2.outputText.replaceAll('"@/lib/student"', '"./student.mjs"'));
+  exporter = await import(`file://${join(exportDir, "students-export.mjs")}`);
+});
+
+const FULL_PROFILE = {
+  user_id: "u-1", full_name: "Asha Verma", phone: "+91 99999 88888",
+  date_of_birth: "2003-05-14", nationality: "Indian", passport_name: "ASHA VERMA",
+  passport_number: "P1234567", current_country: "India", current_city: "Jaipur",
+  current_address: "12 MG Road, Jaipur", preferred_intake: "Fall 2027",
+  target_degree: "Master's", preferred_destination: "Padua",
+  education_history: "BSc, University of Rajasthan", graduation_year: 2025,
+  cgpa: "8.9", english_proficiency: "IELTS 7.5",
+  notes_from_student: "Needs hostel guidance", created_at: "2026-11-01T10:00:00Z", updated_at: "2026-11-02T10:00:00Z",
+};
+
+test("C1 completion of a missing profile is 0% with every field missing", () => {
+  const c = student.profileCompletion(null);
+  assert.equal(c.percent, 0);
+  assert.equal(c.filled, 0);
+  assert.equal(c.total, 16);
+  assert.equal(c.missing.length, 16);
+  assert.equal(c.complete, false);
+});
+
+test("C2 completion of a full profile is 100% and complete", () => {
+  const c = student.profileCompletion(FULL_PROFILE);
+  assert.equal(c.percent, 100);
+  assert.equal(c.complete, true);
+  assert.deepEqual(c.missing, []);
+});
+
+test("C3 partial completion counts real fields and lists the missing ones", () => {
+  const c = student.profileCompletion({ ...FULL_PROFILE, phone: "", passport_number: null, cgpa: "  " });
+  assert.equal(c.filled, 13);
+  assert.equal(c.percent, 81);
+  assert.ok(c.missing.includes("Phone number"));
+  assert.ok(c.missing.includes("Passport number"));
+  assert.ok(c.missing.includes("CGPA / percentage"));
+});
+
+test("V1-V5 avatar validation: type and 3 MB size rules", () => {
+  assert.equal(student.validateAvatarFile({ type: "image/jpeg", size: 1024 }).ok, true);
+  assert.equal(student.validateAvatarFile({ type: "image/webp", size: 3 * 1024 * 1024 }).ok, true);
+  assert.equal(student.validateAvatarFile({ type: "image/gif", size: 1024 }).ok, false);
+  assert.equal(student.validateAvatarFile({ type: "application/pdf", size: 1024 }).ok, false);
+  assert.equal(student.validateAvatarFile({ type: "image/png", size: 3 * 1024 * 1024 + 1 }).ok, false);
+  assert.equal(student.validateAvatarFile({ type: "image/png", size: 0 }).ok, false);
+  assert.equal(student.avatarPath("u-9"), "u-9/profile-photo");
+});
+
+const SOURCE_A = { account: { id: "u-1", email: "asha@example.com", accountStatus: "active", createdAt: "2026-11-01T10:00:00Z" }, profile: FULL_PROFILE };
+const SOURCE_B = { account: { id: "u-2", email: "pending@example.com", accountStatus: "pending", createdAt: "2026-11-03T10:00:00Z" }, profile: null };
+
+test("X1 export rows: real dates, no passport number anywhere, completion matches", () => {
+  const rows = exporter.buildStudentExportRows([SOURCE_A, SOURCE_B]);
+  assert.equal(exporter.EXPORT_HEADERS.length, 18);
+  assert.equal(rows.length, 2);
+  assert.ok(rows[0][14] instanceof Date, "registration date must be a Date");
+  assert.equal(rows[0][16], 100);
+  assert.equal(rows[0][17], "Complete");
+  assert.equal(rows[1][16], 0);
+  assert.equal(rows[1][17], "Incomplete");
+  assert.ok(!JSON.stringify(rows).includes("P1234567"), "passport number must never appear in export rows");
+});
+
+test("X2 export filters: status, search and completion are respected", () => {
+  const all = [SOURCE_A, SOURCE_B];
+  assert.equal(exporter.filterStudentSources(all, { status: "all", query: "", completion: "all" }).length, 2);
+  assert.equal(exporter.filterStudentSources(all, { status: "pending", query: "", completion: "all" }).length, 1);
+  assert.equal(exporter.filterStudentSources(all, { status: "all", query: "asha", completion: "all" }).length, 1);
+  assert.equal(exporter.filterStudentSources(all, { status: "all", query: "u-2", completion: "all" }).length, 1);
+  assert.equal(exporter.filterStudentSources(all, { status: "all", query: "", completion: "complete" }).length, 1);
+  assert.equal(exporter.filterStudentSources(all, { status: "all", query: "", completion: "incomplete" }).length, 1);
+});
+
+test("X3 workbook: valid xlsx, sheet name, headers, filters, frozen header row", async () => {
+  const XLSX = require("xlsx");
+  const zlib = await import("node:zlib");
+  const buffer = await exporter.buildStudentsWorkbookBuffer([SOURCE_A, SOURCE_B]);
+  const bytes = Buffer.from(buffer);
+  assert.equal(bytes.subarray(0, 2).toString("latin1"), "PK");
+  const wb = XLSX.read(bytes, { type: "buffer", cellDates: true });
+  assert.deepEqual(wb.SheetNames, ["N92 Students"]);
+  const ws = wb.Sheets["N92 Students"];
+  const aoa = XLSX.utils.sheet_to_json(ws, { header: 1 });
+  assert.deepEqual(aoa[0], [...exporter.EXPORT_HEADERS]);
+  assert.equal(aoa.length, 3);
+  assert.equal(aoa[1][1], "Asha Verma");
+  assert.ok(ws["!autofilter"]?.ref?.startsWith("A1:"), "autofilter must be set");
+  assert.ok(!JSON.stringify(aoa).includes("P1234567"), "passport must not be in the workbook");
+  // Extract sheet1.xml (independent minimal zip walk) and check the freeze pane.
+  let off = 0;
+  let sheetXml = "";
+  while (off + 30 <= bytes.length && bytes.readUInt32LE(off) === 0x04034b50) {
+    const method = bytes.readUInt16LE(off + 8);
+    const csize = bytes.readUInt32LE(off + 18);
+    const nlen = bytes.readUInt16LE(off + 26);
+    const elen = bytes.readUInt16LE(off + 28);
+    const name = bytes.subarray(off + 30, off + 30 + nlen).toString("utf8");
+    const data = bytes.subarray(off + 30 + nlen + elen, off + 30 + nlen + elen + csize);
+    if (name === "xl/worksheets/sheet1.xml") {
+      sheetXml = (method === 8 ? zlib.inflateRawSync(data) : data).toString("utf8");
+      break;
+    }
+    off += 30 + nlen + elen + csize;
+  }
+  assert.ok(sheetXml.includes('<pane ySplit="1"'), `header row must be frozen; sheet xml starts: ${sheetXml.slice(0, 300)}`);
+  assert.ok(sheetXml.includes('state="frozen"'));
+});

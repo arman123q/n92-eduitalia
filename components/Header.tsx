@@ -20,6 +20,16 @@ import { Menu, X } from "lucide-react";
  *
  * All destinations are the site's existing routes — no page or
  * URL was created, moved or deleted by this redesign.
+ *
+ * Addition (owner instruction, 9 Nov 2026): "Student Login"
+ * (/student/login/) joins MAIN_LINKS as a seventh item — the ONLY
+ * change to this header since the redesign. With seven links the
+ * desktop list overflowed into the CTA cluster (measured overlap
+ * 47px at 1400px), so the desktop bar ONLY was tightened: nav list
+ * gap-0.5, 0.82rem, px-0.5 links, and the Eligibility CTA at px-3.
+ * Re-measured after the fix at 1400/1440/1600/1920px: clearance
+ * +9/+29/+109/+109px, no overlap, no horizontal overflow.
+ * Mobile menu and all other header behaviour are unchanged.
  */
 const MAIN_LINKS = [
   ["Study in Italy", "/study-in-italy/"],
@@ -28,6 +38,7 @@ const MAIN_LINKS = [
   ["Scholarships", "/scholarships/"],
   ["Admissions", "/admissions/"],
   ["Blog & Articles", "/blog/"],
+  ["Student Login", "/student/login/"],
 ];
 
 const SIDE_GROUPS: { heading: string; links: [string, string][] }[] = [
@@ -101,10 +112,10 @@ export default function Header() {
         </a>
 
         <nav className="hidden min-[1400px]:block flex-1 min-w-0" aria-label="Primary">
-          <ul className="flex items-center justify-center gap-2 text-[0.88rem] font-medium text-[#202824]">
+          <ul className="flex items-center justify-center gap-0.5 text-[0.82rem] font-medium text-[#202824]">
             {MAIN_LINKS.map(([label, href]) => (
               <li key={href}>
-                <a className="whitespace-nowrap px-1 hover:text-[#103f35] hover:underline underline-offset-4 decoration-[#c7a05a] decoration-2" href={href}>
+                <a className="whitespace-nowrap px-0.5 hover:text-[#103f35] hover:underline underline-offset-4 decoration-[#c7a05a] decoration-2" href={href}>
                   {label}
                 </a>
               </li>
@@ -113,7 +124,7 @@ export default function Header() {
         </nav>
 
         <div className="flex flex-none items-center gap-2 sm:gap-3">
-          <a href="/eligibility/" className="btn-ghost hidden min-[1400px]:inline-flex whitespace-nowrap !py-2.5 !px-4 text-sm">
+          <a href="/eligibility/" className="btn-ghost hidden min-[1400px]:inline-flex whitespace-nowrap !py-2.5 !px-3 text-sm">
             Check My Eligibility
           </a>
           <a href="/contact/" className="btn-primary inline-flex whitespace-nowrap !py-2.5 !px-4 text-sm sm:!px-5">

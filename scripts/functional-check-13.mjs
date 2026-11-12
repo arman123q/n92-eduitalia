@@ -29,7 +29,7 @@ const base = `http://127.0.0.1:${server.address().port}`;
 let fails = 0;
 const check = (name, ok, detail = "") => { console.log(`${ok ? "PASS" : "FAIL"}  ${name}${detail ? ` — ${detail}` : ""}`); if (!ok) fails++; };
 
-const MAIN = ["Study in Italy", "Universities", "Courses", "Scholarships", "Admissions", "Blog & Articles"];
+const MAIN = ["Study in Italy", "Universities", "Courses", "Scholarships", "Admissions", "Blog & Articles", "Student Login"];
 const GROUPS = ["Planning", "Updates", "About N92", "Services", "Policies"];
 const WIDTHS = [375, 768, 1024, 1280, 1440, 1920];
 
@@ -65,7 +65,7 @@ for (const w of WIDTHS) {
   check(`w=${w}: no overlapping bar elements`, !m.overlap);
   if (w >= 1440) {
     check(`w=${w}: DESKTOP main nav visible`, m.primaryVisible);
-    check(`w=${w}: all six main links visible, none clipped`, m.linkInfo.length === 6 && m.linkInfo.every((l) => l.visible && !l.clipped) && MAIN.every((x) => m.linkInfo.some((l) => l.label === x)), JSON.stringify(m.linkInfo.map((l) => l.label)));
+    check(`w=${w}: all seven main links visible, none clipped`, m.linkInfo.length === 7 && m.linkInfo.every((l) => l.visible && !l.clipped) && MAIN.every((x) => m.linkInfo.some((l) => l.label === x)), JSON.stringify(m.linkInfo.map((l) => l.label)));
     check(`w=${w}: Check My Eligibility visible`, m.eligVisible);
   } else {
     check(`w=${w}: main nav collapsed into menu (bar stays clean)`, !m.primaryVisible);

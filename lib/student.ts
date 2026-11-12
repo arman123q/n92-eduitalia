@@ -642,3 +642,266 @@ export function ensureStudentProfile(userId: string): Promise<
   p.finally(() => profileInFlight.delete(userId));
   return p;
 }
+
+/* ------------------------------------------------------------------ */
+/*  Profile completion (pure — unit-tested)                            */
+/*                                                                     */
+/*  The percentage is computed from the real student_profiles fields */
+/*  below (16 data fields). The profile photo is reported separately */
+/*  (it lives in storage, not in the row) so the percentage always   */
+/*  describes the same field set everywhere it is shown.             */
+/* ------------------------------------------------------------------ */
+
+export const COMPLETION_FIELDS: { key: keyof StudentProfile; label: string }[] = [
+    { key: "full_name", label: "Full name" },
+    { key: "phone", label: "Phone number" },
+    { key: "date_of_birth", label: "Date of birth" },
+    { key: "nationality", label: "Nationality" },
+    { key: "passport_name", label: "Passport name" },
+    { key: "passport_number", label: "Passport number" },
+    { key: "current_country", label: "Current country" },
+    { key: "current_city", label: "Current city" },
+    { key: "current_address", label: "Full address" },
+    { key: "preferred_intake", label: "Preferred intake" },
+    { key: "target_degree", label: "Target degree" },
+    { key: "preferred_destination", label: "Preferred destination" },
+    { key: "education_history", label: "Education history" },
+    { key: "graduation_year", label: "Graduation year" },
+    { key: "cgpa", label: "CGPA / percentage" },
+    { key: "english_proficiency", label: "English proficiency" },
+];
+
+export interface ProfileCompletion {
+    percent: number;
+    filled: number;
+    total: number;
+    missing: string[];
+    complete: boolean;
+}
+
+export function profileCompletion(profile: StudentProfile | null | undefined): ProfileCompletion {
+    const missing: string[] = [];
+    let filled = 0;
+    for (const f of COMPLETION_FIELDS) {
+        const v = profile ? profile[f.key] : null;
+        const has = v !== null && v !== undefined && String(v).trim() !== "";
+        if (has) filled += 1;
+        else missing.push(f.label);
+    }
+    const total = COMPLETION_FIELDS.length;
+    return {
+        percent: total === 0 ? 0 : Math.round((filled / total) * 100),
+        filled,
+        total,
+        missing,
+        complete: missing.length === 0,
+    };
+}
+
+/* ------------------------------------------------------------------ */
+/*  Profile photo (avatar)                                             */
+/*                                                                     */
+/*  Photos live in the PRIVATE `student-avatars` bucket at the       */
+/*  deterministic path `<user_id>/profile-photo` (Migration 014,     */
+/*  owner-approved before it is run). Folder-scoped storage          */
+/*  policies mean a student can only touch their own folder and     */
+/*  the owner can read every folder. Display always goes through     */
+/*  short-lived signed URLs — the bucket is never public. Until      */
+/*  Migration 014 is applied the storage calls fail cleanly and the  */
+/*  UI shows a "being set up" state instead of broken controls.      */
+/* ------------------------------------------------------------------ */
+
+export const AVATAR_BUCKET = "student-avatars";
+export const AVATAR_MAX_BYTES = 3 * 1024 * 1024; // 3 MB
+export const AVATAR_MIME_TYPES = ["image/jpeg", "image/png", "image/webp"];
+
+export function avatarPath(userId: string): string {
+    return `${userId}/profile-photo`;
+}
+
+export function validateAvatarFile(file: { type: string; size: number }): { ok: true } | { ok: false; error: string } {
+    if (!AVATAR_MIME_TYPES.includes(file.type)) {
+        return { ok: false, error: "Only JPEG, PNG or WebP images are allowed." };
+    }
+    if (file.size > AVATAR_MAX_BYTES) {
+        return { ok: false, error: "The image is larger than 3 MB. Please choose a smaller photo." };
+    }
+    if (file.size <= 0) {
+        return { ok: false, error: "The selected file is empty." };
+    }
+    return { ok: true };
+}
+
+async function signStorageObject(bucket: string, path: string, expiresIn: number): Promise<{ ok: boolean; url?: string; error?: string; retryable?: boolean; sessionExpired?: boolean }> {
+    const prep = await prepareStudentAuth();
+    if (!prep.ok) return { ok: false, error: prep.error, retryable: prep.retryable, sessionExpired: prep.sessionExpired };
+    try {
+        const res = await fetch(`${SUPABASE_URL}/storage/v1/object/sign/${bucket}`, {
+            method: "POST",
+            headers: studentHeaders(),
+            body: JSON.stringify({ expiresIn, paths: [path] }),
+        });
+        const data = await res.json().catch(() => null);
+        if (!res.ok || !Array.isArray(data) || !data[0]?.signedURL) {
+            return { ok: false, error: (data as { message?: string } | null)?.message || `Could not create a photo link (HTTP ${res.status}).` };
+        }
+        return { ok: true, url: `${SUPABASE_URL}/storage/v1${data[0].signedURL}` };
+    } catch {
+        return { ok: false, error: "Network error while creating the photo link.", retryable: true };
+    }
+}
+
+export function studentAvatarSignedUrl(userId: string): Promise<{ ok: boolean; url?: string; error?: string; retryable?: boolean; sessionExpired?: boolean }> {
+    return signStorageObject(AVATAR_BUCKET, avatarPath(userId), 120);
+}
+
+export interface AvatarMeta {
+    exists: boolean;
+    createdAt: string | null;
+}
+
+/** List the student's own avatar folder to learn whether a photo
+ *  exists and when it was uploaded. */
+export async function studentAvatarMeta(userId: string): Promise<{ ok: true; meta: AvatarMeta } | { ok: false; error: string; retryable?: boolean; sessionExpired?: boolean }> {
+    const prep = await prepareStudentAuth();
+    if (!prep.ok) return { ok: false, error: prep.error, retryable: prep.retryable, sessionExpired: prep.sessionExpired };
+    try {
+        const res = await fetch(`${SUPABASE_URL}/storage/v1/object/list/${AVATAR_BUCKET}`, {
+            method: "POST",
+            headers: studentHeaders(),
+            body: JSON.stringify({ prefix: `${userId}/`, limit: 10 }),
+        });
+        const data = await res.json().catch(() => null);
+        if (!res.ok || !Array.isArray(data)) {
+            return { ok: false, error: (data as { message?: string } | null)?.message || `Could not check the profile photo (HTTP ${res.status}).` };
+        }
+        const obj = (data as { name: string; created_at?: string }[]).find((o) => o.name === "profile-photo");
+        return { ok: true, meta: { exists: Boolean(obj), createdAt: obj?.created_at ?? null } };
+    } catch {
+        return { ok: false, error: "Network error while checking the profile photo.", retryable: true };
+    }
+}
+
+/** Upload (or replace) the signed-in student's profile photo.
+ *  XMLHttpRequest is used so the UI can show real upload progress. */
+export async function uploadStudentAvatar(
+    userId: string,
+    blob: Blob,
+    onProgress?: (fraction: number) => void
+): Promise<{ ok: boolean; error?: string; sessionExpired?: boolean }> {
+    const prep = await prepareStudentAuth();
+    if (!prep.ok) return { ok: false, error: prep.error, sessionExpired: prep.sessionExpired };
+    const token = getStudentToken() || "";
+    const k = SUPABASE_ANON_KEY;
+    return new Promise((resolve) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", `${SUPABASE_URL}/storage/v1/object/${AVATAR_BUCKET}/${avatarPath(userId)}`);
+        xhr.setRequestHeader("apikey", k);
+        xhr.setRequestHeader("Authorization", `Bearer ${token}`);
+        xhr.setRequestHeader("Content-Type", blob.type || "image/jpeg");
+        xhr.setRequestHeader("x-upsert", "true");
+        if (onProgress && xhr.upload) {
+            xhr.upload.onprogress = (e) => {
+                if (e.lengthComputable && e.total > 0) onProgress(Math.min(1, e.loaded / e.total));
+            };
+        }
+        xhr.onload = () => {
+            if (xhr.status >= 200 && xhr.status < 300) resolve({ ok: true });
+            else {
+                let msg = `Upload failed (HTTP ${xhr.status}).`;
+                try {
+                    const parsed = JSON.parse(xhr.responseText) as { message?: string; error?: string };
+                    msg = parsed.message || parsed.error || msg;
+                } catch { /* keep the default message */ }
+                resolve({ ok: false, error: msg });
+            }
+        };
+        xhr.onerror = () => resolve({ ok: false, error: "Network error during the photo upload." });
+        xhr.send(blob);
+    });
+}
+
+/** Remove the signed-in student's profile photo. */
+export async function deleteStudentAvatar(userId: string): Promise<DbResult<unknown>> {
+    const prep = await prepareStudentAuth();
+    if (!prep.ok) return { ok: false, error: prep.error, retryable: prep.retryable, sessionExpired: prep.sessionExpired };
+    try {
+        const res = await fetch(`${SUPABASE_URL}/storage/v1/object/${AVATAR_BUCKET}`, {
+            method: "DELETE",
+            headers: studentHeaders(),
+            body: JSON.stringify({ prefixes: [avatarPath(userId)] }),
+        });
+        const data = await res.json().catch(() => null);
+        if (!res.ok) {
+            return { ok: false, error: (data as { message?: string } | null)?.message || `Could not remove the photo (HTTP ${res.status}).` };
+        }
+        return { ok: true, rows: Array.isArray(data) ? data : [] };
+    } catch {
+        return { ok: false, error: "Network error while removing the photo.", retryable: true };
+    }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Email + password sign-in and password recovery                     */
+/*                                                                     */
+/*  Accounts are created by the N92 team (public signup stays OFF);  */
+/*  password sign-in only authenticates accounts that already        */
+/*  exist. Recovery uses Supabase's built-in /auth/v1/recover and    */
+/*  returns to the student login page, which completes the reset.    */
+/* ------------------------------------------------------------------ */
+
+export async function studentPasswordLogin(email: string, password: string): Promise<{ ok: true } | { ok: false; error: string }> {
+    const k = SUPABASE_ANON_KEY;
+    try {
+        const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+            method: "POST",
+            headers: { apikey: k, "Content-Type": "application/json" },
+            body: JSON.stringify({ email: email.trim(), password }),
+        });
+        const data = (await res.json().catch(() => null)) as ({ access_token?: string; refresh_token?: string; user?: { email?: string }; msg?: string; error_description?: string }) | null;
+        if (!res.ok || !data?.access_token || !data?.refresh_token || !data?.user) {
+            return { ok: false, error: data?.msg || data?.error_description || "Invalid email or password." };
+        }
+        storeStudentSession(data);
+        return { ok: true };
+    } catch {
+        return { ok: false, error: "Network error during sign-in. Please check your connection and try again." };
+    }
+}
+
+export async function studentRequestPasswordReset(email: string): Promise<{ ok: boolean; error?: string }> {
+    try {
+        const redirectTo = typeof window !== "undefined" ? `${window.location.origin}/student/login/` : undefined;
+        const k = SUPABASE_ANON_KEY;
+        const res = await fetch(`${SUPABASE_URL}/auth/v1/recover`, {
+            method: "POST",
+            headers: { apikey: k, "Content-Type": "application/json" },
+            body: JSON.stringify({ email: email.trim(), redirectTo }),
+        });
+        if (!res.ok) {
+            const data = (await res.json().catch(() => null)) as { msg?: string } | null;
+            return { ok: false, error: data?.msg || `Could not send the reset email (HTTP ${res.status}).` };
+        }
+        return { ok: true };
+    } catch {
+        return { ok: false, error: "Network error while requesting the password reset." };
+    }
+}
+
+/** Set a new password for the signed-in (or recovery) session. */
+export async function studentUpdatePassword(newPassword: string): Promise<{ ok: boolean; error?: string; sessionExpired?: boolean }> {
+    const prep = await prepareStudentAuth();
+    if (!prep.ok) return { ok: false, error: prep.error, sessionExpired: prep.sessionExpired };
+    try {
+        const res = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+            method: "PUT",
+            headers: studentHeaders(),
+            body: JSON.stringify({ password: newPassword }),
+        });
+        const data = (await res.json().catch(() => null)) as { msg?: string } | null;
+        if (!res.ok) return { ok: false, error: data?.msg || `Could not update the password (HTTP ${res.status}).` };
+        return { ok: true };
+    } catch {
+        return { ok: false, error: "Network error while updating the password." };
+    }
+}

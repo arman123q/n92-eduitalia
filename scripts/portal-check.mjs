@@ -5,6 +5,9 @@
  * TEST SCAFFOLDING ONLY.
  */
 import { chromium } from "playwright-core";
+import { mkdirSync } from "node:fs";
+const SHOTS = "/home/hatch/workspace/n92_upgrade_screenshots";
+mkdirSync(SHOTS, { recursive: true });
 
 const BASE = process.env.BASE || "http://127.0.0.1:8923";
 const CHROME = process.env.CHROME || "/home/hatch/workspace/tmp_chrome/chrome-linux64/chrome";
@@ -23,6 +26,19 @@ const api = async (path, method = "GET", body) => {
   return res.json();
 };
 const setScenario = (name) => api("/__scenario", "POST", { name });
+// Wait until a request appears in the stub log — used to let the
+// profile page's mount-time calls (incl. the avatar meta lookup)
+// finish before arming a refresh failure, so the armed counter is
+// consumed by exactly the operations the check intends.
+async function waitForLog(substr, timeout = 10000) {
+  const start = Date.now();
+  for (;;) {
+    const log = await getLog();
+    if (log.some((e) => `${e.method} ${e.path}`.includes(substr))) return;
+    if (Date.now() - start > timeout) throw new Error(`waitForLog timed out: ${substr}`);
+    await new Promise((r) => setTimeout(r, 150));
+  }
+}
 const resetLog = () => api("/__reset", "POST", {});
 const getLog = () => api("/__log");
 const tokenFor = async (sub, email, exp) => (await api(`/__token?sub=${sub}&email=${encodeURIComponent(email)}&exp=${exp}`)).token;
@@ -184,9 +200,10 @@ const studentSeed = async (exp = 3600) => ({
 // gate surfaces the error, session preserved, Try again recovers.
 {
   await setScenario("refresh-retryable"); await resetLog();
-  const page = await openSeeded(await studentSeed(30)); // near-expiry token: every op refreshes
+  const page = await openSeeded(await studentSeed(-10)); // already-expired seed: gate refreshes pre-arm; in the refresh-retryable scenario every later op refreshes too (30s tokens vs 60s threshold) — deterministic
   await page.goto(`${BASE}/student/profile/`);
   await waitForText(page, "My Profile");
+  await waitForLog("object/list/student-avatars");
   await api("/__arm", "POST", { mode: "fail", succeed: 1 }); // save's refresh succeeds; the reload's dies
   await page.fill("#pf-full_name", "Stub Student Updated");
   await page.getByRole("button", { name: "Save profile" }).click();
@@ -204,15 +221,133 @@ const studentSeed = async (exp = 3600) => ({
 // gate redirects to student login; session cleared.
 {
   await setScenario("refresh-retryable"); await resetLog();
-  const page = await openSeeded(await studentSeed(30));
+  const page = await openSeeded(await studentSeed(-10));
   await page.goto(`${BASE}/student/profile/`);
   await waitForText(page, "My Profile");
+  await waitForLog("object/list/student-avatars");
   await api("/__arm", "POST", { mode: "revoke", succeed: 1 });
   await page.fill("#pf-full_name", "Stub Student Again");
   await page.getByRole("button", { name: "Save profile" }).click();
   await waitForUrl(page, "/student/login/");
   const token = await page.evaluate(() => localStorage.getItem("n92_student_token"));
   report("P11 session-expired refresh-after-save redirects to student login, session cleared", token === null);
+  await page.context().close();
+}
+
+// Q1-Q3 — Admin: Profile Overview (complete record, masked passport, refresh),
+// Excel export buttons (owner-only surface).
+{
+  await setScenario("active"); await resetLog();
+  const page = await openSeeded({
+    n92_admin_token: await tokenFor(OWNER_ID, "sh10ad786@gmail.com", 3600),
+    n92_admin_refresh: "stub-refresh-admin",
+    n92_admin_user: "sh10ad786@gmail.com",
+  });
+  await page.goto(`${BASE}/admin/`);
+  await page.getByRole("button", { name: "Student Portal" }).click();
+  await waitForText(page, "Stub Student");
+  const listText = await page.evaluate(() => document.body.innerText);
+  report("Q3a Excel export button is visible to the owner in Student Portal",
+    listText.includes("Export Students to Excel (.xlsx)"));
+  report("Q3b student list shows a profile completion indicator",
+    /\d+%/.test(listText) && listText.includes("Fall 2027"));
+  await page.screenshot({ path: `${SHOTS}/admin-students-list.png` });
+  const row = page.locator("tr", { hasText: "student@test.local" });
+  await row.getByRole("button", { name: "Manage" }).click();
+  await waitForText(page, "Student Profile Overview");
+  const before = await page.evaluate(() => document.body.innerText);
+  report("Q1a overview shows the complete saved profile (academic + English + preferences)",
+    before.includes("BSc Computer Science, Stub University") && before.includes("IELTS 7.0") && before.includes("Padua") && before.includes("STUB STUDENT"));
+  report("Q1b passport number is masked by default in the overview",
+    before.includes("••••") && !before.includes("P1234567"));
+  report("Q1c empty fields display 'Not provided'", before.includes("Not provided"));
+  report("Q1d profile completion percentage + missing fields are shown",
+    before.includes("Profile completion:") && before.includes("Still missing:"));
+  await page.getByRole("button", { name: "Reveal" }).click();
+  await page.waitForFunction(() => document.body.innerText.includes("P1234567"), null, { timeout: 12000 });
+  report("Q1e owner can deliberately reveal the passport number", true);
+  await page.getByRole("button", { name: "Hide" }).click();
+  await page.getByText("Student Profile Overview").scrollIntoViewIfNeeded();
+  await page.screenshot({ path: `${SHOTS}/admin-profile-overview.png` });
+  await api("/__set-profile", "POST", { full_name: "Stub Student Updated" });
+  await page.getByRole("button", { name: "Refresh Profile" }).click();
+  await waitForText(page, "Stub Student Updated");
+  report("Q2 updated student information appears after Refresh Profile", true);
+  await api("/__set-profile", "POST", { full_name: "Stub Student" });
+  await page.context().close();
+}
+
+// Q4 — Header: Student Login on desktop + mobile, no horizontal overflow.
+{
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const page = await ctx.newPage();
+  await page.goto(`${BASE}/`);
+  const desktopLink = page.locator('header nav a[href="/student/login/"]');
+  await desktopLink.first().waitFor({ state: "visible", timeout: 15000 });
+  report("Q4a Student Login link is visible in the desktop header", true);
+  let overflowOk = true;
+  for (const w of [1400, 1440, 1600, 1920]) {
+    await page.setViewportSize({ width: w, height: 900 });
+    await page.waitForTimeout(250);
+    const bad = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
+    if (bad) overflowOk = false;
+  }
+  report("Q4b header causes no horizontal overflow at 1400/1440/1600/1920px", overflowOk);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.screenshot({ path: `${SHOTS}/header-desktop.png` });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(`${BASE}/`);
+  await page.getByRole("button", { name: /Menu/ }).first().click();
+  const mobileLink = page.locator('#mobile-menu a[href="/student/login/"]');
+  await mobileLink.waitFor({ state: "visible", timeout: 15000 });
+  report("Q4c Student Login link is visible in the mobile menu", true);
+  await page.screenshot({ path: `${SHOTS}/header-mobile-menu.png` });
+  await ctx.close();
+}
+
+// Q5 — Login page: Sign In form + registration information (no signup form).
+{
+  const ctx = await browser.newContext();
+  const page = await ctx.newPage();
+  await page.goto(`${BASE}/student/login/`);
+  await page.locator("#sl-email").waitFor({ state: "visible", timeout: 15000 });
+  const forms = await page.locator("form").count();
+  const text = await page.evaluate(() => document.body.innerText);
+  report("Q5a login page has an email + password Sign In form",
+    await page.locator("#sl-password").isVisible() && text.includes("Sign In"));
+  report("Q5b exactly one form on the page (the sign-in form); registration is information only",
+    forms === 1 && text.includes("managed personally by the N92 team") && !text.toLowerCase().includes("create account"));
+  report("Q5c forgot-password entry is present", text.includes("Forgot password?"));
+  await page.screenshot({ path: `${SHOTS}/student-login.png`, fullPage: true });
+  await ctx.close();
+}
+
+// Q6 — Student profile photo section renders for an active student.
+{
+  await setScenario("active"); await resetLog();
+  const page = await openSeeded(await studentSeed(3600));
+  await page.goto(`${BASE}/student/profile/`);
+  await waitForText(page, "Profile photo");
+  await waitForText(page, "Upload Photo");
+  report("Q6 profile photo section with Upload Photo renders on My Profile", true);
+  await page.getByText("Profile photo").scrollIntoViewIfNeeded();
+  await page.screenshot({ path: `${SHOTS}/student-profile-photo.png` });
+  await page.context().close();
+}
+
+// Q7 — Non-owner never sees the export controls.
+{
+  await setScenario("active"); await resetLog();
+  const page = await openSeeded({
+    n92_admin_token: await tokenFor(NONOWNER_ID, "helper@test.local", 3600),
+    n92_admin_refresh: "stub-refresh-admin",
+    n92_admin_user: "helper@test.local",
+  });
+  await page.goto(`${BASE}/admin/`);
+  await page.getByRole("button", { name: "Student Portal" }).click();
+  await waitForText(page, "Owner access required");
+  const text = await page.evaluate(() => document.body.innerText);
+  report("Q7 non-owner cannot see or use the Excel export", !text.includes("Export Students to Excel"));
   await page.context().close();
 }
 

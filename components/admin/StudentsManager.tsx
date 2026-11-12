@@ -19,15 +19,24 @@
 import { useEffect, useState } from "react";
 import { adminSelect, adminInsert, adminUpdate, audit, getToken } from "@/lib/admin";
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from "@/lib/supabase";
-import type {
-  AccountProfile,
-  StudentProfile,
-  StudentApplication,
-  StudentDocument,
-  StudentMessage,
-  StudentDeadline,
-  StudentPayment,
+import {
+  profileCompletion,
+  AVATAR_BUCKET,
+  avatarPath,
+  type AccountProfile,
+  type StudentProfile,
+  type StudentApplication,
+  type StudentDocument,
+  type StudentMessage,
+  type StudentDeadline,
+  type StudentPayment,
+  type ShortlistItem,
 } from "@/lib/student";
+import {
+  filterStudentSources,
+  downloadStudentsExcel,
+  type StudentSource,
+} from "@/lib/students-export";
 
 const APP_STATUSES = [
   "planning", "documents_pending", "ready_to_apply", "submitted", "under_review",
@@ -37,6 +46,31 @@ const DOC_STATUSES = ["pending", "approved", "rejected", "revision_requested"] a
 const PAY_STATUSES = ["pending", "paid", "partially_paid", "overdue", "waived", "refunded"];
 
 interface StudentRow extends AccountProfile { detail?: StudentProfile | null }
+
+/** Batch-sign avatar URLs for the list (one storage call). Returns an
+ *  empty map when the avatars bucket is unavailable (e.g. Migration
+ *  014 not applied yet) so the list falls back to initials. */
+async function signAvatars(userIds: string[]): Promise<Record<string, string>> {
+  const token = getToken();
+  if (!token || userIds.length === 0) return {};
+  try {
+    const paths = userIds.map((id) => avatarPath(id));
+    const res = await fetch(`${SUPABASE_URL}/storage/v1/object/sign/${AVATAR_BUCKET}`, {
+      method: "POST",
+      headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ expiresIn: 3600, paths }),
+    });
+    if (!res.ok) return {};
+    const rows = (await res.json()) as { path?: string; signedURL?: string }[];
+    const map: Record<string, string> = {};
+    rows.forEach((row, i) => {
+      if (row?.signedURL) map[userIds[i]] = `${SUPABASE_URL}/storage/v1${row.signedURL}`;
+    });
+    return map;
+  } catch {
+    return {};
+  }
+}
 
 function fmtDate(iso: string | null | undefined): string {
   if (!iso) return "—";
@@ -52,16 +86,37 @@ export default function StudentsManager() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [filter, setFilter] = useState<"all" | "pending" | "active" | "suspended">("all");
+  const [query, setQuery] = useState("");
+  const [completionFilter, setCompletionFilter] = useState<"all" | "complete" | "incomplete">("all");
+  const [avatarUrls, setAvatarUrls] = useState<Record<string, string>>({});
+  const [avatarFailed, setAvatarFailed] = useState<Record<string, boolean>>({});
+  const [exporting, setExporting] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   async function loadStudents() {
-    const [accounts, details] = await Promise.all([
+    // The list query deliberately does NOT select passport_number:
+    // the value is fetched only when one student is opened in Manage.
+    // A separate presence query (user_id only, filtered server-side)
+    // keeps the profile-completion maths exact without the number
+    // ever reaching the list payload.
+    const LIST_COLUMNS = "user_id,full_name,phone,date_of_birth,nationality,passport_name,current_country,current_city,current_address,preferred_intake,target_degree,preferred_destination,education_history,graduation_year,cgpa,english_proficiency,notes_from_student,created_at,updated_at";
+    const [accounts, details, withPassport] = await Promise.all([
       adminSelect<AccountProfile>("profiles", "select=id,email,role,account_status,created_at&role=eq.student&order=created_at.desc"),
-      adminSelect<StudentProfile>("student_profiles", "select=*"),
+      adminSelect<StudentProfile>("student_profiles", `select=${LIST_COLUMNS}`),
+      adminSelect<{ user_id: string }>("student_profiles", "select=user_id&passport_number=not.is.null"),
     ]);
     if (!accounts) { setError("Could not load student accounts from the database."); return; }
+    const hasPassport = new Set((withPassport || []).map((r) => r.user_id));
     const byId = new Map((details || []).map((d) => [d.user_id, d]));
-    setStudents(accounts.map((a) => ({ ...a, detail: byId.get(a.id) ?? null })));
+    const rows = accounts.map((a) => {
+      const d = byId.get(a.id) ?? null;
+      // passport_number here is a PRESENCE SENTINEL ONLY ("•••" when a
+      // number exists) so completion % stays exact; never the value.
+      const detail = d ? { ...d, passport_number: hasPassport.has(a.id) ? "•••" : null } : null;
+      return { ...a, detail };
+    });
+    setStudents(rows);
+    setAvatarUrls(await signAvatars(rows.map((r) => r.id)));
   }
 
   useEffect(() => {
@@ -109,7 +164,29 @@ export default function StudentsManager() {
     );
   }
 
-  const visible = students.filter((s) => filter === "all" || s.account_status === filter);
+  const toSource = (s: StudentRow): StudentSource => ({
+    account: { id: s.id, email: s.email || "", accountStatus: s.account_status, createdAt: s.created_at },
+    profile: s.detail ?? null,
+  });
+  const visible = filterStudentSources(students.map(toSource), { status: filter, query, completion: completionFilter })
+    .map((src) => students.find((s) => s.id === src.account.id) as StudentRow);
+
+  async function exportExcel(filtered: boolean) {
+    setError("");
+    setNotice("");
+    setExporting(true);
+    try {
+      const sources = filtered
+        ? filterStudentSources(students.map(toSource), { status: filter, query, completion: completionFilter })
+        : students.map(toSource);
+      if (sources.length === 0) { setError("There are no students to export in this selection."); setExporting(false); return; }
+      const n = await downloadStudentsExcel(sources);
+      setNotice(`Excel export downloaded — ${n} student${n === 1 ? "" : "s"} included${filtered ? " (filtered view)" : ""}. Passport numbers are never included in exports.`);
+    } catch {
+      setError("The Excel export could not be generated. Please try again.");
+    }
+    setExporting(false);
+  }
   const counts = {
     pending: students.filter((s) => s.account_status === "pending").length,
     active: students.filter((s) => s.account_status === "active").length,
@@ -130,16 +207,39 @@ export default function StudentsManager() {
           ))}
         </div>
       </div>
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <button type="button" className="btn-primary !py-2" disabled={exporting} onClick={() => exportExcel(false)}>
+          {exporting ? "Preparing export…" : "Export Students to Excel (.xlsx)"}
+        </button>
+        <button type="button" className="btn-ghost !py-2" disabled={exporting} onClick={() => exportExcel(true)}>
+          Export filtered view
+        </button>
+        <span className="text-[0.8rem] text-[#202824]/55">Owner-only. Exports never include passport numbers or any credentials.</span>
+      </div>
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <input className="field-input !w-72" type="search" placeholder="Search by name, email or student ID…"
+          value={query} onChange={(e) => setQuery(e.target.value)} aria-label="Search students" />
+        <select className="field-input !w-auto" value={completionFilter}
+          onChange={(e) => setCompletionFilter(e.target.value as "all" | "complete" | "incomplete")} aria-label="Filter by profile completion">
+          <option value="all">Profile: all</option>
+          <option value="complete">Profile complete</option>
+          <option value="incomplete">Profile incomplete</option>
+        </select>
+        <span className="text-[0.82rem] text-[#202824]/55">Showing {visible.length} of {students.length} students</span>
+      </div>
       {error && <p className="field-error mt-3" role="alert">{error}</p>}
       {notice && <p className="mt-3 rounded-lg bg-[#103f35]/8 px-4 py-2.5 text-[0.88rem] font-semibold text-[#103f35]" role="status">{notice}</p>}
 
       <div className="panel mt-5 overflow-x-auto">
-        <table className="w-full min-w-[680px] text-left text-[0.9rem]">
+        <table className="w-full min-w-[980px] text-left text-[0.9rem]">
           <thead>
             <tr className="border-b border-[#103f35]/15 text-[#202824]/60">
               <th className="px-4 py-3 font-semibold">Student</th>
               <th className="px-4 py-3 font-semibold">Status</th>
               <th className="px-4 py-3 font-semibold">Registered</th>
+              <th className="px-4 py-3 font-semibold">Intake</th>
+              <th className="px-4 py-3 font-semibold">Degree</th>
+              <th className="px-4 py-3 font-semibold">Profile</th>
               <th className="px-4 py-3 font-semibold">Actions</th>
             </tr>
           </thead>
@@ -147,10 +247,22 @@ export default function StudentsManager() {
             {visible.map((s) => (
               <tr key={s.id} className="border-b border-[#103f35]/8 last:border-0">
                 <td className="px-4 py-3">
-                  <button type="button" className="font-semibold text-[#103f35] underline" onClick={() => setSelectedId(s.id)}>
-                    {s.detail?.full_name || s.email || s.id}
-                  </button>
-                  {s.detail?.full_name && <span className="block text-[0.8rem] text-[#202824]/55">{s.email}</span>}
+                  <div className="flex items-center gap-3">
+                    {avatarUrls[s.id] && !avatarFailed[s.id] ? (
+                      <img src={avatarUrls[s.id]} alt="" className="h-9 w-9 flex-none rounded-full object-cover border border-[#103f35]/20"
+                        onError={() => setAvatarFailed((f) => ({ ...f, [s.id]: true }))} />
+                    ) : (
+                      <span aria-hidden="true" className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-[#103f35]/10 text-[0.8rem] font-bold text-[#103f35]">
+                        {(s.detail?.full_name || s.email || "?").trim().charAt(0).toUpperCase()}
+                      </span>
+                    )}
+                    <span>
+                      <button type="button" className="font-semibold text-[#103f35] underline" onClick={() => setSelectedId(s.id)}>
+                        {s.detail?.full_name || s.email || s.id}
+                      </button>
+                      {s.detail?.full_name && <span className="block text-[0.8rem] text-[#202824]/55">{s.email}</span>}
+                    </span>
+                  </div>
                 </td>
                 <td className="px-4 py-3">
                   <span className={`rounded-full px-2.5 py-0.5 text-[0.75rem] font-bold ${s.account_status === "active" ? "bg-[#103f35] text-white" : s.account_status === "pending" ? "bg-[#c7a05a]/25 text-[#7a5c1e] border border-[#c7a05a]" : "bg-[#b3392e]/10 text-[#b3392e]"}`}>
@@ -158,6 +270,21 @@ export default function StudentsManager() {
                   </span>
                 </td>
                 <td className="px-4 py-3">{fmtDate(s.created_at)}</td>
+                <td className="px-4 py-3">{s.detail?.preferred_intake || "—"}</td>
+                <td className="px-4 py-3">{s.detail?.target_degree || "—"}</td>
+                <td className="px-4 py-3">
+                  {(() => {
+                    const c = profileCompletion(s.detail);
+                    return (
+                      <span title={c.complete ? "Profile complete" : `Missing: ${c.missing.join(", ")}`}>
+                        <span className={`rounded-full px-2.5 py-0.5 text-[0.75rem] font-bold ${c.complete ? "bg-[#103f35] text-white" : "bg-[#c7a05a]/25 text-[#7a5c1e] border border-[#c7a05a]"}`}>{c.percent}%</span>
+                        <span className="mt-1 block h-1.5 w-16 overflow-hidden rounded bg-[#103f35]/10">
+                          <span className="block h-full bg-[#103f35]" style={{ width: `${c.percent}%` }} />
+                        </span>
+                      </span>
+                    );
+                  })()}
+                </td>
                 <td className="px-4 py-3">
                   <div className="flex flex-wrap gap-2">
                     {s.account_status !== "active" && (
@@ -175,7 +302,7 @@ export default function StudentsManager() {
               </tr>
             ))}
             {visible.length === 0 && (
-              <tr><td colSpan={4} className="px-4 py-6 text-[#202824]/60">No students in this group yet.</td></tr>
+              <tr><td colSpan={7} className="px-4 py-6 text-[#202824]/60">No students match this view yet.</td></tr>
             )}
           </tbody>
         </table>
@@ -189,6 +316,7 @@ export default function StudentsManager() {
           onClose={() => setSelectedId(null)}
           onError={setError}
           onNotice={setNotice}
+          onRefreshStudents={loadStudents}
         />
       )}
     </div>
@@ -197,12 +325,31 @@ export default function StudentsManager() {
 
 /* ------------------------------------------------------------------ */
 
-function StudentDetail({ student, ownerId, onClose, onError, onNotice }: {
+function OvRow({ label, value }: { label: string; value: string | null | undefined }) {
+  return (
+    <div className="flex gap-2 py-1 text-[0.88rem]">
+      <span className="w-40 flex-none font-semibold text-[#202824]/55">{label}</span>
+      <span className={value ? "text-[#202824]" : "text-[#202824]/45 italic"}>{value || "Not provided"}</span>
+    </div>
+  );
+}
+
+function OvSection({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-xl border border-[#103f35]/12 p-4">
+      <h5 className="text-[0.78rem] font-bold uppercase tracking-[0.14em] text-[#8a6d35]">{title}</h5>
+      <div className="mt-1.5 divide-y divide-[#103f35]/6">{children}</div>
+    </div>
+  );
+}
+
+function StudentDetail({ student, ownerId, onClose, onError, onNotice, onRefreshStudents }: {
   student: StudentRow;
   ownerId: string;
   onClose: () => void;
   onError: (e: string) => void;
   onNotice: (n: string) => void;
+  onRefreshStudents: () => Promise<void>;
 }) {
   const sid = student.id;
   const [apps, setApps] = useState<StudentApplication[]>([]);
@@ -217,6 +364,66 @@ function StudentDetail({ student, ownerId, onClose, onError, onNotice }: {
   const [docType, setDocType] = useState("passport");
   const [ntf, setNtf] = useState({ title: "", body: "" });
   const [busy, setBusy] = useState(false);
+  // Complete profile (fetched per-student, INCLUDING the passport
+  // number that the list never loads) + shortlist + avatar state for
+  // the Student Profile Overview.
+  const [fullProfile, setFullProfile] = useState<StudentProfile | null>(null);
+  const [profileLoaded, setProfileLoaded] = useState(false);
+  const [shortlist, setShortlist] = useState<ShortlistItem[]>([]);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [avatarUploadedAt, setAvatarUploadedAt] = useState<string | null>(null);
+  const [avatarBroken, setAvatarBroken] = useState(false);
+  const [showPassport, setShowPassport] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
+  async function loadProfile() {
+    const enc = encodeURIComponent(sid);
+    const [profiles, shorts] = await Promise.all([
+      adminSelect<StudentProfile>("student_profiles", `select=*&user_id=eq.${enc}`),
+      adminSelect<ShortlistItem>("student_shortlists", `select=*&student_id=eq.${enc}&order=created_at.desc`),
+    ]);
+    if (profiles) setFullProfile(profiles[0] ?? null);
+    if (shorts) setShortlist(shorts);
+    setProfileLoaded(true);
+    // Avatar: signed URL + upload date from storage metadata. Any
+    // failure (e.g. bucket not created yet) simply means "no photo".
+    const token = getToken();
+    if (token) {
+      try {
+        const [signRes, listRes] = await Promise.all([
+          fetch(`${SUPABASE_URL}/storage/v1/object/sign/${AVATAR_BUCKET}`, {
+            method: "POST",
+            headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+            body: JSON.stringify({ expiresIn: 3600, paths: [avatarPath(sid)] }),
+          }),
+          fetch(`${SUPABASE_URL}/storage/v1/object/list/${AVATAR_BUCKET}`, {
+            method: "POST",
+            headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+            body: JSON.stringify({ prefix: `${sid}/`, limit: 10 }),
+          }),
+        ]);
+        if (listRes.ok) {
+          const objs = (await listRes.json()) as { name: string; created_at?: string }[];
+          const obj = Array.isArray(objs) ? objs.find((o) => o.name === "profile-photo") : undefined;
+          setAvatarUploadedAt(obj?.created_at ?? null);
+          if (obj && signRes.ok) {
+            const rows = (await signRes.json()) as { signedURL?: string }[];
+            if (rows[0]?.signedURL) { setAvatarUrl(`${SUPABASE_URL}/storage/v1${rows[0].signedURL}`); setAvatarBroken(false); }
+          } else {
+            setAvatarUrl(null);
+          }
+        }
+      } catch { /* no photo display — initials fallback in the UI */ }
+    }
+  }
+
+  async function refreshProfile() {
+    setRefreshing(true);
+    onError("");
+    await Promise.all([loadProfile(), loadAll(), onRefreshStudents()]);
+    setRefreshing(false);
+    onNotice(`Profile reloaded for ${student.email || sid} — the latest saved details are shown.`);
+  }
 
   async function loadAll() {
     const enc = encodeURIComponent(sid);
@@ -234,7 +441,7 @@ function StudentDetail({ student, ownerId, onClose, onError, onNotice }: {
     if (p) setPayments(p);
     if (!a || !d || !m || !dl || !p) onError("Some of this student's records could not be loaded — check your connection and reopen the student.");
   }
-  useEffect(() => { loadAll(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [sid]);
+  useEffect(() => { loadAll(); loadProfile(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [sid]);
 
   async function act(label: string, fn: () => Promise<{ ok: boolean; error?: string }>) {
     setBusy(true);
@@ -312,7 +519,116 @@ function StudentDetail({ student, ownerId, onClose, onError, onNotice }: {
             {student.detail?.target_degree ? ` · ${student.detail.target_degree}` : ""}
           </p>
         </div>
-        <button type="button" className="btn-ghost !py-1.5" onClick={onClose}>Close</button>
+        <div className="flex gap-2">
+          <button type="button" className="btn-primary !py-1.5" onClick={refreshProfile} disabled={refreshing}>
+            {refreshing ? "Refreshing…" : "Refresh Profile"}
+          </button>
+          <button type="button" className="btn-ghost !py-1.5" onClick={onClose}>Close</button>
+        </div>
+      </div>
+
+      {/* ---- Student Profile Overview (read-only, complete record) ---- */}
+      <div className="mt-6 rounded-2xl border border-[#103f35]/15 bg-[#faf9f5] p-5">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h4 className="font-display text-lg font-bold text-[#103f35]">Student Profile Overview</h4>
+          <span className="text-[0.8rem] text-[#202824]/55">Read-only · loaded from the database when you opened this student · use Refresh Profile for the latest</span>
+        </div>
+        {!profileLoaded && <p className="mt-3 text-[0.88rem] text-[#202824]/60" role="status">Loading profile…</p>}
+        {profileLoaded && (() => {
+          const completion = profileCompletion(fullProfile);
+          const passport = fullProfile?.passport_number || null;
+          const maskedPassport = passport ? `••••••${passport.length > 2 ? passport.slice(-2) : ""}` : null;
+          return (
+            <>
+              <div className="mt-4 rounded-xl border border-[#103f35]/12 bg-white p-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="font-display text-base font-bold text-[#103f35]">Profile completion: {completion.percent}%</span>
+                  <span className="h-2 w-44 overflow-hidden rounded bg-[#103f35]/10">
+                    <span className="block h-full bg-[#103f35]" style={{ width: `${completion.percent}%` }} />
+                  </span>
+                  <span className="text-[0.82rem] text-[#202824]/60">{completion.filled} of {completion.total} fields provided</span>
+                  <span className="text-[0.82rem] text-[#202824]/60">· Photo: {avatarUploadedAt ? `uploaded ${fmtDate(avatarUploadedAt)}` : "not uploaded"}</span>
+                </div>
+                {completion.missing.length > 0 && (
+                  <p className="mt-2 text-[0.84rem] text-[#202824]/70">
+                    <strong>Still missing:</strong> {completion.missing.join(", ")}
+                  </p>
+                )}
+              </div>
+              {!fullProfile && (
+                <p className="mt-4 rounded-lg bg-amber-50 border border-amber-200 px-4 py-3 text-[0.88rem] text-amber-900">
+                  This student has not completed a profile yet — the record appears here as soon as they save
+                  their details in the Student Portal. Use Refresh Profile to check again.
+                </p>
+              )}
+              {fullProfile && (
+                <div className="mt-4 grid gap-4 md:grid-cols-2">
+                  <OvSection title="A · Personal Information">
+                    <OvRow label="Full name" value={fullProfile.full_name} />
+                    <OvRow label="Email" value={student.email} />
+                    <OvRow label="Phone number" value={fullProfile.phone} />
+                    <OvRow label="Date of birth" value={fullProfile.date_of_birth ? fmtDate(fullProfile.date_of_birth) : null} />
+                    <OvRow label="Nationality" value={fullProfile.nationality} />
+                  </OvSection>
+                  <OvSection title="B · Profile Photo">
+                    <div className="flex items-center gap-3 py-1">
+                      {avatarUrl && !avatarBroken ? (
+                        <img src={avatarUrl} alt="Student profile" className="h-16 w-16 rounded-full object-cover border border-[#103f35]/20"
+                          onError={() => setAvatarBroken(true)} />
+                      ) : (
+                        <span aria-hidden="true" className="flex h-16 w-16 items-center justify-center rounded-full bg-[#103f35]/10 text-xl font-bold text-[#103f35]">
+                          {(fullProfile.full_name || student.email || "?").trim().charAt(0).toUpperCase()}
+                        </span>
+                      )}
+                      <span className="text-[0.88rem]">{avatarUploadedAt ? `Uploaded ${fmtDate(avatarUploadedAt)}` : "No photo uploaded yet"}</span>
+                    </div>
+                  </OvSection>
+                  <OvSection title="C · Passport Information">
+                    <OvRow label="Passport name" value={fullProfile.passport_name} />
+                    <div className="flex gap-2 py-1 text-[0.88rem]">
+                      <span className="w-40 flex-none font-semibold text-[#202824]/55">Passport number</span>
+                      {passport ? (
+                        <span className="flex items-center gap-2">
+                          <span>{showPassport ? passport : maskedPassport}</span>
+                          <button type="button" className="btn-ghost !px-2 !py-0.5 text-[0.75rem]" onClick={() => setShowPassport((v) => !v)}>
+                            {showPassport ? "Hide" : "Reveal"}
+                          </button>
+                        </span>
+                      ) : (
+                        <span className="text-[#202824]/45 italic">Not provided</span>
+                      )}
+                    </div>
+                  </OvSection>
+                  <OvSection title="D · Address Information">
+                    <OvRow label="Country" value={fullProfile.current_country} />
+                    <OvRow label="City" value={fullProfile.current_city} />
+                    <OvRow label="Full address" value={fullProfile.current_address} />
+                  </OvSection>
+                  <OvSection title="E · Study Preferences">
+                    <OvRow label="Preferred intake" value={fullProfile.preferred_intake} />
+                    <OvRow label="Target degree" value={fullProfile.target_degree} />
+                    <OvRow label="Preferred destination" value={fullProfile.preferred_destination} />
+                    <OvRow label="Preferred universities" value={shortlist.length ? [...new Set(shortlist.map((s) => s.university_name).filter(Boolean))].join(", ") : null} />
+                    <OvRow label="Preferred courses" value={shortlist.length ? [...new Set(shortlist.map((s) => s.programme_name).filter(Boolean))].join(", ") : null} />
+                  </OvSection>
+                  <OvSection title="F · Academic Information">
+                    <OvRow label="Education history" value={fullProfile.education_history} />
+                    <OvRow label="Graduation year" value={fullProfile.graduation_year ? String(fullProfile.graduation_year) : null} />
+                    <OvRow label="CGPA / percentage" value={fullProfile.cgpa} />
+                  </OvSection>
+                  <OvSection title="G · English Language">
+                    <OvRow label="English proficiency" value={fullProfile.english_proficiency} />
+                  </OvSection>
+                  <OvSection title="H · Additional Information">
+                    <OvRow label="Student notes" value={fullProfile.notes_from_student} />
+                    <OvRow label="Profile created" value={fmtDate(fullProfile.created_at)} />
+                    <OvRow label="Last updated" value={fmtDate(fullProfile.updated_at)} />
+                  </OvSection>
+                </div>
+              )}
+            </>
+          );
+        })()}
       </div>
 
       <div className="mt-6 grid gap-8 lg:grid-cols-2">
