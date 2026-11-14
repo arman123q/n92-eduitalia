@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   description:
     "N92 Edu-Italia helps Indian students study in Italy: free eligibility check, universities, scholarships and visa guidance.",
-  metadataBase: new URL("https://n92eduitalia.example/"),
+metadataBase: new URL("https://n92-eduitalia.pages.dev/"),
   openGraph: {
     siteName: "N92 Edu-Italia",
     title: "N92 Edu-Italia — Your Italian Dream. A Clearer Plan.",
